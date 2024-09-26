@@ -1,0 +1,596 @@
+USE dbpatients
+
+----------------------- pacientes -----------------------
+
+--procedimento para exibir as 50 primeiras entradas no banco de dados
+CREATE PROC sp_show_clients
+AS
+BEGIN
+	SELECT TOP 50 * FROM clients
+	ORDER BY name ASC
+END;
+GO
+
+--procedimento para pesquisar por nome
+CREATE PROC sp_search_clientName
+	@name VARCHAR(100)
+AS
+BEGIN
+	SELECT TOP 50 * FROM clients
+	WHERE name LIKE @name + '%'
+	ORDER BY name ASC;
+END;
+GO
+
+--procedimento para pesquisar por cpf
+CREATE PROC sp_search_clientCPF
+	@cpf VARCHAR(11)
+AS
+BEGIN
+	SELECT TOP 50 * FROM clients
+	WHERE cpf LIKE @cpf + '%'
+	ORDER BY name ASC;
+END;
+
+--procedimento para inserir um paciente
+CREATE PROC sp_insert_client
+	@name VARCHAR(100),
+	@telephone VARCHAR(20),
+	@street VARCHAR(50),
+	@houseNumber VARCHAR(10),
+	@neighborhood VARCHAR(50),
+	@city VARCHAR(50),
+	@complement VARCHAR(50),
+	@idNumber VARCHAR(15),
+	@cpf VARCHAR(11)
+AS
+BEGIN
+	DECLARE @returnCode INT;
+	
+	BEGIN TRY
+		DECLARE @appointmentsQuantity INT;
+		SET @appointmentsQuantity = 0;
+
+		INSERT INTO clients
+		(name, telephone, street, houseNumber, neighborhood, city, complement, idNumber, cpf, appointmentsQuantity)
+		VALUES
+		(@name, @telephone, @street, @houseNumber, @neighborhood, @city, @complement, @idNumber, @cpf, @appointmentsQuantity)
+		
+		SET @returnCode = 0; -- Código de sucesso
+	END TRY
+	BEGIN CATCH
+		SET @returnCode = ERROR_NUMBER(); -- Captura do erro
+	END CATCH;
+	
+	RETURN @returnCode; -- Retorna o código
+END;
+GO
+
+--procedimento para editar alguns dos dados do paciente
+CREATE PROC sp_edit_client
+	@idClient INT,
+	@name VARCHAR(100),
+	@telephone VARCHAR(20),
+	@street VARCHAR(50),
+	@houseNumber VARCHAR(10),
+	@neighborhood VARCHAR(50),
+	@city VARCHAR(50),
+	@complement VARCHAR(50)
+AS
+BEGIN
+	 DECLARE @returnCode INT;
+	 
+	BEGIN TRY
+		UPDATE clients
+		SET name = @name,
+			telephone = @telephone,
+			street = @street,
+			houseNumber = @houseNumber,
+			neighborhood = @neighborhood,
+			city = @city,
+			complement = @complement
+		WHERE idClient = @idClient
+		
+		SET @returnCode = 0; -- Código de sucesso
+	END TRY
+	BEGIN CATCH
+		SET @returnCode = ERROR_NUMBER(); -- Captura do erro
+	END CATCH;
+	
+	RETURN @returnCode; -- Retorna o código
+END;
+GO
+
+--procedimento para editar todos os dados do paciente
+CREATE PROC sp_edit_client_admin
+	@idClient INT,
+	@name VARCHAR(100),
+	@telephone VARCHAR(20),
+	@street VARCHAR(50),
+	@houseNumber VARCHAR(10),
+	@neighborhood VARCHAR(50),
+	@city VARCHAR(50),
+	@complement VARCHAR(50),
+	@idNumber VARCHAR(15),
+	@cpf VARCHAR(11)
+AS
+BEGIN
+	 DECLARE @returnCode INT;
+	 
+	BEGIN TRY
+		UPDATE clients
+		SET name = @name,
+			telephone = @telephone,
+			street = @street,
+			houseNumber = @houseNumber,
+			neighborhood = @neighborhood,
+			city = @city,
+			complement = @complement,
+			idNumber = @idNumber,
+			cpf = @cpf
+		WHERE idClient = @idClient
+		
+		SET @returnCode = 0; -- Código de sucesso
+	END TRY
+	BEGIN CATCH
+		SET @returnCode = ERROR_NUMBER(); -- Captura do erro
+	END CATCH;
+	
+	RETURN @returnCode; -- Retorna o código
+END;
+GO
+
+--procedimento para deletar um paciente
+CREATE PROC sp_delete_client
+	@idClient INT
+AS
+BEGIN
+	DELETE FROM clients
+	WHERE idClient = @idClient;
+END;
+GO
+
+----------------------- consultas -----------------------
+
+--procedimento para exibir as 50 primeiras entradas no banco de dados
+CREATE PROC sp_show_consultations
+AS
+BEGIN
+	SELECT TOP 50 * FROM consultations
+	ORDER BY consultationDate ASC
+END;
+GO
+
+--procedimento para pesquisar por data
+CREATE PROC sp_search_date
+	@consultationDate DATE
+AS
+BEGIN
+	SELECT TOP 50 * FROM consultations
+	WHERE consultationDate = @consultationDate
+	ORDER BY consultationDate ASC;
+END;
+GO
+
+--procedimento para inserir uma consulta
+CREATE PROC sp_insert_client
+	@consultationDate DATE,
+	@timeOfConsultation TIME,
+	@idClient INT,
+	@status INT
+AS
+BEGIN
+	DECLARE @returnCode INT;
+	
+	BEGIN TRY
+		INSERT INTO consultations
+		(consultationDate, timeOfConsultation, idClient, status)
+		VALUES
+		(@consultationDate, @timeOfConsultation, @idClient, @status)
+		
+		SET @returnCode = 0; -- Código de sucesso
+	END TRY
+	BEGIN CATCH
+		SET @returnCode = ERROR_NUMBER(); -- Captura do erro
+	END CATCH;
+	
+	RETURN @returnCode; -- Retorna o código
+END;
+GO
+
+--procedimento para editar uma consulta
+CREATE PROC sp_edit_client
+	@idConsultation INT,
+	@consultationDate DATE,
+	@timeOfConsultation TIME,
+	@idClient INT,
+	@status INT
+AS
+BEGIN
+	 DECLARE @returnCode INT;
+	 
+	BEGIN TRY
+		UPDATE consultations
+		SET consultationDate = @consultationDate,
+			timeOfConsultation = @timeOfConsultation,
+			idClient = @idClient,
+			status = @status
+		WHERE idConsultation = @idConsultation
+		
+		SET @returnCode = 0; -- Código de sucesso
+	END TRY
+	BEGIN CATCH
+		SET @returnCode = ERROR_NUMBER(); -- Captura do erro
+	END CATCH;
+	
+	RETURN @returnCode; -- Retorna o código
+END;
+GO
+
+--procedimento para deletar uma consulta
+CREATE PROC sp_delete_consultation
+	@idConsultation INT
+AS
+BEGIN
+	DELETE FROM consultations
+	WHERE idConsultation = @idConsultation;
+END;
+GO
+
+----------------------- configurações -----------------------
+
+--procedimento para ler as configurações
+CREATE PROC sp_read_configurations
+	--
+	@workOnMondays BIT OUTPUT,
+	@workOnTuesdays BIT OUTPUT,
+	@workOnWednesdays BIT OUTPUT,
+	@workOnThursdays BIT OUTPUT,
+	@workOnFridays BIT OUTPUT,
+	@workOnSaturdays BIT OUTPUT,
+	@workOnSundays BIT OUTPUT,
+	--
+	@startOfWorkOnMondays TIME OUTPUT,
+	@endOfWorkOnMondays TIME OUTPUT,
+	@startOfWorkOnTuesdays TIME OUTPUT,
+	@endOfWorkOnTuesdays TIME OUTPUT,
+	@startOfWorkOnWednesdays TIME OUTPUT,
+	@endOfWorkOnWednesdays TIME OUTPUT,
+	@startOfWorkOnThursdays TIME OUTPUT,
+	@endOfWorkOnThursdays TIME OUTPUT,
+	@startOfWorkOnFridays TIME OUTPUT,
+	@endOfWorkOnFridays TIME OUTPUT,
+	@startOfWorkOnSaturdays TIME OUTPUT,
+	@endOfWorkOnSaturdays TIME OUTPUT,
+	@startOfWorkOnSundays TIME OUTPUT,
+	@endOfWorkOnSundays TIME OUTPUT,
+	--
+	@startOfBreakOnMondays TIME OUTPUT,
+	@endOfBreakOnMondays TIME OUTPUT,
+	@startOfBreakOnTuesdays TIME OUTPUT,
+	@endOfBreakOnTuesdays TIME OUTPUT,
+	@startOfBreakOnWednesdays TIME OUTPUT,
+	@endOfBreakOnWednesdays TIME OUTPUT,
+	@startOfBreakOnThursdays TIME OUTPUT,
+	@endOfBreakOnThursdays TIME OUTPUT,
+	@startOfBreakOnFridays TIME OUTPUT,
+	@endOfBreakOnFridays TIME OUTPUT,
+	@startOfBreakOnSaturdays TIME OUTPUT,
+	@endOfBreakOnSaturdays TIME OUTPUT,
+	@startOfBreakOnSundays TIME OUTPUT,
+	@endOfBreakOnSundays TIME OUTPUT,
+	@standardConsultationTime INT OUTPUT
+AS
+BEGIN
+	SET @workOnMondays = 0;
+	SET @workOnTuesdays = 0;
+	SET @workOnWednesdays = 0;
+	SET @workOnThursdays = 0;
+	SET @workOnFridays = 0;
+	SET @workOnSaturdays = 0;
+	SET @workOnSundays = 0;
+	SET @startOfWorkOnMondays = NULL;
+	SET @endOfWorkOnMondays = NULL;
+	SET @startOfWorkOnTuesdays = NULL;
+	SET @endOfWorkOnTuesdays = NULL;
+	SET @startOfWorkOnWednesdays = NULL;
+	SET @endOfWorkOnWednesdays = NULL;
+	SET @startOfWorkOnThursdays = NULL;
+	SET @endOfWorkOnThursdays = NULL;
+	SET @startOfWorkOnFridays = NULL;
+	SET @endOfWorkOnFridays = NULL;
+	SET @startOfWorkOnSaturdays = NULL;
+	SET @endOfWorkOnSaturdays = NULL;
+	SET @startOfWorkOnSundays = NULL;
+	SET @endOfWorkOnSundays = NULL;
+	SET @startOfBreakOnMondays = NULL;
+	SET @endOfBreakOnMondays = NULL;
+	SET @startOfBreakOnTuesdays = NULL;
+	SET @endOfBreakOnTuesdays = NULL;
+	SET @startOfBreakOnWednesdays = NULL;
+	SET @endOfBreakOnWednesdays = NULL;
+	SET @startOfBreakOnThursdays = NULL;
+	SET @endOfBreakOnThursdays = NULL;
+	SET @startOfBreakOnFridays = NULL;
+	SET @endOfBreakOnFridays = NULL;
+	SET @startOfBreakOnSaturdays = NULL;
+	SET @endOfBreakOnSaturdays = NULL;
+	SET @startOfBreakOnSundays = NULL;
+	SET @endOfBreakOnSundays = NULL;
+	SET @standardConsultationTime = 0;
+	
+	IF EXISTS (SELECT 1 FROM settings)
+	BEGIN
+		SELECT TOP 1
+			@workOnMondays = workOnMondays,
+			@workOnTuesdays = workOnTuesdays,
+			@workOnWednesdays = workOnWednesdays,
+			@workOnThursdays = workOnThursdays,
+			@workOnFridays = workOnFridays,
+			@workOnSaturdays = workOnSaturdays,
+			@workOnSundays = workOnSundays,
+			@startOfWorkOnMondays = startOfWorkOnMondays,
+			@endOfWorkOnMondays = endOfWorkOnMondays,
+			@startOfWorkOnTuesdays = startOfWorkOnTuesdays,
+			@endOfWorkOnTuesdays = endOfWorkOnTuesdays,
+			@startOfWorkOnWednesdays = startOfWorkOnWednesdays,
+			@endOfWorkOnWednesdays = endOfWorkOnWednesdays,
+			@startOfWorkOnThursdays = startOfWorkOnThursdays,
+			@endOfWorkOnThursdays = endOfWorkOnThursdays,
+			@startOfWorkOnFridays = startOfWorkOnFridays,
+			@endOfWorkOnFridays = endOfWorkOnFridays,
+			@startOfWorkOnSaturdays = startOfWorkOnSaturdays,
+			@endOfWorkOnSaturdays = endOfWorkOnSaturdays,
+			@startOfWorkOnSundays = startOfWorkOnSundays,
+			@endOfWorkOnSundays = endOfWorkOnSundays,
+			@startOfBreakOnMondays = startOfBreakOnMondays,
+			@endOfBreakOnMondays = endOfBreakOnMondays,
+			@startOfBreakOnTuesdays = startOfBreakOnTuesdays,
+			@endOfBreakOnTuesdays = endOfBreakOnTuesdays,
+			@startOfBreakOnWednesdays = startOfBreakOnWednesdays,
+			@endOfBreakOnWednesdays = endOfBreakOnWednesdays,
+			@startOfBreakOnThursdays = startOfBreakOnThursdays,
+			@endOfBreakOnThursdays = endOfBreakOnThursdays,
+			@startOfBreakOnFridays = startOfBreakOnFridays,
+			@endOfBreakOnFridays = endOfBreakOnFridays,
+			@startOfBreakOnSaturdays = startOfBreakOnSaturdays,
+			@endOfBreakOnSaturdays = endOfBreakOnSaturdays,
+			@startOfBreakOnSundays = startOfBreakOnSundays,
+			@endOfBreakOnSundays = endOfBreakOnSundays,
+			@standardConsultationTime = standardConsultationTime
+		FROM settings;
+	END;
+END;
+GO
+
+--procedimento para verificar se existe alguma configuração
+CREATE PROC sp_verify_settings_data
+	@registered BIT OUTPUT
+AS
+BEGIN
+	SET @registered = 0;
+	
+	IF EXISTS(SELECT 1 FROM settings)
+	BEGIN
+		SET @registered = 1;
+	END;
+END;
+GO
+
+CREATE PROC sp_insert_settings
+	@workOnMondays BIT OUTPUT,
+	@workOnTuesdays BIT OUTPUT,
+	@workOnWednesdays BIT OUTPUT,
+	@workOnThursdays BIT OUTPUT,
+	@workOnFridays BIT OUTPUT,
+	@workOnSaturdays BIT OUTPUT,
+	@workOnSundays BIT OUTPUT,
+	@startOfWorkOnMondays TIME OUTPUT,
+	@endOfWorkOnMondays TIME OUTPUT,
+	@startOfWorkOnTuesdays TIME OUTPUT,
+	@endOfWorkOnTuesdays TIME OUTPUT,
+	@startOfWorkOnWednesdays TIME OUTPUT,
+	@endOfWorkOnWednesdays TIME OUTPUT,
+	@startOfWorkOnThursdays TIME OUTPUT,
+	@endOfWorkOnThursdays TIME OUTPUT,
+	@startOfWorkOnFridays TIME OUTPUT,
+	@endOfWorkOnFridays TIME OUTPUT,
+	@startOfWorkOnSaturdays TIME OUTPUT,
+	@endOfWorkOnSaturdays TIME OUTPUT,
+	@startOfWorkOnSundays TIME OUTPUT,
+	@endOfWorkOnSundays TIME OUTPUT,
+	@startOfBreakOnMondays TIME OUTPUT,
+	@endOfBreakOnMondays TIME OUTPUT,
+	@startOfBreakOnTuesdays TIME OUTPUT,
+	@endOfBreakOnTuesdays TIME OUTPUT,
+	@startOfBreakOnWednesdays TIME OUTPUT,
+	@endOfBreakOnWednesdays TIME OUTPUT,
+	@startOfBreakOnThursdays TIME OUTPUT,
+	@endOfBreakOnThursdays TIME OUTPUT,
+	@startOfBreakOnFridays TIME OUTPUT,
+	@endOfBreakOnFridays TIME OUTPUT,
+	@startOfBreakOnSaturdays TIME OUTPUT,
+	@endOfBreakOnSaturdays TIME OUTPUT,
+	@startOfBreakOnSundays TIME OUTPUT,
+	@endOfBreakOnSundays TIME OUTPUT,
+	@standardConsultationTime INT OUTPUT
+AS
+BEGIN
+	DECLARE @returnCode INT;
+	
+	BEGIN TRY
+		INSERT INTO settings
+		(workOnMondays,
+		workOnTuesdays,
+		workOnWednesdays,
+		workOnThursdays,
+		workOnFridays,
+		workOnSaturdays,
+		workOnSundays,
+		startOfWorkOnMondays,
+		endOfWorkOnMondays,
+		startOfWorkOnTuesdays,
+		endOfWorkOnTuesdays,
+		startOfWorkOnWednesdays,
+		endOfWorkOnWednesdays,
+		startOfWorkOnThursdays,
+		endOfWorkOnThursdays,
+		startOfWorkOnFridays,
+		endOfWorkOnFridays,
+		startOfWorkOnSaturdays,
+		endOfWorkOnSaturdays,
+		startOfWorkOnSundays,
+		endOfWorkOnSundays,
+		startOfBreakOnMondays,
+		endOfBreakOnMondays,
+		startOfBreakOnTuesdays,
+		endOfBreakOnTuesdays,
+		startOfBreakOnWednesdays,
+		endOfBreakOnWednesdays,
+		startOfBreakOnThursdays,
+		endOfBreakOnThursdays,
+		startOfBreakOnFridays,
+		endOfBreakOnFridays,
+		startOfBreakOnSaturdays,
+		endOfBreakOnSaturdays,
+		startOfBreakOnSundays,
+		endOfBreakOnSundays,
+		standardConsultationTime)
+		VALUES
+		(@workOnMondays,
+		@workOnTuesdays,
+		@workOnWednesdays,
+		@workOnThursdays,
+		@workOnFridays,
+		@workOnSaturdays,
+		@workOnSundays,
+		@startOfWorkOnMondays,
+		@endOfWorkOnMondays,
+		@startOfWorkOnTuesdays,
+		@endOfWorkOnTuesdays,
+		@startOfWorkOnWednesdays,
+		@endOfWorkOnWednesdays,
+		@startOfWorkOnThursdays,
+		@endOfWorkOnThursdays,
+		@startOfWorkOnFridays,
+		@endOfWorkOnFridays,
+		@startOfWorkOnSaturdays,
+		@endOfWorkOnSaturdays,
+		@startOfWorkOnSundays,
+		@endOfWorkOnSundays,
+		@startOfBreakOnMondays,
+		@endOfBreakOnMondays,
+		@startOfBreakOnTuesdays,
+		@endOfBreakOnTuesdays,
+		@startOfBreakOnWednesdays,
+		@endOfBreakOnWednesdays,
+		@startOfBreakOnThursdays,
+		@endOfBreakOnThursdays,
+		@startOfBreakOnFridays,
+		@endOfBreakOnFridays,
+		@startOfBreakOnSaturdays,
+		@endOfBreakOnSaturdays,
+		@startOfBreakOnSundays,
+		@endOfBreakOnSundays,
+		@standardConsultationTime)
+		
+		SET @returnCode = 0; -- Código de sucesso
+	END TRY
+	BEGIN CATCH
+		SET @returnCode = ERROR_NUMBER(); -- Captura do erro
+	END CATCH;
+	
+	RETURN @returnCode; -- Retorna o código
+END;
+GO
+
+CREATE PROC sp_edit_all_settings
+	@workOnMondays BIT OUTPUT,
+	@workOnTuesdays BIT OUTPUT,
+	@workOnWednesdays BIT OUTPUT,
+	@workOnThursdays BIT OUTPUT,
+	@workOnFridays BIT OUTPUT,
+	@workOnSaturdays BIT OUTPUT,
+	@workOnSundays BIT OUTPUT,
+	@startOfWorkOnMondays TIME OUTPUT,
+	@endOfWorkOnMondays TIME OUTPUT,
+	@startOfWorkOnTuesdays TIME OUTPUT,
+	@endOfWorkOnTuesdays TIME OUTPUT,
+	@startOfWorkOnWednesdays TIME OUTPUT,
+	@endOfWorkOnWednesdays TIME OUTPUT,
+	@startOfWorkOnThursdays TIME OUTPUT,
+	@endOfWorkOnThursdays TIME OUTPUT,
+	@startOfWorkOnFridays TIME OUTPUT,
+	@endOfWorkOnFridays TIME OUTPUT,
+	@startOfWorkOnSaturdays TIME OUTPUT,
+	@endOfWorkOnSaturdays TIME OUTPUT,
+	@startOfWorkOnSundays TIME OUTPUT,
+	@endOfWorkOnSundays TIME OUTPUT,
+	@startOfBreakOnMondays TIME OUTPUT,
+	@endOfBreakOnMondays TIME OUTPUT,
+	@startOfBreakOnTuesdays TIME OUTPUT,
+	@endOfBreakOnTuesdays TIME OUTPUT,
+	@startOfBreakOnWednesdays TIME OUTPUT,
+	@endOfBreakOnWednesdays TIME OUTPUT,
+	@startOfBreakOnThursdays TIME OUTPUT,
+	@endOfBreakOnThursdays TIME OUTPUT,
+	@startOfBreakOnFridays TIME OUTPUT,
+	@endOfBreakOnFridays TIME OUTPUT,
+	@startOfBreakOnSaturdays TIME OUTPUT,
+	@endOfBreakOnSaturdays TIME OUTPUT,
+	@startOfBreakOnSundays TIME OUTPUT,
+	@endOfBreakOnSundays TIME OUTPUT,
+	@standardConsultationTime INT OUTPUT
+AS
+BEGIN
+	DECLARE @returnCode INT;
+	BEGIN TRY
+		UPDATE settings
+		SET workOnMondays = @workOnMondays,
+			workOnTuesdays = @workOnTuesdays,
+			workOnWednesdays = @workOnWednesdays,
+			workOnThursdays = @workOnThursdays,
+			workOnFridays = @workOnFridays,
+			workOnSaturdays = @workOnSaturdays,
+			workOnSundays = @workOnSundays,
+			startOfWorkOnMondays = @startOfWorkOnMondays,
+			endOfWorkOnMondays = @endOfWorkOnMondays,
+			startOfWorkOnTuesdays = @startOfWorkOnTuesdays,
+			endOfWorkOnTuesdays = @endOfWorkOnTuesdays,
+			startOfWorkOnWednesdays = @startOfWorkOnWednesdays,
+			endOfWorkOnWednesdays = @endOfWorkOnWednesdays,
+			startOfWorkOnThursdays = @startOfWorkOnThursdays,
+			endOfWorkOnThursdays = @endOfWorkOnThursdays,
+			startOfWorkOnFridays = @startOfWorkOnFridays,
+			endOfWorkOnFridays = @endOfWorkOnFridays,
+			startOfWorkOnSaturdays = @startOfWorkOnSaturdays,
+			endOfWorkOnSaturdays = @endOfWorkOnSaturdays,
+			startOfWorkOnSundays = @startOfWorkOnSundays,
+			endOfWorkOnSundays = @endOfWorkOnSundays,
+			startOfBreakOnMondays = @startOfBreakOnMondays,
+			endOfBreakOnMondays = @endOfBreakOnMondays,
+			startOfBreakOnTuesdays = @startOfBreakOnTuesdays,
+			endOfBreakOnTuesdays = @endOfBreakOnTuesdays,
+			startOfBreakOnWednesdays = @startOfBreakOnWednesdays,
+			endOfBreakOnWednesdays = @endOfBreakOnWednesdays,
+			startOfBreakOnThursdays = @startOfBreakOnThursdays,
+			endOfBreakOnThursdays = @endOfBreakOnThursdays,
+			startOfBreakOnFridays = @startOfBreakOnFridays,
+			endOfBreakOnFridays = @endOfBreakOnFridays,
+			startOfBreakOnSaturdays = @startOfBreakOnSaturdays,
+			endOfBreakOnSaturdays = @endOfBreakOnSaturdays,
+			startOfBreakOnSundays = @startOfBreakOnSundays,
+			endOfBreakOnSundays = @endOfBreakOnSundays,
+			standardConsultationTime = @standardConsultationTime
+		WHERE TOP 1
+	
+		SET @returnCode = 0; -- Código de sucesso
+	END TRY
+	BEGIN CATCH
+		SET @returnCode = ERROR_NUMBER(); -- Captura do erro
+	END CATCH;
+	
+	RETURN @returnCode; -- Retorna o código
+	
+END;
+GO

@@ -1,0 +1,75 @@
+CREATE DATABASE dbpatients;
+
+Use dbpatients
+
+CREATE TABLE clients(
+	idClient INT PRIMARY KEY IDENTITY(1,1),
+	name VARCHAR(100) NOT NULL,
+	--contatos
+	telephone VARCHAR(20)NOT NULL,
+	--endereço
+	street VARCHAR(50) NOT NULL,
+	houseNumber VARCHAR(10) NOT NULL,
+	neighborhood VARCHAR(50) NOT NULL, --não gosto dessa tradução para bairro
+	city VARCHAR(50) NOT NULL,
+	complement VARCHAR(50),
+	--documentos
+	idNumber VARCHAR(15) NOT NULL,
+	cpf VARCHAR(11) NOT NULL UNIQUE,
+	--referencias
+	appointmentsQuantity INT NOT NULL
+);
+
+CREATE TABLE consultations(
+	idConsultation INT PRIMARY KEY IDENTITY(1,1),
+	consultationDate DATE NOT NULL,
+	timeOfConsultation TIME NOT NULL,
+	idClient INT NOT NULL,
+	status INT NOT NULL, --enum
+	
+	FOREIGN KEY (idClient) REFERENCES clients(idClient)
+);
+
+CREATE TABLE settings(
+	id INT PRIMARY KEY CHECK (Id = 1),
+	--dias trabalhados
+	workOnMondays BIT NOT NULL,
+	workOnTuesdays BIT NOT NULL,
+	workOnWednesdays BIT NOT NULL,
+	workOnThursdays BIT NOT NULL,
+	workOnFridays BIT NOT NULL,
+	workOnSaturdays BIT NOT NULL,
+	workOnSundays BIT NOT NULL,
+	--horarios de trabalho
+	startOfWorkOnMondays TIME,
+	endOfWorkOnMondays TIME,
+	startOfWorkOnTuesdays TIME,
+	endOfWorkOnTuesdays TIME,
+	startOfWorkOnWednesdays TIME,
+	endOfWorkOnWednesdays TIME,
+	startOfWorkOnThursdays TIME,
+	endOfWorkOnThursdays TIME,
+	startOfWorkOnFridays TIME,
+	endOfWorkOnFridays TIME,
+	startOfWorkOnSaturdays TIME,
+	endOfWorkOnSaturdays TIME,
+	startOfWorkOnSundays TIME,
+	endOfWorkOnSundays TIME,
+	--horarios do almoço
+	startOfBreakOnMondays TIME,
+	endOfBreakOnMondays TIME,
+	startOfBreakOnTuesdays TIME,
+	endOfBreakOnTuesdays TIME,
+	startOfBreakOnWednesdays TIME,
+	endOfBreakOnWednesdays TIME,
+	startOfBreakOnThursdays TIME,
+	endOfBreakOnThursdays TIME,
+	startOfBreakOnFridays TIME,
+	endOfBreakOnFridays TIME,
+	startOfBreakOnSaturdays TIME,
+	endOfBreakOnSaturdays TIME,
+	startOfBreakOnSundays TIME,
+	endOfBreakOnSundays TIME,
+	--tempo padrão das consultas
+	standardConsultationTime INT NOT NULL --em minutos
+);

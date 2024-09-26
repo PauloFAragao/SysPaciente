@@ -1,0 +1,15 @@
+C:\Sistemas\SysPaciente\SysPaciente\bin\Debug\SysPaciente.exe.config
+C:\Sistemas\SysPaciente\SysPaciente\bin\Debug\SysPaciente.exe
+C:\Sistemas\SysPaciente\SysPaciente\bin\Debug\SysPaciente.pdb
+C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.csproj.AssemblyReference.cache
+C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.Form1.resources
+C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.Properties.Resources.resources
+C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.csproj.GenerateResource.cache
+C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.csproj.CoreCompileInputs.cache
+C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.exe
+C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.pdb
+C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.Forms.FrmClients.resources
+C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.Forms.FrmConsultations.resources
+C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.Forms.FrmSettings.resources
+C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.Forms.FrmHome.resources
+C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.Forms.FrmAdm.resources
