@@ -13,3 +13,4 @@ C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.Forms.FrmConsultations
 C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.Forms.FrmSettings.resources
 C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.Forms.FrmHome.resources
 C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.Forms.FrmAdm.resources
+C:\Sistemas\SysPaciente\SysPaciente\obj\Debug\SysPaciente.Forms.FrmAddEditClient.resources

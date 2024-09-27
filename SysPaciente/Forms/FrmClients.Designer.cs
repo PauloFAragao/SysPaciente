@@ -84,6 +84,7 @@
             this.BtnEdit.TabIndex = 8;
             this.BtnEdit.Text = "Editar";
             this.BtnEdit.UseVisualStyleBackColor = false;
+            this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // BtnNew
             // 
@@ -98,6 +99,7 @@
             this.BtnNew.TabIndex = 7;
             this.BtnNew.Text = "Novo";
             this.BtnNew.UseVisualStyleBackColor = false;
+            this.BtnNew.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // BtnSearchMode
             // 
@@ -137,7 +139,7 @@
             this.DgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvData.Location = new System.Drawing.Point(0, 0);
             this.DgvData.Name = "DgvData";
-            this.DgvData.Size = new System.Drawing.Size(992, 379);
+            this.DgvData.Size = new System.Drawing.Size(992, 391);
             this.DgvData.TabIndex = 1;
             // 
             // panel2
@@ -146,14 +148,14 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 83);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(992, 379);
+            this.panel2.Size = new System.Drawing.Size(992, 391);
             this.panel2.TabIndex = 2;
             // 
             // FrmClients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(992, 462);
+            this.ClientSize = new System.Drawing.Size(992, 474);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "FrmClients";

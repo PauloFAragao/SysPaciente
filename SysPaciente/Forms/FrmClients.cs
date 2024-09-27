@@ -91,11 +91,17 @@ namespace SysPaciente.Forms
             {
                 this.BtnSearchMode.Text = "Mudar para cpf";
                 LblSearch.Text = "Buscar por nome:";
+
+                //para quando clicar no botão já fazer a pesquisa
+                Search();
             }
             else
             {
                 this.BtnSearchMode.Text = "Mudar para nome";
                 LblSearch.Text = "Buscar por cpf:";
+
+                //para quando clicar no botão já fazer a pesquisa
+                Search();
             }
             this.TxtSearchText.Focus();
         }
@@ -117,6 +123,24 @@ namespace SysPaciente.Forms
             
         }
 
+        private void NewEdit(int value)
+        {
+            if(value == 0)
+                FormLoader.OpenChildForm(new FrmAddEditClient(0));
+            else if(value == 1)
+                FormLoader.OpenChildForm(new FrmAddEditClient(1,
+                    Convert.ToInt32(this.DgvData.CurrentRow.Cells["idClient"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["telephone"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["street"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["houseNumber"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["neighborhood"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["city"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["complement"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["idNumber"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["cpf"].Value)));
+        }
+
         //------------------ métodos criados pelo visual studio
         private void BtnSearchMode_Click(object sender, EventArgs e)
         {
@@ -126,6 +150,16 @@ namespace SysPaciente.Forms
         private void TxtSearchText_TextChanged(object sender, EventArgs e)
         {
             Search();
+        }
+
+        private void BtnNew_Click(object sender, EventArgs e)
+        {
+            NewEdit(0);
+        }
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            NewEdit(1);
         }
     }
 }
