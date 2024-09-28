@@ -69,7 +69,6 @@ GO
 --procedimento para editar alguns dos dados do paciente
 CREATE PROC sp_edit_client
 	@idClient INT,
-	@name VARCHAR(100),
 	@telephone VARCHAR(20),
 	@street VARCHAR(50),
 	@houseNumber VARCHAR(10),
@@ -82,8 +81,7 @@ BEGIN
 	 
 	BEGIN TRY
 		UPDATE clients
-		SET name = @name,
-			telephone = @telephone,
+		SET telephone = @telephone,
 			street = @street,
 			houseNumber = @houseNumber,
 			neighborhood = @neighborhood,

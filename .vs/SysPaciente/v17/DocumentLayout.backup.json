@@ -1,12 +1,103 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Sistemas\\SysPaciente\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|c:\\sistemas\\syspaciente\\syspaciente\\forms\\frmaddeditclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|solutionrelative:syspaciente\\forms\\frmaddeditclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|c:\\sistemas\\syspaciente\\syspaciente\\forms\\frmaddeditclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|solutionrelative:syspaciente\\forms\\frmaddeditclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|c:\\sistemas\\syspaciente\\syspaciente\\entities\\menubuttoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|solutionrelative:syspaciente\\entities\\menubuttoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|c:\\sistemas\\syspaciente\\syspaciente\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|solutionrelative:syspaciente\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|c:\\sistemas\\syspaciente\\syspaciente\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|solutionrelative:syspaciente\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FrmAddEditClient.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmAddEditClient.cs",
+              "RelativeDocumentMoniker": "SysPaciente\\Forms\\FrmAddEditClient.cs",
+              "ToolTip": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmAddEditClient.cs",
+              "RelativeToolTip": "SysPaciente\\Forms\\FrmAddEditClient.cs",
+              "ViewState": "AgIAANcAAAAAAAAAAAAiwPEAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-27T20:40:32.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FrmAddEditClient.cs [Design]",
+              "DocumentMoniker": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmAddEditClient.cs",
+              "RelativeDocumentMoniker": "SysPaciente\\Forms\\FrmAddEditClient.cs",
+              "ToolTip": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmAddEditClient.cs [Design]",
+              "RelativeToolTip": "SysPaciente\\Forms\\FrmAddEditClient.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-27T20:40:21.922Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MenuButtonController.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Entities\\MenuButtonController.cs",
+              "RelativeDocumentMoniker": "SysPaciente\\Entities\\MenuButtonController.cs",
+              "ToolTip": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Entities\\MenuButtonController.cs",
+              "RelativeToolTip": "SysPaciente\\Entities\\MenuButtonController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB4AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-27T20:20:29.535Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Form1.cs",
+              "RelativeDocumentMoniker": "SysPaciente\\Form1.cs",
+              "ToolTip": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Form1.cs",
+              "RelativeToolTip": "SysPaciente\\Form1.cs",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAwwHkAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-27T20:17:25.059Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Form1.cs",
+              "RelativeDocumentMoniker": "SysPaciente\\Form1.cs",
+              "ToolTip": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Form1.cs [Design]",
+              "RelativeToolTip": "SysPaciente\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-27T20:17:23.134Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -69,12 +69,26 @@ namespace SysPaciente.Forms
             //modo de editar simples
             if (Tipe == 1)
             {
+                //tornando campos desabilitados para evitar edição de dados
                 this.TxtIdNumber.Enabled = false;
                 this.TxtCpf.Enabled = false;
+                this.TxtName.Enabled = false;
 
+                //mudando nome dos labels para tirar o *
                 this.LblIdentidade.Text = "Identidade: ";
                 this.LblCpf.Text = "cpf: ";
+                this.LblName.Text = "Nome:";
 
+                //mudando o nome do botão
+                this.BtnConfirm.Text = "Editar";
+            }
+            //modo de edição de adm
+            else if(Tipe == 2)
+            {
+                //label que indica modo de edição de administrador
+                this.LblAdm.Visible = true;
+
+                //mudando nome do botão
                 this.BtnConfirm.Text = "Editar";
             }
         }
@@ -162,7 +176,7 @@ namespace SysPaciente.Forms
                 }
                 else if(Tipe == 1)//para editar um paciente
                 {
-                    string resp = Data.EditClient(Id, name, telephone, street, houseNumber, neighborhood, city, complement);
+                    string resp = Data.EditClient(Id, telephone, street, houseNumber, neighborhood, city, complement);
 
                     if (resp == "Registro editado com sucesso.")
                     {
@@ -175,7 +189,19 @@ namespace SysPaciente.Forms
                 }
                 else//para edição de adm
                 {
+                    string resp = Data.EditClientAdm(Id, name, telephone, street, houseNumber, neighborhood, city, complement, idNumber, cpf);
 
+                    if (resp == "Registro editado com sucesso.")
+                    {
+                        MessageBox.Show(resp, "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FormLoader.OpenChildForm(new FrmClients());
+
+                        //mandando o botão de clientes ficar selecionado
+                        MenuButtonController.SetBtnClientsSelected();
+                    }
+
+                    else
+                        ErrorMessage(resp, "Erro");
                 }
             }
             else//se algum campo importante estiver em branco dá uma msg de erro
@@ -194,6 +220,17 @@ namespace SysPaciente.Forms
             }
         }
 
+        private void Cancel()
+        {
+            if (Tipe == 2)//para adicionar um novo paciente
+            {
+                //mandando o botão de clientes ficar selecionado
+                MenuButtonController.SetBtnClientsSelected();
+            }
+
+            FormLoader.OpenChildForm(new FrmClients());
+        }
+
         //------------------------------- métodos criados pelo visual studio
         private void BtnConfirm_Click(object sender, EventArgs e)
         {
@@ -202,7 +239,7 @@ namespace SysPaciente.Forms
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            FormLoader.OpenChildForm(new FrmClients());
+            Cancel();
         }
     }
 }

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.BtnDelClients = new System.Windows.Forms.Button();
             this.BtnEditClient = new System.Windows.Forms.Button();
             this.BtnDelConsultations = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,33 +39,18 @@
             this.label5 = new System.Windows.Forms.Label();
             this.TxtConfirmPassword = new System.Windows.Forms.TextBox();
             this.PainelChangePassword = new System.Windows.Forms.Panel();
+            this.BtnCancel = new System.Windows.Forms.Button();
+            this.LblPasswordsNotMatch = new System.Windows.Forms.Label();
+            this.LblPasswordWrong = new System.Windows.Forms.Label();
             this.BtnConfirmPasswordChange = new System.Windows.Forms.Button();
             this.PanelLogin = new System.Windows.Forms.Panel();
             this.BtnLogin = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.LblError = new System.Windows.Forms.Label();
             this.TxtPassord = new System.Windows.Forms.TextBox();
-            this.LblPasswordWrong = new System.Windows.Forms.Label();
-            this.LblPasswordsNotMatch = new System.Windows.Forms.Label();
-            this.BtnCancel = new System.Windows.Forms.Button();
             this.PainelChangePassword.SuspendLayout();
             this.PanelLogin.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // BtnDelClients
-            // 
-            this.BtnDelClients.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
-            this.BtnDelClients.Enabled = false;
-            this.BtnDelClients.FlatAppearance.BorderSize = 0;
-            this.BtnDelClients.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDelClients.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnDelClients.ForeColor = System.Drawing.Color.White;
-            this.BtnDelClients.Location = new System.Drawing.Point(51, 161);
-            this.BtnDelClients.Name = "BtnDelClients";
-            this.BtnDelClients.Size = new System.Drawing.Size(137, 35);
-            this.BtnDelClients.TabIndex = 8;
-            this.BtnDelClients.Text = "Deletar Pacientes";
-            this.BtnDelClients.UseVisualStyleBackColor = false;
             // 
             // BtnEditClient
             // 
@@ -78,10 +62,11 @@
             this.BtnEditClient.ForeColor = System.Drawing.Color.White;
             this.BtnEditClient.Location = new System.Drawing.Point(51, 103);
             this.BtnEditClient.Name = "BtnEditClient";
-            this.BtnEditClient.Size = new System.Drawing.Size(137, 35);
+            this.BtnEditClient.Size = new System.Drawing.Size(137, 52);
             this.BtnEditClient.TabIndex = 9;
-            this.BtnEditClient.Text = "Editar Paciente";
+            this.BtnEditClient.Text = "Editar/Deletar Paciente";
             this.BtnEditClient.UseVisualStyleBackColor = false;
+            this.BtnEditClient.Click += new System.EventHandler(this.BtnEditClient_Click);
             // 
             // BtnDelConsultations
             // 
@@ -91,7 +76,7 @@
             this.BtnDelConsultations.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnDelConsultations.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnDelConsultations.ForeColor = System.Drawing.Color.White;
-            this.BtnDelConsultations.Location = new System.Drawing.Point(51, 220);
+            this.BtnDelConsultations.Location = new System.Drawing.Point(51, 179);
             this.BtnDelConsultations.Name = "BtnDelConsultations";
             this.BtnDelConsultations.Size = new System.Drawing.Size(137, 35);
             this.BtnDelConsultations.TabIndex = 10;
@@ -199,6 +184,45 @@
             this.PainelChangePassword.TabIndex = 19;
             this.PainelChangePassword.Visible = false;
             // 
+            // BtnCancel
+            // 
+            this.BtnCancel.BackColor = System.Drawing.Color.SteelBlue;
+            this.BtnCancel.FlatAppearance.BorderSize = 0;
+            this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCancel.ForeColor = System.Drawing.Color.White;
+            this.BtnCancel.Location = new System.Drawing.Point(179, 215);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(86, 35);
+            this.BtnCancel.TabIndex = 22;
+            this.BtnCancel.Text = "Cancelar";
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
+            // LblPasswordsNotMatch
+            // 
+            this.LblPasswordsNotMatch.AutoSize = true;
+            this.LblPasswordsNotMatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPasswordsNotMatch.ForeColor = System.Drawing.Color.Red;
+            this.LblPasswordsNotMatch.Location = new System.Drawing.Point(58, 179);
+            this.LblPasswordsNotMatch.Name = "LblPasswordsNotMatch";
+            this.LblPasswordsNotMatch.Size = new System.Drawing.Size(190, 16);
+            this.LblPasswordsNotMatch.TabIndex = 21;
+            this.LblPasswordsNotMatch.Text = "As senhas não correspondem!";
+            this.LblPasswordsNotMatch.Visible = false;
+            // 
+            // LblPasswordWrong
+            // 
+            this.LblPasswordWrong.AutoSize = true;
+            this.LblPasswordWrong.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPasswordWrong.ForeColor = System.Drawing.Color.Red;
+            this.LblPasswordWrong.Location = new System.Drawing.Point(102, 70);
+            this.LblPasswordWrong.Name = "LblPasswordWrong";
+            this.LblPasswordWrong.Size = new System.Drawing.Size(93, 16);
+            this.LblPasswordWrong.TabIndex = 20;
+            this.LblPasswordWrong.Text = "Senha Errada!";
+            this.LblPasswordWrong.Visible = false;
+            // 
             // BtnConfirmPasswordChange
             // 
             this.BtnConfirmPasswordChange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
@@ -272,45 +296,6 @@
             this.TxtPassord.TabIndex = 0;
             this.TxtPassord.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPassord_KeyPress);
             // 
-            // LblPasswordWrong
-            // 
-            this.LblPasswordWrong.AutoSize = true;
-            this.LblPasswordWrong.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblPasswordWrong.ForeColor = System.Drawing.Color.Red;
-            this.LblPasswordWrong.Location = new System.Drawing.Point(102, 70);
-            this.LblPasswordWrong.Name = "LblPasswordWrong";
-            this.LblPasswordWrong.Size = new System.Drawing.Size(93, 16);
-            this.LblPasswordWrong.TabIndex = 20;
-            this.LblPasswordWrong.Text = "Senha Errada!";
-            this.LblPasswordWrong.Visible = false;
-            // 
-            // LblPasswordsNotMatch
-            // 
-            this.LblPasswordsNotMatch.AutoSize = true;
-            this.LblPasswordsNotMatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblPasswordsNotMatch.ForeColor = System.Drawing.Color.Red;
-            this.LblPasswordsNotMatch.Location = new System.Drawing.Point(58, 179);
-            this.LblPasswordsNotMatch.Name = "LblPasswordsNotMatch";
-            this.LblPasswordsNotMatch.Size = new System.Drawing.Size(190, 16);
-            this.LblPasswordsNotMatch.TabIndex = 21;
-            this.LblPasswordsNotMatch.Text = "As senhas não correspondem!";
-            this.LblPasswordsNotMatch.Visible = false;
-            // 
-            // BtnCancel
-            // 
-            this.BtnCancel.BackColor = System.Drawing.Color.SteelBlue;
-            this.BtnCancel.FlatAppearance.BorderSize = 0;
-            this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCancel.ForeColor = System.Drawing.Color.White;
-            this.BtnCancel.Location = new System.Drawing.Point(179, 215);
-            this.BtnCancel.Name = "BtnCancel";
-            this.BtnCancel.Size = new System.Drawing.Size(86, 35);
-            this.BtnCancel.TabIndex = 22;
-            this.BtnCancel.Text = "Cancelar";
-            this.BtnCancel.UseVisualStyleBackColor = false;
-            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
-            // 
             // FrmAdm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -323,7 +308,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.BtnDelConsultations);
             this.Controls.Add(this.BtnEditClient);
-            this.Controls.Add(this.BtnDelClients);
             this.Name = "FrmAdm";
             this.Text = "FrmAdm";
             this.PainelChangePassword.ResumeLayout(false);
@@ -336,7 +320,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button BtnDelClients;
         private System.Windows.Forms.Button BtnEditClient;
         private System.Windows.Forms.Button BtnDelConsultations;
         private System.Windows.Forms.Label label2;

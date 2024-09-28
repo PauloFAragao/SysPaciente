@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SysPaciente.Entities;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using SysPaciente.Forms;
 
 namespace SysPaciente.Forms
 {
@@ -28,7 +30,6 @@ namespace SysPaciente.Forms
 
                 //torna os botões enabled
                 this.BtnEditClient.Enabled = true;
-                this.BtnDelClients.Enabled = true;
                 this.BtnDelConsultations.Enabled = true;
                 this.BtnChangePassword.Enabled = true;
             }
@@ -158,6 +159,11 @@ namespace SysPaciente.Forms
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             CancelChangePassword();
+        }
+
+        private void BtnEditClient_Click(object sender, EventArgs e)
+        {
+            FormLoader.OpenChildForm(new FrmAdmClients());
         }
     }
 }

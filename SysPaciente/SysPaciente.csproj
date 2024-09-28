@@ -49,6 +49,7 @@
     <Compile Include="Entities\Connection.cs" />
     <Compile Include="Entities\Data.cs" />
     <Compile Include="Entities\FormLoader.cs" />
+    <Compile Include="Entities\MenuButtonController.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +67,12 @@
     </Compile>
     <Compile Include="Forms\FrmAdm.Designer.cs">
       <DependentUpon>FrmAdm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmAdmClients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmAdmClients.Designer.cs">
+      <DependentUpon>FrmAdmClients.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmClients.cs">
       <SubType>Form</SubType>
@@ -101,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAdm.resx">
       <DependentUpon>FrmAdm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmAdmClients.resx">
+      <DependentUpon>FrmAdmClients.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmClients.resx">
       <DependentUpon>FrmClients.cs</DependentUpon>

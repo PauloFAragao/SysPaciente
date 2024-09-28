@@ -36,7 +36,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.TxtName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LblName = new System.Windows.Forms.Label();
             this.TxtTelephone = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -52,9 +52,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.TxtNeighborhood = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.LblAdm = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnCancel
@@ -64,7 +67,7 @@
             this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnCancel.ForeColor = System.Drawing.Color.White;
-            this.BtnCancel.Location = new System.Drawing.Point(823, 416);
+            this.BtnCancel.Location = new System.Drawing.Point(801, 420);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(97, 35);
             this.BtnCancel.TabIndex = 11;
@@ -110,7 +113,7 @@
             this.groupBox3.Controls.Add(this.LblIdentidade);
             this.groupBox3.Controls.Add(this.LblCpf);
             this.groupBox3.Controls.Add(this.TxtCpf);
-            this.groupBox3.Location = new System.Drawing.Point(28, 240);
+            this.groupBox3.Location = new System.Drawing.Point(26, 258);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(837, 123);
             this.groupBox3.TabIndex = 17;
@@ -120,10 +123,10 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.TxtName);
-            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.LblName);
             this.groupBox2.Controls.Add(this.TxtTelephone);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(28, 27);
+            this.groupBox2.Location = new System.Drawing.Point(26, 45);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(837, 78);
             this.groupBox2.TabIndex = 16;
@@ -137,14 +140,14 @@
             this.TxtName.Size = new System.Drawing.Size(190, 20);
             this.TxtName.TabIndex = 1;
             // 
-            // label1
+            // LblName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Nome*: ";
+            this.LblName.AutoSize = true;
+            this.LblName.Location = new System.Drawing.Point(19, 38);
+            this.LblName.Name = "LblName";
+            this.LblName.Size = new System.Drawing.Size(45, 13);
+            this.LblName.TabIndex = 0;
+            this.LblName.Text = "Nome*: ";
             // 
             // TxtTelephone
             // 
@@ -185,7 +188,7 @@
             this.BtnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnConfirm.ForeColor = System.Drawing.Color.White;
-            this.BtnConfirm.Location = new System.Drawing.Point(702, 416);
+            this.BtnConfirm.Location = new System.Drawing.Point(680, 420);
             this.BtnConfirm.Name = "BtnConfirm";
             this.BtnConfirm.Size = new System.Drawing.Size(97, 35);
             this.BtnConfirm.TabIndex = 10;
@@ -230,7 +233,7 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.TxtNeighborhood);
-            this.groupBox1.Location = new System.Drawing.Point(28, 111);
+            this.groupBox1.Location = new System.Drawing.Point(26, 129);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(837, 123);
             this.groupBox1.TabIndex = 15;
@@ -279,11 +282,37 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(21, 371);
+            this.label8.Location = new System.Drawing.Point(19, 389);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(329, 13);
             this.label8.TabIndex = 20;
             this.label8.Text = "Atenção: Todos os campos marcados com * devem ser preenchidos";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panel1.Controls.Add(this.LblAdm);
+            this.panel1.Controls.Add(this.groupBox2);
+            this.panel1.Controls.Add(this.BtnCancel);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.BtnConfirm);
+            this.panel1.Controls.Add(this.groupBox3);
+            this.panel1.Location = new System.Drawing.Point(38, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(926, 472);
+            this.panel1.TabIndex = 21;
+            // 
+            // LblAdm
+            // 
+            this.LblAdm.AutoSize = true;
+            this.LblAdm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblAdm.Location = new System.Drawing.Point(368, 11);
+            this.LblAdm.Name = "LblAdm";
+            this.LblAdm.Size = new System.Drawing.Size(210, 16);
+            this.LblAdm.TabIndex = 22;
+            this.LblAdm.Text = "Modo de edição de administrador";
+            this.LblAdm.Visible = false;
             // 
             // FrmAddEditClient
             // 
@@ -291,12 +320,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(992, 474);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.BtnCancel);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.BtnConfirm);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.panel1);
             this.Name = "FrmAddEditClient";
             this.Text = "FrmAddEditClient";
             this.groupBox3.ResumeLayout(false);
@@ -305,8 +329,9 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -320,7 +345,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox TxtName;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LblName;
         private System.Windows.Forms.TextBox TxtTelephone;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
@@ -336,5 +361,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TxtNeighborhood;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label LblAdm;
     }
 }

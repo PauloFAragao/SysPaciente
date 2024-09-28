@@ -1,22 +1,28 @@
-﻿using System;
+﻿using SysPaciente.Entities;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using SysPaciente.Entities;
 
 namespace SysPaciente.Forms
 {
-    public partial class FrmClients : Form
+    public partial class FrmAdmClients : Form
     {
         bool SearchForName;
 
-        public FrmClients()
+        public FrmAdmClients()
         {
             InitializeComponent();
 
             //inicia buscando por nome
             SearchForName = true;
 
-            if(LoadData())
+            if (LoadData())
             {
                 HideColumns();
                 ChangeColumns();
@@ -30,7 +36,7 @@ namespace SysPaciente.Forms
         {
             DataTable dataTable = Data.ShowClients();
 
-            if(dataTable != null)
+            if (dataTable != null)
             {
                 this.DgvData.DataSource = dataTable;
                 return true;
@@ -110,7 +116,7 @@ namespace SysPaciente.Forms
         {
             DataTable dataTable;
 
-            if(SearchForName)
+            if (SearchForName)
             {
                 dataTable = Data.SearchClienteName(this.TxtSearchText.Text);
                 this.DgvData.DataSource = dataTable;
@@ -120,29 +126,25 @@ namespace SysPaciente.Forms
                 dataTable = Data.SearchClienteCPF(this.TxtSearchText.Text);
                 this.DgvData.DataSource = dataTable;
             }
-            
+
         }
 
-        private void NewEdit(int value)
+        private void Edit()
         {
             //verifica se tem alguma linha no DataGridView
             if (DgvData.Rows.Count > 0)
             {
-                if (value == 0)
-                    FormLoader.OpenChildForm(new FrmAddEditClient(0));
-
-                else if (value == 1)
-                    FormLoader.OpenChildForm(new FrmAddEditClient(1,
-                        Convert.ToInt32(this.DgvData.CurrentRow.Cells["idClient"].Value),
-                        Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value),
-                        Convert.ToString(this.DgvData.CurrentRow.Cells["telephone"].Value),
-                        Convert.ToString(this.DgvData.CurrentRow.Cells["street"].Value),
-                        Convert.ToString(this.DgvData.CurrentRow.Cells["houseNumber"].Value),
-                        Convert.ToString(this.DgvData.CurrentRow.Cells["neighborhood"].Value),
-                        Convert.ToString(this.DgvData.CurrentRow.Cells["city"].Value),
-                        Convert.ToString(this.DgvData.CurrentRow.Cells["complement"].Value),
-                        Convert.ToString(this.DgvData.CurrentRow.Cells["idNumber"].Value),
-                        Convert.ToString(this.DgvData.CurrentRow.Cells["cpf"].Value)));
+                FormLoader.OpenChildForm(new FrmAddEditClient(2,
+                    Convert.ToInt32(this.DgvData.CurrentRow.Cells["idClient"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["telephone"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["street"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["houseNumber"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["neighborhood"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["city"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["complement"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["idNumber"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["cpf"].Value)));
             }
             else
             {
@@ -150,7 +152,16 @@ namespace SysPaciente.Forms
             }
         }
 
-        //------------------ métodos criados pelo visual studio
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            Edit();
+        }
+
+        private void BtnDel_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void BtnSearchMode_Click(object sender, EventArgs e)
         {
             ChangeText();
@@ -159,16 +170,6 @@ namespace SysPaciente.Forms
         private void TxtSearchText_TextChanged(object sender, EventArgs e)
         {
             Search();
-        }
-
-        private void BtnNew_Click(object sender, EventArgs e)
-        {
-            NewEdit(0);
-        }
-
-        private void BtnEdit_Click(object sender, EventArgs e)
-        {
-            NewEdit(1);
         }
     }
 }

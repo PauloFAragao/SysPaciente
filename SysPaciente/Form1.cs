@@ -15,7 +15,6 @@ namespace SysPaciente
 {
     public partial class Form1 : Form
     {
-        private Button currentButton;
         private bool menu;
 
         public Form1()
@@ -28,43 +27,12 @@ namespace SysPaciente
             //o menu começa recolido
             menu = false;
 
+            //
+            MenuButtonController.SetButtonsData(this.BtnHome, this.BtnClients, this.BtnConsultations, this.BtnConfigurations);
+
             //o botão inicio (BtnHome) começa selecionado
-            currentButton = BtnHome;
+            MenuButtonController.SetBtnHomeSelected();
             FormLoader.OpenChildForm(new FrmHome());
-        }
-
-        //desseleciona o botão ativo e seleciona o novo botão
-        private void ActivateButton(object btnSender)
-        {
-            if (btnSender != currentButton)
-            {
-                //resetando o outro botão q estava selecionado
-                if (currentButton != null)
-                {
-                    currentButton.BackColor = Color.FromArgb(70, 130, 180);
-                    currentButton.ForeColor = Color.Black;
-                }
-
-                //marcando o botão o botão selecionado
-                if (currentButton != (Button)btnSender)
-                {
-                    currentButton = (Button)btnSender;
-                    currentButton.BackColor = Color.FromArgb(63, 72, 204);
-                    currentButton.ForeColor = Color.White;
-                }
-            }
-        }
-
-        //desseleciona o botão ativo - para ser chamado pelo menu adm
-        private void DesactivateButton()
-        {
-            //resetando o outro botão q estava selecionado
-            if (currentButton != null)
-            {
-                currentButton.BackColor = Color.FromArgb(70, 130, 180);
-                currentButton.ForeColor = Color.Black;
-                currentButton = null;
-            }
         }
 
         //sobrecarga para desativar o menu
@@ -103,8 +71,7 @@ namespace SysPaciente
         private void Clients()
         {
             //passando o botão que deve ficar selecionado
-            Button btn = this.BtnClients;
-            ActivateButton(btn);
+            MenuButtonController.SetBtnClientsSelected();
 
             //desativar o menu se ele estiver ativado
             MenuController();
@@ -116,8 +83,7 @@ namespace SysPaciente
         private void Consultations()
         {
             //passando o botão que deve ficar selecionado
-            Button btn = this.BtnConsultations;
-            ActivateButton(btn);
+            MenuButtonController.SetBtnConsultationsSelected();
 
             //desativar o menu se ele estiver ativado
             MenuController();
@@ -129,8 +95,7 @@ namespace SysPaciente
         private void Settings()
         {
             //passando o botão que deve ficar selecionado
-            Button btn = this.BtnConfigurations;
-            ActivateButton(btn);
+            MenuButtonController.SetBtnConfigurationsSelected();
 
             //desativar o menu se ele estiver ativado
             MenuController();
@@ -142,8 +107,7 @@ namespace SysPaciente
         private void Home()
         {
             //passando o botão que deve ficar selecionado
-            Button btn = this.BtnHome;
-            ActivateButton(btn);
+            MenuButtonController.SetBtnHomeSelected();
 
             //desativar o menu se ele estiver ativado
             MenuController();
@@ -155,7 +119,7 @@ namespace SysPaciente
         private void Adm()
         {
             //desativando todos os botões
-            DesactivateButton();
+            MenuButtonController.UnselectCurrentButton();
 
             //desativar o menu se ele estiver ativado
             MenuController();
