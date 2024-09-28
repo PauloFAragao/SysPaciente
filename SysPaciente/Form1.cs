@@ -1,14 +1,7 @@
 ﻿using SysPaciente.Entities;
 using SysPaciente.Forms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SysPaciente
@@ -67,7 +60,6 @@ namespace SysPaciente
             }
         }
 
-        //quando o botão pacientes for clicado
         private void Clients()
         {
             //passando o botão que deve ficar selecionado
@@ -134,25 +126,21 @@ namespace SysPaciente
         private void BtnHome_Click(object sender, EventArgs e)
         {
             Home();
-            //ActivateButton(sender);
         }
 
         private void BtnClients_Click(object sender, EventArgs e)
         {
             Clients();
-            //ActivateButton(sender);
         }
 
         private void BtnConsultations_Click(object sender, EventArgs e)
         {
             Consultations();
-            //ActivateButton(sender);
         }
 
         private void BtnConfigurations_Click(object sender, EventArgs e)
         {
             Settings();
-            //ActivateButton(sender);
         }
 
         private void BtnMenu_Click(object sender, EventArgs e)

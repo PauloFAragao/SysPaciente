@@ -29,26 +29,26 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.LblDate = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.BtnSearchMode = new System.Windows.Forms.Button();
             this.BtnView = new System.Windows.Forms.Button();
             this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnChangeStatus = new System.Windows.Forms.Button();
             this.TxtSearchText = new System.Windows.Forms.TextBox();
             this.LblSearch = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.DgvData = new System.Windows.Forms.DataGridView();
-            this.BtnSearchMode = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.LblDate = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.PanelChangeDate = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.DateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.BtnChangeDate = new System.Windows.Forms.Button();
             this.BtnCancelChangeDate = new System.Windows.Forms.Button();
+            this.BtnChangeDate = new System.Windows.Forms.Button();
+            this.DateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.DgvData = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.PanelChangeDate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -68,6 +68,56 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(992, 98);
             this.panel1.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(465, 26);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(104, 35);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Trocar data";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // LblDate
+            // 
+            this.LblDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.LblDate.AutoSize = true;
+            this.LblDate.Location = new System.Drawing.Point(467, 73);
+            this.LblDate.Name = "LblDate";
+            this.LblDate.Size = new System.Drawing.Size(65, 13);
+            this.LblDate.TabIndex = 12;
+            this.LblDate.Text = "01/01/2000";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(437, 73);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(33, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Data:";
+            // 
+            // BtnSearchMode
+            // 
+            this.BtnSearchMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
+            this.BtnSearchMode.FlatAppearance.BorderSize = 0;
+            this.BtnSearchMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSearchMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSearchMode.ForeColor = System.Drawing.Color.White;
+            this.BtnSearchMode.Location = new System.Drawing.Point(322, 26);
+            this.BtnSearchMode.Name = "BtnSearchMode";
+            this.BtnSearchMode.Size = new System.Drawing.Size(137, 35);
+            this.BtnSearchMode.TabIndex = 10;
+            this.BtnSearchMode.Text = "Mudar para cpf";
+            this.BtnSearchMode.UseVisualStyleBackColor = false;
+            this.BtnSearchMode.Click += new System.EventHandler(this.BtnSearchMode_Click);
             // 
             // BtnView
             // 
@@ -140,65 +190,6 @@
             this.panel2.Size = new System.Drawing.Size(992, 376);
             this.panel2.TabIndex = 3;
             // 
-            // DgvData
-            // 
-            this.DgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DgvData.Location = new System.Drawing.Point(0, 0);
-            this.DgvData.Name = "DgvData";
-            this.DgvData.Size = new System.Drawing.Size(992, 376);
-            this.DgvData.TabIndex = 1;
-            // 
-            // BtnSearchMode
-            // 
-            this.BtnSearchMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
-            this.BtnSearchMode.FlatAppearance.BorderSize = 0;
-            this.BtnSearchMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSearchMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSearchMode.ForeColor = System.Drawing.Color.White;
-            this.BtnSearchMode.Location = new System.Drawing.Point(322, 26);
-            this.BtnSearchMode.Name = "BtnSearchMode";
-            this.BtnSearchMode.Size = new System.Drawing.Size(137, 35);
-            this.BtnSearchMode.TabIndex = 10;
-            this.BtnSearchMode.Text = "Mudar para cpf";
-            this.BtnSearchMode.UseVisualStyleBackColor = false;
-            this.BtnSearchMode.Click += new System.EventHandler(this.BtnSearchMode_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(437, 73);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Data:";
-            // 
-            // LblDate
-            // 
-            this.LblDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.LblDate.AutoSize = true;
-            this.LblDate.Location = new System.Drawing.Point(467, 73);
-            this.LblDate.Name = "LblDate";
-            this.LblDate.Size = new System.Drawing.Size(65, 13);
-            this.LblDate.TabIndex = 12;
-            this.LblDate.Text = "01/01/2000";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(465, 26);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 35);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Trocar data";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // PanelChangeDate
             // 
             this.PanelChangeDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -211,38 +202,6 @@
             this.PanelChangeDate.Size = new System.Drawing.Size(433, 215);
             this.PanelChangeDate.TabIndex = 2;
             this.PanelChangeDate.Visible = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(154, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(103, 20);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Trocar a data";
-            // 
-            // DateTimePicker
-            // 
-            this.DateTimePicker.Location = new System.Drawing.Point(96, 62);
-            this.DateTimePicker.Name = "DateTimePicker";
-            this.DateTimePicker.Size = new System.Drawing.Size(233, 20);
-            this.DateTimePicker.TabIndex = 2;
-            // 
-            // BtnChangeDate
-            // 
-            this.BtnChangeDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
-            this.BtnChangeDate.FlatAppearance.BorderSize = 0;
-            this.BtnChangeDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnChangeDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnChangeDate.ForeColor = System.Drawing.Color.White;
-            this.BtnChangeDate.Location = new System.Drawing.Point(37, 130);
-            this.BtnChangeDate.Name = "BtnChangeDate";
-            this.BtnChangeDate.Size = new System.Drawing.Size(137, 35);
-            this.BtnChangeDate.TabIndex = 11;
-            this.BtnChangeDate.Text = "Confirmar";
-            this.BtnChangeDate.UseVisualStyleBackColor = false;
-            this.BtnChangeDate.Click += new System.EventHandler(this.BtnChangeDate_Click);
             // 
             // BtnCancelChangeDate
             // 
@@ -259,6 +218,51 @@
             this.BtnCancelChangeDate.UseVisualStyleBackColor = false;
             this.BtnCancelChangeDate.Click += new System.EventHandler(this.BtnCancelChangeDate_Click);
             // 
+            // BtnChangeDate
+            // 
+            this.BtnChangeDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
+            this.BtnChangeDate.FlatAppearance.BorderSize = 0;
+            this.BtnChangeDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnChangeDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnChangeDate.ForeColor = System.Drawing.Color.White;
+            this.BtnChangeDate.Location = new System.Drawing.Point(37, 130);
+            this.BtnChangeDate.Name = "BtnChangeDate";
+            this.BtnChangeDate.Size = new System.Drawing.Size(137, 35);
+            this.BtnChangeDate.TabIndex = 11;
+            this.BtnChangeDate.Text = "Confirmar";
+            this.BtnChangeDate.UseVisualStyleBackColor = false;
+            this.BtnChangeDate.Click += new System.EventHandler(this.BtnChangeDate_Click);
+            // 
+            // DateTimePicker
+            // 
+            this.DateTimePicker.Location = new System.Drawing.Point(96, 62);
+            this.DateTimePicker.Name = "DateTimePicker";
+            this.DateTimePicker.Size = new System.Drawing.Size(233, 20);
+            this.DateTimePicker.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(154, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(103, 20);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Trocar a data";
+            // 
+            // DgvData
+            // 
+            this.DgvData.AllowUserToAddRows = false;
+            this.DgvData.AllowUserToDeleteRows = false;
+            this.DgvData.AllowUserToOrderColumns = true;
+            this.DgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvData.Location = new System.Drawing.Point(0, 0);
+            this.DgvData.Name = "DgvData";
+            this.DgvData.ReadOnly = true;
+            this.DgvData.Size = new System.Drawing.Size(992, 376);
+            this.DgvData.TabIndex = 1;
+            // 
             // FrmConsultations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -271,9 +275,9 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();
             this.PanelChangeDate.ResumeLayout(false);
             this.PanelChangeDate.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();
             this.ResumeLayout(false);
 
         }

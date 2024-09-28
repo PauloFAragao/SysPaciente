@@ -1,5 +1,36 @@
 USE dbpatients
 
+--procidure que vai receber uma string e dividir
+CREATE FUNCTION dbo.SplitString
+(
+    @List NVARCHAR(MAX),
+    @Delimiter CHAR(1)
+)
+RETURNS @Output TABLE (IdClient INT)
+AS
+BEGIN
+    DECLARE @Start INT, @End INT
+    SET @Start = 1
+
+    WHILE CHARINDEX(@Delimiter, @List, @Start) > 0
+    BEGIN
+        SET @End = CHARINDEX(@Delimiter, @List, @Start)
+        INSERT INTO @Output (IdClient) 
+        VALUES (CAST(SUBSTRING(@List, @Start, @End - @Start) AS INT))
+        SET @Start = @End + 1
+    END
+
+    -- Adicionar o último ID
+    IF @Start <= LEN(@List)
+    BEGIN
+        INSERT INTO @Output (IdClient) 
+        VALUES (CAST(SUBSTRING(@List, @Start, LEN(@List) - @Start + 1) AS INT))
+    END
+
+    RETURN
+END;
+GO
+
 ----------------------- pacientes -----------------------
 
 --procedimento para exibir as 50 primeiras entradas no banco de dados
@@ -17,7 +48,7 @@ CREATE PROC sp_search_clientName
 AS
 BEGIN
 	SELECT TOP 50 * FROM clients
-	WHERE name LIKE @name + '%'
+	WHERE name LIKE LTRIM(RTRIM(@name)) + '%'
 	ORDER BY name ASC;
 END;
 GO
@@ -28,9 +59,21 @@ CREATE PROC sp_search_clientCPF
 AS
 BEGIN
 	SELECT TOP 50 * FROM clients
-	WHERE cpf LIKE @cpf + '%'
+	WHERE cpf LIKE LTRIM(RTRIM(@cpf)) + '%'
 	ORDER BY name ASC;
 END;
+GO
+
+--procedimento para pesquisar os nomes dos clientes
+CREATE PROC sp_search_clients_by_ids
+    @idList NVARCHAR(MAX)
+AS
+BEGIN
+    SELECT c.name
+    FROM clients c
+    JOIN dbo.SplitString(@idList, ',') AS t ON c.idClient = t.IdClient
+END;
+GO
 
 --procedimento para inserir um paciente
 CREATE PROC sp_insert_client
@@ -77,7 +120,7 @@ CREATE PROC sp_edit_client
 	@complement VARCHAR(50)
 AS
 BEGIN
-	 DECLARE @returnCode INT;
+	DECLARE @returnCode INT;
 	 
 	BEGIN TRY
 		UPDATE clients
@@ -113,7 +156,7 @@ CREATE PROC sp_edit_client_admin
 	@cpf VARCHAR(11)
 AS
 BEGIN
-	 DECLARE @returnCode INT;
+	DECLARE @returnCode INT;
 	 
 	BEGIN TRY
 		UPDATE clients
@@ -143,8 +186,19 @@ CREATE PROC sp_delete_client
 	@idClient INT
 AS
 BEGIN
-	DELETE FROM clients
-	WHERE idClient = @idClient;
+	DECLARE @returnCode INT;
+	
+	BEGIN TRY
+		DELETE FROM clients
+		WHERE idClient = @idClient;
+		
+		SET @returnCode = 0; -- Código de sucesso
+	END TRY
+	BEGIN CATCH
+		SET @returnCode = ERROR_NUMBER(); -- Captura do erro
+	END CATCH;
+	
+	RETURN @returnCode; -- Retorna o código
 END;
 GO
 
@@ -155,7 +209,7 @@ CREATE PROC sp_show_consultations
 AS
 BEGIN
 	SELECT TOP 50 * FROM consultations
-	ORDER BY consultationDate ASC
+	ORDER BY timeOfConsultation ASC
 END;
 GO
 
@@ -166,12 +220,27 @@ AS
 BEGIN
 	SELECT TOP 50 * FROM consultations
 	WHERE consultationDate = @consultationDate
-	ORDER BY consultationDate ASC;
+	ORDER BY timeOfConsultation ASC;
+END;
+GO
+
+--procedimento para pesquisar por nome do paciente
+CREATE PROC sp_consultation_search_with_client_name
+    @name VARCHAR(100)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT TOP 50 *
+    FROM consultations c
+    INNER JOIN clients cl ON c.idClient = cl.idClient
+    WHERE cl.name LIKE LTRIM(RTRIM(@name)) + '%'
+    ORDER BY consultationDate ASC;
 END;
 GO
 
 --procedimento para inserir uma consulta
-CREATE PROC sp_insert_client
+CREATE PROC sp_insert_consultation
 	@consultationDate DATE,
 	@timeOfConsultation TIME,
 	@idClient INT,
@@ -197,7 +266,7 @@ END;
 GO
 
 --procedimento para editar uma consulta
-CREATE PROC sp_edit_client
+CREATE PROC sp_edit_consultation
 	@idConsultation INT,
 	@consultationDate DATE,
 	@timeOfConsultation TIME,
@@ -230,8 +299,19 @@ CREATE PROC sp_delete_consultation
 	@idConsultation INT
 AS
 BEGIN
-	DELETE FROM consultations
-	WHERE idConsultation = @idConsultation;
+	DECLARE @returnCode INT;
+	 
+	BEGIN TRY
+		DELETE FROM consultations
+		WHERE idConsultation = @idConsultation;
+		
+		SET @returnCode = 0; -- Código de sucesso
+	END TRY
+	BEGIN CATCH
+		SET @returnCode = ERROR_NUMBER(); -- Captura do erro
+	END CATCH;
+	
+	RETURN @returnCode; -- Retorna o código
 END;
 GO
 

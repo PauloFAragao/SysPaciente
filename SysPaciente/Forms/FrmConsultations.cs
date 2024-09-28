@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SysPaciente.Entities;
+using System;
+using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -19,6 +21,26 @@ namespace SysPaciente.Forms
 
             //texto com a data na tela
             this.LblDate.Text = date.ToShortDateString();
+
+            if(LoadData())
+            {
+                Debug.WriteLine("Dados carregados");
+            }
+        }
+
+        private bool LoadData()
+        {
+            DataTable dataTable = Data.ShowConsultations(date);
+
+            if (dataTable != null)
+            {
+                this.DgvData.DataSource = dataTable;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         //muda o texto do botão e do label

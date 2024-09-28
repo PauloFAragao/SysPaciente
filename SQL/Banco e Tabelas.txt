@@ -27,7 +27,7 @@ CREATE TABLE consultations(
 	idClient INT NOT NULL,
 	status INT NOT NULL, --enum
 	
-	FOREIGN KEY (idClient) REFERENCES clients(idClient)
+	FOREIGN KEY (idClient) REFERENCES clients(idClient) ON DELETE CASCADE,
 );
 
 CREATE TABLE settings(

@@ -138,10 +138,14 @@
             // 
             // DgvData
             // 
+            this.DgvData.AllowUserToAddRows = false;
+            this.DgvData.AllowUserToDeleteRows = false;
+            this.DgvData.AllowUserToOrderColumns = true;
             this.DgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvData.Location = new System.Drawing.Point(0, 0);
             this.DgvData.Name = "DgvData";
+            this.DgvData.ReadOnly = true;
             this.DgvData.Size = new System.Drawing.Size(992, 391);
             this.DgvData.TabIndex = 1;
             // 

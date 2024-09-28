@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -152,6 +153,36 @@ namespace SysPaciente.Forms
             }
         }
 
+        private void Delete()
+        {
+            //verifica se tem alguma linha no DataGridView
+            if (DgvData.Rows.Count > 0)
+            {
+                int id = Convert.ToInt32(this.DgvData.CurrentRow.Cells["idClient"].Value);
+                string name = Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value);
+
+                if (MessageBox.Show(
+                    "Realmente Deseja Apagar o(a) Paciente: " + name + " ?",
+                    "Apagar Paciente?",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    string resp;
+
+                    resp = Data.DeleteClient(id);
+
+                    Debug.WriteLine(resp);
+
+                    LoadData();
+                }
+            }
+            else
+            {
+                MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //----------------------métodos criados pelo visual studio
         private void BtnEdit_Click(object sender, EventArgs e)
         {
             Edit();
@@ -159,7 +190,7 @@ namespace SysPaciente.Forms
 
         private void BtnDel_Click(object sender, EventArgs e)
         {
-
+            Delete();
         }
 
         private void BtnSearchMode_Click(object sender, EventArgs e)
