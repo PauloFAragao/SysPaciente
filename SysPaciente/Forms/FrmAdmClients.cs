@@ -14,14 +14,14 @@ namespace SysPaciente.Forms
 {
     public partial class FrmAdmClients : Form
     {
-        bool SearchForName;
+        private bool _searchForName;
 
         public FrmAdmClients()
         {
             InitializeComponent();
 
             //inicia buscando por nome
-            SearchForName = true;
+            _searchForName = true;
 
             if (LoadData())
             {
@@ -48,11 +48,12 @@ namespace SysPaciente.Forms
             }
         }
 
+
         private void HideColumns()
         {
             this.DgvData.Columns[0].Visible = false;//id
-            this.DgvData.Columns[8].Visible = false;//número da identidade
-            this.DgvData.Columns[9].Visible = false;//número do cpf
+            this.DgvData.Columns[11].Visible = false;//número da identidade
+            this.DgvData.Columns[12].Visible = false;//número do cpf
         }
 
         private void ChangeColumns()
@@ -65,36 +66,48 @@ namespace SysPaciente.Forms
             this.DgvData.Columns[2].HeaderText = "Contato";
             this.DgvData.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-            // Altera o texto do cabeçalho da coluna 3 para "Rua"
-            this.DgvData.Columns[3].HeaderText = "Rua";
+            // Altera o texto do cabeçalho da coluna 3 para "Data de nascimento"
+            this.DgvData.Columns[3].HeaderText = "Data de nascimento";
             this.DgvData.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-            // Altera o texto do cabeçalho da coluna 4 para "Número da casa"
-            this.DgvData.Columns[4].HeaderText = "Número da casa";
+            // Altera o texto do cabeçalho da coluna 4 para "Rua"
+            this.DgvData.Columns[4].HeaderText = "Rua";
             this.DgvData.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-            // Altera o texto do cabeçalho da coluna 5 para "Bairro"
-            this.DgvData.Columns[5].HeaderText = "Bairro";
+            // Altera o texto do cabeçalho da coluna 5 para "Número da casa"
+            this.DgvData.Columns[5].HeaderText = "Número da casa";
             this.DgvData.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-            // Altera o texto do cabeçalho da coluna 6 para "Cidade"
-            this.DgvData.Columns[6].HeaderText = "Cidade";
+            // Altera o texto do cabeçalho da coluna 6 para "Bairro"
+            this.DgvData.Columns[6].HeaderText = "Bairro";
             this.DgvData.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-            // Altera o texto do cabeçalho da coluna 7 para "Complemento"
-            this.DgvData.Columns[7].HeaderText = "Complemento";
+            // Altera o texto do cabeçalho da coluna 7 para "Cidade"
+            this.DgvData.Columns[7].HeaderText = "Cidade";
             this.DgvData.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-            // Altera o texto do cabeçalho da coluna 9 para "Histórico de consultas"
-            this.DgvData.Columns[10].HeaderText = "Histórico de consultas";
+            // Altera o texto do cabeçalho da coluna 8 para "Complemento"
+            this.DgvData.Columns[8].HeaderText = "Cep";
+            this.DgvData.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+            // Altera o texto do cabeçalho da coluna 9 para "Complemento"
+            this.DgvData.Columns[9].HeaderText = "Estado";
+            this.DgvData.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+            // Altera o texto do cabeçalho da coluna 10 para "Complemento"
+            this.DgvData.Columns[10].HeaderText = "Complemento";
             this.DgvData.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+            // Altera o texto do cabeçalho da coluna 13 para "Histórico de consultas"
+            this.DgvData.Columns[13].HeaderText = "Histórico de consultas";
+            this.DgvData.Columns[13].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
 
         private void ChangeText()
         {
-            SearchForName = !SearchForName;
+            _searchForName = !_searchForName;
 
-            if (SearchForName)
+            if (_searchForName)
             {
                 this.BtnSearchMode.Text = "Mudar para cpf";
                 LblSearch.Text = "Buscar por nome:";
@@ -110,6 +123,7 @@ namespace SysPaciente.Forms
                 //para quando clicar no botão já fazer a pesquisa
                 Search();
             }
+
             this.TxtSearchText.Focus();
         }
 
@@ -117,7 +131,7 @@ namespace SysPaciente.Forms
         {
             DataTable dataTable;
 
-            if (SearchForName)
+            if (_searchForName)
             {
                 dataTable = Data.SearchClienteName(this.TxtSearchText.Text);
                 this.DgvData.DataSource = dataTable;
@@ -139,10 +153,13 @@ namespace SysPaciente.Forms
                     Convert.ToInt32(this.DgvData.CurrentRow.Cells["idClient"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["telephone"].Value),
+                    Convert.ToDateTime( this.DgvData.CurrentRow.Cells["dateOfBirth"].Value ),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["street"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["houseNumber"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["neighborhood"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["city"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["cep"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["state"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["complement"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["idNumber"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["cpf"].Value)));

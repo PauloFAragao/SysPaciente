@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace SysPaciente.Entities
 {
     internal class FormLoader
     {
-        public static Panel PanelBody;
+        public static Panel PanelBody { get; set; }
 
-        private static Form activeForm;
+        private static Form _activeForm;
 
         public static void OpenChildForm(Form childForm)
         {
-            if (activeForm != null)
+            if (_activeForm != null)
             {
-                activeForm.Close();
+                _activeForm.Close();
             }
 
-            activeForm = childForm;
+            _activeForm = childForm;
 
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
@@ -30,5 +25,7 @@ namespace SysPaciente.Entities
             childForm.BringToFront();
             childForm.Show();
         }
+
+
     }
 }

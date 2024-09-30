@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
-using System.Xml.Linq;
 
 namespace SysPaciente.Entities
 {
@@ -130,7 +129,8 @@ namespace SysPaciente.Entities
         }
 
         // método que vai inserir um cliente no banco de dados
-        public static string InsertClient(string name, string telephone, string street, string houseNumber, string neighborhood, string city, string complement, string idNumber, string cpf)
+        public static string InsertClient(string name, string telephone, DateTime dateOfBirth, string street, string houseNumber, 
+            string neighborhood, string city, string cep, string state, string complement, string idNumber, string cpf)
         {
             string resp = "";
 
@@ -154,6 +154,9 @@ namespace SysPaciente.Entities
                         // Parâmetro sql para o telefone
                         sqlCmd.Parameters.Add(CreateSqlParameter(telephone, "@telephone", 20));
 
+                        // Parâmetro sql para a data de nascimento
+                        sqlCmd.Parameters.Add(CreateSqlParameter(dateOfBirth, "@dateOfBirth"));
+
                         // Parâmetro sql para o nome da rua
                         sqlCmd.Parameters.Add(CreateSqlParameter(street, "@street", 50));
 
@@ -165,6 +168,12 @@ namespace SysPaciente.Entities
 
                         // Parâmetro sql para a cidade
                         sqlCmd.Parameters.Add(CreateSqlParameter(city, "@city", 50));
+
+                        // Parâmetro sql para o cep
+                        sqlCmd.Parameters.Add(CreateSqlParameter(cep, "@cep", 9));
+
+                        // Parâmetro sql para o estado
+                        sqlCmd.Parameters.Add(CreateSqlParameter(state, "@state", 25));
 
                         // Parâmetro sql para o complemento
                         sqlCmd.Parameters.Add(CreateSqlParameter(complement, "@complement", 50));
@@ -194,7 +203,8 @@ namespace SysPaciente.Entities
         }
 
         // método que vai Editar um cliente no banco de dados
-        public static string EditClient(int idClient, string telephone, string street, string houseNumber, string neighborhood, string city, string complement)
+        public static string EditClient(int idClient, string telephone, DateTime dateOfBirth, string street, string houseNumber, 
+            string neighborhood, string city, string cep, string state, string complement)
         {
             string resp = "";
 
@@ -218,6 +228,9 @@ namespace SysPaciente.Entities
                         // Parâmetro sql para o telefone
                         sqlCmd.Parameters.Add(CreateSqlParameter(telephone, "@telephone", 20));
 
+                        // Parâmetro sql para a data de nascimento
+                        sqlCmd.Parameters.Add(CreateSqlParameter(dateOfBirth, "@dateOfBirth"));
+
                         // Parâmetro sql para o nome da rua
                         sqlCmd.Parameters.Add(CreateSqlParameter(street, "@street", 50));
 
@@ -229,6 +242,12 @@ namespace SysPaciente.Entities
 
                         // Parâmetro sql para a cidade
                         sqlCmd.Parameters.Add(CreateSqlParameter(city, "@city", 50));
+
+                        // Parâmetro sql para o cep
+                        sqlCmd.Parameters.Add(CreateSqlParameter(cep, "@cep", 9));
+
+                        // Parâmetro sql para o estado
+                        sqlCmd.Parameters.Add(CreateSqlParameter(state, "@state", 25));
 
                         // Parâmetro sql para o complemento
                         sqlCmd.Parameters.Add(CreateSqlParameter(complement, "@complement", 50));
@@ -252,7 +271,8 @@ namespace SysPaciente.Entities
         }
 
         // método que vai Editar todos os dados do cliente no banco de dados
-        public static string EditClientAdm(int idClient, string name, string telephone, string street, string houseNumber, string neighborhood, string city, string complement, string idNumber, string cpf)
+        public static string EditClientAdm(int idClient, string name, string telephone, DateTime dateOfBirth, string street, 
+            string houseNumber, string neighborhood, string city, string cep, string state, string complement, string idNumber, string cpf)
         {
             string resp = "";
 
@@ -279,6 +299,9 @@ namespace SysPaciente.Entities
                         // Parâmetro sql para o telefone
                         sqlCmd.Parameters.Add(CreateSqlParameter(telephone, "@telephone", 20));
 
+                        // Parâmetro sql para a data de nascimento
+                        sqlCmd.Parameters.Add(CreateSqlParameter(dateOfBirth, "@dateOfBirth"));
+
                         // Parâmetro sql para o nome da rua
                         sqlCmd.Parameters.Add(CreateSqlParameter(street, "@street", 50));
 
@@ -290,6 +313,12 @@ namespace SysPaciente.Entities
 
                         // Parâmetro sql para a cidade
                         sqlCmd.Parameters.Add(CreateSqlParameter(city, "@city", 50));
+
+                        // Parâmetro sql para o cep
+                        sqlCmd.Parameters.Add(CreateSqlParameter(cep, "@cep", 9));
+
+                        // Parâmetro sql para o estado
+                        sqlCmd.Parameters.Add(CreateSqlParameter(state, "@state", 25));
 
                         // Parâmetro sql para o complemento
                         sqlCmd.Parameters.Add(CreateSqlParameter(complement, "@complement", 50));
@@ -360,14 +389,13 @@ namespace SysPaciente.Entities
 
         //------------------------------------- consultas -------------------------------------
 
-        // método que vai pegar 50 consultas do dia e exibir
-        public static DataTable ShowConsultations(DateTime date)
+        // método que vai pegar as consultas da data no banco de dados
+        public static DataTable ShowConsultationsByDate(DateTime date, string search)
         {
             // Objeto do tipo DataTable
             DataTable dtResult = new DataTable("consultations");
 
-            // lista para pegar os ids dos clientes
-            //List<int> ids = new List<int>();
+            // string para pegar os ids dos clientes
             string idList = "";
 
             // lista para guardar os nomes dos clientes
@@ -423,7 +451,6 @@ namespace SysPaciente.Entities
                             }
                         }
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -432,9 +459,8 @@ namespace SysPaciente.Entities
                 }
             }
 
-            //return dtResult;
-
-            return EditConsultationsTable(dtResult, names);
+            //chamando a gambiarra que vai adiconar uma coluna de nomes na tabela
+            return EditConsultationsTable(dtResult, names, search);
         }
 
         //------------------------------------- SqlParameter -------------------------------------
@@ -504,24 +530,46 @@ namespace SysPaciente.Entities
 
         //------------------------------------- Ganbiarra -------------------------------------
 
-        private static DataTable EditConsultationsTable(DataTable dtResult, List<string> names)
+        // Método que vai adiconar a coluna name e preencher ela com os nomes que estão na lista
+        private static DataTable EditConsultationsTable(DataTable dtResult, List<string> names, string name)
         {
             // Adicionando a nova coluna para o nome do paciente
-            dtResult.Columns.Add("Nome", typeof(string));
+            dtResult.Columns.Add("Nome do paciente", typeof(string));
 
             // Reorganizando as colunas para que "Nome" fique depois de "idConsultation"
-            dtResult.Columns["Nome"].SetOrdinal(dtResult.Columns["idConsultation"].Ordinal + 1);
+            dtResult.Columns["Nome do paciente"].SetOrdinal(dtResult.Columns["idConsultation"].Ordinal + 1);
 
-            int index = 0;
-
-            //Adicionando os nomes dos pacientes
-            foreach (DataRow row in dtResult.Rows)
+            if(name == "")
             {
-                row["Nome"] = names[index];
+                int index = 0;
 
-                index++;
+                //Adicionando os nomes dos pacientes
+                foreach (DataRow row in dtResult.Rows)
+                {
+                    row["Nome do paciente"] = names[index];
+
+                    index++;
+                }
             }
+            else
+            {
+                int index = 0;
 
+                //Adicionando os nomes dos pacientes
+                foreach (DataRow row in dtResult.Rows)
+                {
+                    if(names[index].StartsWith(name, StringComparison.OrdinalIgnoreCase) )
+                        row["Nome do paciente"] = names[index];
+                    
+                    else
+                        row.Delete();// marca para deletar
+
+                    index++;
+                }
+
+                dtResult.AcceptChanges();// aqui deleta o que estava marcado para deletar
+            }
+            
             return dtResult;
         }
     }

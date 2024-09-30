@@ -23,11 +23,14 @@ namespace SysPaciente.Entities
             _btnConfigurations = btnConfigurations;
         }
 
-        public  static void UnselectCurrentButton()
+        public static void UnselectCurrentButton()
         {
-            _currentButton.BackColor = _unselectedButton;
-            _currentButton.ForeColor = Color.Black;
-            _currentButton = null;
+            if(_currentButton != null)
+            {
+                _currentButton.BackColor = _unselectedButton;
+                _currentButton.ForeColor = Color.Black;
+                _currentButton = null;
+            }
         }
 
         public static void SetBtnHomeSelected()

@@ -79,10 +79,13 @@ GO
 CREATE PROC sp_insert_client
 	@name VARCHAR(100),
 	@telephone VARCHAR(20),
+	@dateOfBirth DATE,
 	@street VARCHAR(50),
 	@houseNumber VARCHAR(10),
 	@neighborhood VARCHAR(50),
 	@city VARCHAR(50),
+	@cep VARCHAR(8),
+	@state VARCHAR(25),
 	@complement VARCHAR(50),
 	@idNumber VARCHAR(15),
 	@cpf VARCHAR(11)
@@ -95,9 +98,9 @@ BEGIN
 		SET @appointmentsQuantity = 0;
 
 		INSERT INTO clients
-		(name, telephone, street, houseNumber, neighborhood, city, complement, idNumber, cpf, appointmentsQuantity)
+		(name, telephone, dateOfBirth, street, houseNumber, neighborhood, city, cep, state, complement, idNumber, cpf, appointmentsQuantity)
 		VALUES
-		(@name, @telephone, @street, @houseNumber, @neighborhood, @city, @complement, @idNumber, @cpf, @appointmentsQuantity)
+		(@name, @telephone, @dateOfBirth, @street, @houseNumber, @neighborhood, @city, @cep, @state, @complement, @idNumber, @cpf, @appointmentsQuantity)
 		
 		SET @returnCode = 0; -- Código de sucesso
 	END TRY
@@ -113,10 +116,13 @@ GO
 CREATE PROC sp_edit_client
 	@idClient INT,
 	@telephone VARCHAR(20),
+	@dateOfBirth DATE,
 	@street VARCHAR(50),
 	@houseNumber VARCHAR(10),
 	@neighborhood VARCHAR(50),
 	@city VARCHAR(50),
+	@cep VARCHAR(8),
+	@state VARCHAR(25),
 	@complement VARCHAR(50)
 AS
 BEGIN
@@ -125,10 +131,13 @@ BEGIN
 	BEGIN TRY
 		UPDATE clients
 		SET telephone = @telephone,
+			dateOfBirth = @dateOfBirth,
 			street = @street,
 			houseNumber = @houseNumber,
 			neighborhood = @neighborhood,
 			city = @city,
+			cep = @cep,
+			state = @state,
 			complement = @complement
 		WHERE idClient = @idClient
 		
@@ -147,10 +156,13 @@ CREATE PROC sp_edit_client_admin
 	@idClient INT,
 	@name VARCHAR(100),
 	@telephone VARCHAR(20),
+	@dateOfBirth DATE,
 	@street VARCHAR(50),
 	@houseNumber VARCHAR(10),
 	@neighborhood VARCHAR(50),
 	@city VARCHAR(50),
+	@cep VARCHAR(8),
+	@state VARCHAR(25),
 	@complement VARCHAR(50),
 	@idNumber VARCHAR(15),
 	@cpf VARCHAR(11)
@@ -162,10 +174,13 @@ BEGIN
 		UPDATE clients
 		SET name = @name,
 			telephone = @telephone,
+			dateOfBirth = @dateOfBirth,
 			street = @street,
 			houseNumber = @houseNumber,
 			neighborhood = @neighborhood,
 			city = @city,
+			cep = @cep,
+			state = @state,
 			complement = @complement,
 			idNumber = @idNumber,
 			cpf = @cpf

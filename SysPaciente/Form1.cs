@@ -8,7 +8,7 @@ namespace SysPaciente
 {
     public partial class Form1 : Form
     {
-        private bool menu;
+        private bool _menu;// Indica se o menu está aberto ou não
 
         public Form1()
         {
@@ -18,7 +18,7 @@ namespace SysPaciente
             FormLoader.PanelBody = this.PanelBody;
 
             //o menu começa recolido
-            menu = false;
+            _menu = false;
 
             //
             MenuButtonController.SetButtonsData(this.BtnHome, this.BtnClients, this.BtnConsultations, this.BtnConfigurations);
@@ -31,7 +31,7 @@ namespace SysPaciente
         //sobrecarga para desativar o menu
         private void MenuController()
         {
-            if (menu)
+            if (_menu)
             {
                 Button btn = this.BtnMenu;
                 MenuController(btn);
@@ -43,16 +43,16 @@ namespace SysPaciente
         {
             Button bt = (Button)sender;
 
-            if (menu)
+            if (_menu)
             {
-                menu = !menu;
+                _menu = !_menu;
                 this.PanelMenu.Visible = false;
                 bt.BackColor = Color.FromArgb(70, 130, 180);
                 bt.ForeColor = Color.Black;
             }
             else
             {
-                menu = !menu;
+                _menu = !_menu;
                 this.PanelMenu.Visible = true;
                 bt.BackColor = Color.FromArgb(63, 72, 204);
                 bt.ForeColor = Color.White;

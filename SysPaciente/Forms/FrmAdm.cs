@@ -9,13 +9,13 @@ namespace SysPaciente.Forms
     public partial class FrmAdm : Form
     {
         //temporario
-        string password;
+        private string _password;
 
         public FrmAdm()
         {
             InitializeComponent();
 
-            password = "123";
+            _password = "123";
 
             //focus no campo não funciona
             this.TxtPassord.Focus();
@@ -24,7 +24,7 @@ namespace SysPaciente.Forms
         private void VerifyPassword()
         {
             //se a senha estiver correta
-            if (this.TxtPassord.Text == password)
+            if (this.TxtPassord.Text == _password)
             {
                 PanelLogin.Visible = false;//retira o panel da tela
 
@@ -59,11 +59,13 @@ namespace SysPaciente.Forms
                 //retira os avisos da tela
                 this.LblPasswordWrong.Visible = false;
                 this.LblPasswordsNotMatch.Visible = false;
+                this.LblPasswordFieldInBlank.Visible = false;
+                this.LblConfirmFieldInBlank.Visible = false;
             }
             else
             {
                 //captura a nova senha
-                password = this.TxtNewPassword.Text;
+                _password = this.TxtNewPassword.Text;
 
                 //torna o botão para alterar senha visivel
                 this.BtnChangePassword.Visible = true;
@@ -76,7 +78,7 @@ namespace SysPaciente.Forms
         private void CheckToChangePassword()
         {
             //verifica se a senha digitada como senha atual está correta
-            if (this.TxtCurrentPassword.Text != password)
+            if (this.TxtCurrentPassword.Text != _password)
             {
                 this.LblPasswordWrong.Visible = true;//torna o aviso de senha errada visivel
             }
@@ -84,9 +86,11 @@ namespace SysPaciente.Forms
             {   //apaga o aviso de senha errada
                 this.LblPasswordWrong.Visible = false;
 
+                bool NewPassordFild = TxtNewPasswordIsNull();
+                bool ConfirmPassordFild = TxtConfirmPasswordIsNull();
+
                 //verifica se os campos estão em branco-é chamado assim para que haja uma verificação individual
-                if (TxtNewPasswordIsNull() &&
-                   TxtConfirmPasswordIsNull())
+                if (NewPassordFild && ConfirmPassordFild)
                 {
                     //verifica se os campos tem valores correspondentes
                     if (this.TxtNewPassword.Text == this.TxtConfirmPassword.Text)
@@ -116,6 +120,8 @@ namespace SysPaciente.Forms
             if (String.IsNullOrWhiteSpace(this.TxtNewPassword.Text))
             {
                 Debug.WriteLine("O campo da nova senha está em branco");
+                this.LblPasswordFieldInBlank.Visible = true;
+
                 return false;
             }
             else
@@ -128,6 +134,8 @@ namespace SysPaciente.Forms
             if (String.IsNullOrWhiteSpace(this.TxtConfirmPassword.Text))
             {
                 Debug.WriteLine("O campo de confirmar a nova senha está em branco");
+                this.LblConfirmFieldInBlank.Visible = true;
+
                 return false;
             }
             else
@@ -164,6 +172,16 @@ namespace SysPaciente.Forms
         private void BtnEditClient_Click(object sender, EventArgs e)
         {
             FormLoader.OpenChildForm(new FrmAdmClients());
+        }
+
+        private void TxtNewPassword_TextChanged(object sender, EventArgs e)
+        {
+            this.LblPasswordFieldInBlank.Visible = false;
+        }
+
+        private void TxtConfirmPassword_TextChanged(object sender, EventArgs e)
+        {
+            this.LblConfirmFieldInBlank.Visible = false;
         }
     }
 }

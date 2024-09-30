@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnDate = new System.Windows.Forms.Button();
             this.LblDate = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.BtnSearchMode = new System.Windows.Forms.Button();
             this.BtnView = new System.Windows.Forms.Button();
             this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnChangeStatus = new System.Windows.Forms.Button();
@@ -54,10 +53,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.BtnDate);
             this.panel1.Controls.Add(this.LblDate);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.BtnSearchMode);
             this.panel1.Controls.Add(this.BtnView);
             this.panel1.Controls.Add(this.BtnEdit);
             this.panel1.Controls.Add(this.BtnChangeStatus);
@@ -69,26 +67,26 @@
             this.panel1.Size = new System.Drawing.Size(992, 98);
             this.panel1.TabIndex = 1;
             // 
-            // button1
+            // BtnDate
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(465, 26);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 35);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Trocar data";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.BtnDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
+            this.BtnDate.FlatAppearance.BorderSize = 0;
+            this.BtnDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnDate.ForeColor = System.Drawing.Color.White;
+            this.BtnDate.Location = new System.Drawing.Point(503, 26);
+            this.BtnDate.Name = "BtnDate";
+            this.BtnDate.Size = new System.Drawing.Size(104, 35);
+            this.BtnDate.TabIndex = 13;
+            this.BtnDate.Text = "Trocar data";
+            this.BtnDate.UseVisualStyleBackColor = false;
+            this.BtnDate.Click += new System.EventHandler(this.BtnDate_Click);
             // 
             // LblDate
             // 
-            this.LblDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.LblDate.AutoSize = true;
-            this.LblDate.Location = new System.Drawing.Point(467, 73);
+            this.LblDate.Location = new System.Drawing.Point(347, 37);
             this.LblDate.Name = "LblDate";
             this.LblDate.Size = new System.Drawing.Size(65, 13);
             this.LblDate.TabIndex = 12;
@@ -96,28 +94,12 @@
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(437, 73);
+            this.label1.Location = new System.Drawing.Point(317, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 11;
             this.label1.Text = "Data:";
-            // 
-            // BtnSearchMode
-            // 
-            this.BtnSearchMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
-            this.BtnSearchMode.FlatAppearance.BorderSize = 0;
-            this.BtnSearchMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSearchMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSearchMode.ForeColor = System.Drawing.Color.White;
-            this.BtnSearchMode.Location = new System.Drawing.Point(322, 26);
-            this.BtnSearchMode.Name = "BtnSearchMode";
-            this.BtnSearchMode.Size = new System.Drawing.Size(137, 35);
-            this.BtnSearchMode.TabIndex = 10;
-            this.BtnSearchMode.Text = "Mudar para cpf";
-            this.BtnSearchMode.UseVisualStyleBackColor = false;
-            this.BtnSearchMode.Click += new System.EventHandler(this.BtnSearchMode_Click);
             // 
             // BtnView
             // 
@@ -170,6 +152,7 @@
             this.TxtSearchText.Name = "TxtSearchText";
             this.TxtSearchText.Size = new System.Drawing.Size(209, 20);
             this.TxtSearchText.TabIndex = 1;
+            this.TxtSearchText.TextChanged += new System.EventHandler(this.TxtSearchText_TextChanged);
             // 
             // LblSearch
             // 
@@ -292,8 +275,7 @@
         private System.Windows.Forms.Label LblSearch;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView DgvData;
-        private System.Windows.Forms.Button BtnSearchMode;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnDate;
         private System.Windows.Forms.Label LblDate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel PanelChangeDate;

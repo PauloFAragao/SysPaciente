@@ -1,3 +1,5 @@
+--ADICIONAR NO CADASTRO DO CLIENTE: CEP, DATA DE NASCIMENTO e ESTADO
+
 CREATE DATABASE dbpatients;
 
 Use dbpatients
@@ -5,13 +7,15 @@ Use dbpatients
 CREATE TABLE clients(
 	idClient INT PRIMARY KEY IDENTITY(1,1),
 	name VARCHAR(100) NOT NULL,
-	--contatos
 	telephone VARCHAR(20)NOT NULL,
+	dateOfBirth DATE NOT NULL, 
 	--endereço
 	street VARCHAR(50) NOT NULL,
 	houseNumber VARCHAR(10) NOT NULL,
 	neighborhood VARCHAR(50) NOT NULL, --não gosto dessa tradução para bairro
 	city VARCHAR(50) NOT NULL,
+	cep VARCHAR(9) NOT NULL, 
+	state VARCHAR(25) NOT NULL, 
 	complement VARCHAR(50),
 	--documentos
 	idNumber VARCHAR(15) NOT NULL,

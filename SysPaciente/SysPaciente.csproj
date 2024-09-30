@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Connection.cs" />
+    <Compile Include="Entities\CpfValidator.cs" />
     <Compile Include="Entities\Data.cs" />
+    <Compile Include="Entities\Enums\Status.cs" />
     <Compile Include="Entities\FormLoader.cs" />
     <Compile Include="Entities\MenuButtonController.cs" />
     <Compile Include="Form1.cs">

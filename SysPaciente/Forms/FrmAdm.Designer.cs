@@ -48,6 +48,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LblError = new System.Windows.Forms.Label();
             this.TxtPassord = new System.Windows.Forms.TextBox();
+            this.LblPasswordFieldInBlank = new System.Windows.Forms.Label();
+            this.LblConfirmFieldInBlank = new System.Windows.Forms.Label();
             this.PainelChangePassword.SuspendLayout();
             this.PanelLogin.SuspendLayout();
             this.SuspendLayout();
@@ -145,6 +147,7 @@
             this.TxtNewPassword.PasswordChar = '*';
             this.TxtNewPassword.Size = new System.Drawing.Size(225, 20);
             this.TxtNewPassword.TabIndex = 15;
+            this.TxtNewPassword.TextChanged += new System.EventHandler(this.TxtNewPassword_TextChanged);
             // 
             // label5
             // 
@@ -163,11 +166,14 @@
             this.TxtConfirmPassword.PasswordChar = '*';
             this.TxtConfirmPassword.Size = new System.Drawing.Size(225, 20);
             this.TxtConfirmPassword.TabIndex = 17;
+            this.TxtConfirmPassword.TextChanged += new System.EventHandler(this.TxtConfirmPassword_TextChanged);
             // 
             // PainelChangePassword
             // 
             this.PainelChangePassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.PainelChangePassword.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.PainelChangePassword.Controls.Add(this.LblConfirmFieldInBlank);
+            this.PainelChangePassword.Controls.Add(this.LblPasswordFieldInBlank);
             this.PainelChangePassword.Controls.Add(this.BtnCancel);
             this.PainelChangePassword.Controls.Add(this.LblPasswordsNotMatch);
             this.PainelChangePassword.Controls.Add(this.LblPasswordWrong);
@@ -240,6 +246,7 @@
             // 
             // PanelLogin
             // 
+            this.PanelLogin.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.PanelLogin.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.PanelLogin.Controls.Add(this.BtnLogin);
             this.PanelLogin.Controls.Add(this.label1);
@@ -296,6 +303,30 @@
             this.TxtPassord.TabIndex = 0;
             this.TxtPassord.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPassord_KeyPress);
             // 
+            // LblPasswordFieldInBlank
+            // 
+            this.LblPasswordFieldInBlank.AutoSize = true;
+            this.LblPasswordFieldInBlank.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPasswordFieldInBlank.ForeColor = System.Drawing.Color.Red;
+            this.LblPasswordFieldInBlank.Location = new System.Drawing.Point(119, 89);
+            this.LblPasswordFieldInBlank.Name = "LblPasswordFieldInBlank";
+            this.LblPasswordFieldInBlank.Size = new System.Drawing.Size(158, 16);
+            this.LblPasswordFieldInBlank.TabIndex = 23;
+            this.LblPasswordFieldInBlank.Text = "Campo senha em branco";
+            this.LblPasswordFieldInBlank.Visible = false;
+            // 
+            // LblConfirmFieldInBlank
+            // 
+            this.LblConfirmFieldInBlank.AutoSize = true;
+            this.LblConfirmFieldInBlank.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblConfirmFieldInBlank.ForeColor = System.Drawing.Color.Red;
+            this.LblConfirmFieldInBlank.Location = new System.Drawing.Point(162, 132);
+            this.LblConfirmFieldInBlank.Name = "LblConfirmFieldInBlank";
+            this.LblConfirmFieldInBlank.Size = new System.Drawing.Size(118, 16);
+            this.LblConfirmFieldInBlank.TabIndex = 24;
+            this.LblConfirmFieldInBlank.Text = "Campo em branco";
+            this.LblConfirmFieldInBlank.Visible = false;
+            // 
             // FrmAdm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -340,5 +371,7 @@
         private System.Windows.Forms.Label LblPasswordWrong;
         private System.Windows.Forms.Label LblPasswordsNotMatch;
         private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.Label LblPasswordFieldInBlank;
+        private System.Windows.Forms.Label LblConfirmFieldInBlank;
     }
 }
