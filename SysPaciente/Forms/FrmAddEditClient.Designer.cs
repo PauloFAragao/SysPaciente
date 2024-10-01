@@ -59,7 +59,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LblAdm = new System.Windows.Forms.Label();
-            this.TxtTelephone = new System.Windows.Forms.TextBox();
+            this.MskTel = new System.Windows.Forms.MaskedTextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -73,7 +73,7 @@
             this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnCancel.ForeColor = System.Drawing.Color.White;
-            this.BtnCancel.Location = new System.Drawing.Point(801, 420);
+            this.BtnCancel.Location = new System.Drawing.Point(751, 413);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(97, 35);
             this.BtnCancel.TabIndex = 14;
@@ -114,7 +114,7 @@
             this.groupBox3.Controls.Add(this.LblCpf);
             this.groupBox3.Location = new System.Drawing.Point(26, 258);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(837, 123);
+            this.groupBox3.Size = new System.Drawing.Size(751, 123);
             this.groupBox3.TabIndex = 85;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Documentos";
@@ -129,7 +129,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.TxtTelephone);
+            this.groupBox2.Controls.Add(this.MskTel);
             this.groupBox2.Controls.Add(this.MskDateOfBirth);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.TxtName);
@@ -137,14 +137,14 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Location = new System.Drawing.Point(26, 45);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(837, 78);
+            this.groupBox2.Size = new System.Drawing.Size(751, 78);
             this.groupBox2.TabIndex = 96;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Identificação";
             // 
             // MskDateOfBirth
             // 
-            this.MskDateOfBirth.Location = new System.Drawing.Point(641, 35);
+            this.MskDateOfBirth.Location = new System.Drawing.Point(519, 35);
             this.MskDateOfBirth.Mask = "00/00/0000";
             this.MskDateOfBirth.Name = "MskDateOfBirth";
             this.MskDateOfBirth.Size = new System.Drawing.Size(70, 20);
@@ -153,7 +153,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(530, 38);
+            this.label1.Location = new System.Drawing.Point(408, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 13);
             this.label1.TabIndex = 97;
@@ -178,7 +178,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(271, 38);
+            this.label2.Location = new System.Drawing.Point(252, 38);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 98;
@@ -187,7 +187,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(358, 39);
+            this.label7.Location = new System.Drawing.Point(342, 39);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(74, 13);
             this.label7.TabIndex = 93;
@@ -195,7 +195,7 @@
             // 
             // TxtComplement
             // 
-            this.TxtComplement.Location = new System.Drawing.Point(436, 36);
+            this.TxtComplement.Location = new System.Drawing.Point(420, 36);
             this.TxtComplement.Name = "TxtComplement";
             this.TxtComplement.Size = new System.Drawing.Size(190, 20);
             this.TxtComplement.TabIndex = 6;
@@ -207,7 +207,7 @@
             this.BtnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnConfirm.ForeColor = System.Drawing.Color.White;
-            this.BtnConfirm.Location = new System.Drawing.Point(680, 420);
+            this.BtnConfirm.Location = new System.Drawing.Point(630, 413);
             this.BtnConfirm.Name = "BtnConfirm";
             this.BtnConfirm.Size = new System.Drawing.Size(97, 35);
             this.BtnConfirm.TabIndex = 13;
@@ -218,7 +218,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(250, 39);
+            this.label6.Location = new System.Drawing.Point(241, 39);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(51, 13);
             this.label6.TabIndex = 94;
@@ -226,7 +226,7 @@
             // 
             // TxtHouseNumber
             // 
-            this.TxtHouseNumber.Location = new System.Drawing.Point(301, 36);
+            this.TxtHouseNumber.Location = new System.Drawing.Point(292, 36);
             this.TxtHouseNumber.Name = "TxtHouseNumber";
             this.TxtHouseNumber.Size = new System.Drawing.Size(48, 20);
             this.TxtHouseNumber.TabIndex = 5;
@@ -234,7 +234,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(254, 78);
+            this.label5.Location = new System.Drawing.Point(245, 78);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(47, 13);
             this.label5.TabIndex = 90;
@@ -258,7 +258,7 @@
             this.groupBox1.Controls.Add(this.TxtNeighborhood);
             this.groupBox1.Location = new System.Drawing.Point(26, 129);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(837, 123);
+            this.groupBox1.Size = new System.Drawing.Size(751, 123);
             this.groupBox1.TabIndex = 88;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Endereço";
@@ -296,7 +296,7 @@
             "São Paulo - SP",
             "Sergipe - SE",
             "Tocantins - TO"});
-            this.CbxState.Location = new System.Drawing.Point(560, 75);
+            this.CbxState.Location = new System.Drawing.Point(537, 75);
             this.CbxState.Name = "CbxState";
             this.CbxState.Size = new System.Drawing.Size(160, 21);
             this.CbxState.TabIndex = 10;
@@ -304,7 +304,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(507, 78);
+            this.label10.Location = new System.Drawing.Point(484, 78);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(47, 13);
             this.label10.TabIndex = 89;
@@ -312,7 +312,7 @@
             // 
             // MskCep
             // 
-            this.MskCep.Location = new System.Drawing.Point(674, 36);
+            this.MskCep.Location = new System.Drawing.Point(648, 36);
             this.MskCep.Mask = "00000-000";
             this.MskCep.Name = "MskCep";
             this.MskCep.Size = new System.Drawing.Size(70, 20);
@@ -321,7 +321,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(638, 39);
+            this.label9.Location = new System.Drawing.Point(612, 39);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(33, 13);
             this.label9.TabIndex = 92;
@@ -329,7 +329,7 @@
             // 
             // TxtCity
             // 
-            this.TxtCity.Location = new System.Drawing.Point(301, 75);
+            this.TxtCity.Location = new System.Drawing.Point(292, 75);
             this.TxtCity.Name = "TxtCity";
             this.TxtCity.Size = new System.Drawing.Size(190, 20);
             this.TxtCity.TabIndex = 9;
@@ -385,9 +385,9 @@
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.BtnConfirm);
             this.panel1.Controls.Add(this.groupBox3);
-            this.panel1.Location = new System.Drawing.Point(38, 5);
+            this.panel1.Location = new System.Drawing.Point(63, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(926, 472);
+            this.panel1.Size = new System.Drawing.Size(872, 472);
             this.panel1.TabIndex = 82;
             // 
             // LblAdm
@@ -401,12 +401,15 @@
             this.LblAdm.Text = "Modo de edição de administrador";
             this.LblAdm.Visible = false;
             // 
-            // TxtTelephone
+            // MskTel
             // 
-            this.TxtTelephone.Location = new System.Drawing.Point(333, 35);
-            this.TxtTelephone.Name = "TxtTelephone";
-            this.TxtTelephone.Size = new System.Drawing.Size(190, 20);
-            this.TxtTelephone.TabIndex = 96;
+            this.MskTel.Location = new System.Drawing.Point(309, 35);
+            this.MskTel.Mask = "(00)0000-0000";
+            this.MskTel.Name = "MskTel";
+            this.MskTel.Size = new System.Drawing.Size(97, 20);
+            this.MskTel.TabIndex = 100;
+            this.MskTel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MskTel_KeyPress);
+            this.MskTel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MskTel_KeyUp);
             // 
             // FrmAddEditClient
             // 
@@ -462,6 +465,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.MaskedTextBox MskCep;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox TxtTelephone;
+        private System.Windows.Forms.MaskedTextBox MskTel;
     }
 }

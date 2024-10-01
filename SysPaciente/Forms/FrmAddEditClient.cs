@@ -25,7 +25,7 @@ namespace SysPaciente.Forms
         string _idNumber = "";
         string _cpf = "";
 
-        //sobrecarca do construtor para edição de dados
+        // sobrecarca do construtor para edição de dados
         public FrmAddEditClient(int tipe, int id, string name, string telephone, DateTime dateOfBirth, string street, string houseNumber,
             string neighborhood, string city, string cep, string state, string complement, string idNumber, string cpf)
         {
@@ -55,15 +55,18 @@ namespace SysPaciente.Forms
             LoadData();
         }
 
-        //sobrecarga do método para edição dedados
+        // sobrecarga do método para edição dedados
         private void LoadData(string name, string telephone, DateTime dateOfBirth, string street, string houseNumber,
             string neighborhood, string city, string cep, string state, string complement, string idNumber, string cpf)
         {
             LoadData();
 
-            //colocando os dados nos campos
+            if (telephone.Length == 14)// resolvendo a mascara do campo telefone
+                this.MskTel.Mask = "(00)00000-0000";
+
+            // colocando os dados nos campos
             this.TxtName.Text = name;
-            this.TxtTelephone.Text = telephone;
+            this.MskTel.Text = telephone;
             this.MskDateOfBirth.Text = dateOfBirth.ToString("dd-MM-yyyy");
             this.TxtStreet.Text = street;
             this.TxtHouseNumber.Text = houseNumber;
@@ -105,7 +108,7 @@ namespace SysPaciente.Forms
             }
         }
 
-        //método para capturar e verificar as infirmações inseridas no formulario
+        // método para capturar e verificar as infirmações inseridas no formulario
         private bool CaptureAndVerifyData()
         {
             bool allFieldsAreCorrect = true;
@@ -121,8 +124,8 @@ namespace SysPaciente.Forms
             }
 
             // telefone
-            if (!String.IsNullOrWhiteSpace(this.TxtTelephone.Text))
-                _telephone = this.TxtTelephone.Text;
+            if (this.MskTel.MaskCompleted)
+                _telephone = this.MskTel.Text;
             else
             {
                 allFieldsAreCorrect = false;
@@ -228,7 +231,7 @@ namespace SysPaciente.Forms
             return allFieldsAreCorrect;
         }
 
-        //método chamar o método CaptureAndVerifyData() e enviar para a classe Data
+        // método chamar o método CaptureAndVerifyData() e enviar para a classe Data
         private void VerifyAndSendData()
         {
             if (CaptureAndVerifyData())//captura e verifica os dados do formulario
@@ -239,7 +242,7 @@ namespace SysPaciente.Forms
 
                 if (_tipe == 0)//para adicionar um novo paciente
                 {
-                    string resp =  Data.InsertClient(_name, _telephone, birth, _street, _houseNumber, _neighborhood, 
+                    string resp = Data.InsertClient(_name, _telephone, birth, _street, _houseNumber, _neighborhood,
                         _city, _cep, _state, _complement, _idNumber, _cpf);
 
                     if (resp == "Registro inserido com sucesso.")
@@ -296,6 +299,23 @@ namespace SysPaciente.Forms
             FormLoader.OpenChildForm(new FrmClients());
         }
 
+        // esse método vai alterar a mascara do campo te telefone para aceitar telefones fixos e celulares
+        private void MskTelCntroller(bool backspace)
+        {
+            if (this.MskTel.Text.Length == 13 && !backspace)
+            {
+                this.MskTel.Mask = "(00)00000-0000";
+                this.MskTel.SelectionStart = this.MskTel.Text.Length;
+            }
+            else
+            {
+                this.MskTel.Mask = "(00)0000-0000";
+
+                if (this.MskTel.Text.Length == 13 && backspace)
+                    this.MskTel.SelectionStart = this.MskTel.Text.Length;
+            }
+        }
+
         //------------------------------- métodos criados pelo visual studio
         private void BtnConfirm_Click(object sender, EventArgs e)
         {
@@ -305,6 +325,18 @@ namespace SysPaciente.Forms
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             Cancel();
+        }
+
+        private void MskTel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))//verifica se a tecla pressionada foi um número
+                MskTelCntroller(false);
+        }
+
+        private void MskTel_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Back)//verifica se a tecla pressionada foi o backspace
+                MskTelCntroller(true);
         }
     }
 }

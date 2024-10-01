@@ -33,6 +33,18 @@ GO
 
 ----------------------- pacientes -----------------------
 
+--procedimento para recuperar o nome a partir de uma id
+CREATE PROC sp_search_client_name
+	@idClient INT
+AS
+Begin
+	SET NOCOUNT ON;
+
+	SELECT name, telephone, dateOfBirth FROM clients
+	WHERE idClient = @idClient
+END;
+GO
+
 --procedimento para exibir as 50 primeiras entradas no banco de dados
 CREATE PROC sp_show_clients
 AS
@@ -84,7 +96,7 @@ CREATE PROC sp_insert_client
 	@houseNumber VARCHAR(10),
 	@neighborhood VARCHAR(50),
 	@city VARCHAR(50),
-	@cep VARCHAR(8),
+	@cep VARCHAR(9),
 	@state VARCHAR(25),
 	@complement VARCHAR(50),
 	@idNumber VARCHAR(15),
@@ -121,7 +133,7 @@ CREATE PROC sp_edit_client
 	@houseNumber VARCHAR(10),
 	@neighborhood VARCHAR(50),
 	@city VARCHAR(50),
-	@cep VARCHAR(8),
+	@cep VARCHAR(9),
 	@state VARCHAR(25),
 	@complement VARCHAR(50)
 AS
@@ -161,7 +173,7 @@ CREATE PROC sp_edit_client_admin
 	@houseNumber VARCHAR(10),
 	@neighborhood VARCHAR(50),
 	@city VARCHAR(50),
-	@cep VARCHAR(8),
+	@cep VARCHAR(9),
 	@state VARCHAR(25),
 	@complement VARCHAR(50),
 	@idNumber VARCHAR(15),
@@ -289,7 +301,7 @@ CREATE PROC sp_edit_consultation
 	@status INT
 AS
 BEGIN
-	 DECLARE @returnCode INT;
+	DECLARE @returnCode INT;
 	 
 	BEGIN TRY
 		UPDATE consultations
@@ -300,6 +312,29 @@ BEGIN
 		WHERE idConsultation = @idConsultation
 		
 		SET @returnCode = 0; -- Código de sucesso
+	END TRY
+	BEGIN CATCH
+		SET @returnCode = ERROR_NUMBER(); -- Captura do erro
+	END CATCH;
+	
+	RETURN @returnCode; -- Retorna o código
+END;
+GO
+
+--procedimento para editar o status de uma consulta
+CREATE PROC sp_edit_consultation_status
+	@idConsultation,
+	@status
+AS
+BEGIN
+	DECLARE @returnCode INT;
+	 
+	BEGIN TRY
+		UPDATE consultations
+		SET status = @status
+		WHERE idConsultation = @idConsultation
+		
+	SET @returnCode = 0; -- Código de sucesso
 	END TRY
 	BEGIN CATCH
 		SET @returnCode = ERROR_NUMBER(); -- Captura do erro

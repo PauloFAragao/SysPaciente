@@ -54,7 +54,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(992, 83);
+            this.panel1.Size = new System.Drawing.Size(992, 80);
             this.panel1.TabIndex = 0;
             // 
             // BtnView
@@ -146,16 +146,16 @@
             this.DgvData.Location = new System.Drawing.Point(0, 0);
             this.DgvData.Name = "DgvData";
             this.DgvData.ReadOnly = true;
-            this.DgvData.Size = new System.Drawing.Size(992, 391);
+            this.DgvData.Size = new System.Drawing.Size(992, 394);
             this.DgvData.TabIndex = 1;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.DgvData);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 83);
+            this.panel2.Location = new System.Drawing.Point(0, 80);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(992, 391);
+            this.panel2.Size = new System.Drawing.Size(992, 394);
             this.panel2.TabIndex = 2;
             // 
             // FrmClients

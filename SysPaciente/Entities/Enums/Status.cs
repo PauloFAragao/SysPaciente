@@ -6,6 +6,7 @@
         Remarcada = 1, 
         Realizada = 2, 
         Faltou = 3, 
-        Cancelada = 4
+        Cancelada = 4,
+        Pendente = 5
     }
 }

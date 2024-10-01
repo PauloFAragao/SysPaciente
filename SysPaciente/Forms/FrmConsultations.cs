@@ -2,7 +2,6 @@
 using System;
 using System.Data;
 using System.Diagnostics;
-using System.Reflection;
 using System.Windows.Forms;
 using SysPaciente.Entities.Enums;
 
@@ -22,7 +21,7 @@ namespace SysPaciente.Forms
             //texto com a data na tela
             this.LblDate.Text = _date.ToShortDateString();
 
-            if(LoadData())
+            if (LoadData())
             {
                 HideColumns();
                 ChangeColumns();
@@ -56,7 +55,7 @@ namespace SysPaciente.Forms
 
             foreach (DataRow row in dataTable.Rows)
             {
-                if(row != null)
+                if (row != null)
                 {
                     string status = Enum.GetName(typeof(Status), Convert.ToInt32(row["status"]));
 
@@ -97,7 +96,7 @@ namespace SysPaciente.Forms
             else
                 LoadData();
         }
-        
+
         //pega a data selecionada no DateTimePicker e guarda na variavel
         private void ChangeDate()
         {
@@ -115,8 +114,55 @@ namespace SysPaciente.Forms
             this.PanelChangeDate.Visible = value;
         }
 
+        private void ChangePanelAlterstatusVicibility(bool value)
+        {
+            if (DgvData.Rows.Count > 0)
+            {
+                this.PanelAlterStatus.Visible = value;
+
+                CbxStatus.Text = Convert.ToString(this.DgvData.CurrentRow.Cells["Status da consulta"].Value);
+            }
+            else
+            {
+                MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Edit()
+        {
+            if (DgvData.Rows.Count > 0)
+            {
+                FormLoader.OpenChildForm(new FrmMarkEditConsultation(
+                    Convert.ToInt32(this.DgvData.CurrentRow.Cells["idConsultation"].Value),
+                    Convert.ToInt32(this.DgvData.CurrentRow.Cells["idClient"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["consultationDate"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["timeOfConsultation"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["Status da consulta"].Value)));
+            }
+            else
+            {
+                MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void EditStatus()
+        {
+            string resp = Data.EditConsultationStatus(
+                Convert.ToInt32(this.DgvData.CurrentRow.Cells["idConsultation"].Value),
+                this.CbxStatus.SelectedIndex);
+
+            if (resp == "Registro editado com sucesso.")
+            {
+                MessageBox.Show(resp, "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ChangePanelAlterstatusVicibility(false);
+                LoadData();
+            }
+            else
+                MessageBox.Show(resp, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         //--------------------------------- métodos criados pelo visual studio
-        
+
         private void BtnChangeDate_Click(object sender, EventArgs e)
         {
             ChangeDate();
@@ -135,6 +181,31 @@ namespace SysPaciente.Forms
         private void TxtSearchText_TextChanged(object sender, EventArgs e)
         {
             Search();
+        }
+
+        private void BtnChangeStatus_Click(object sender, EventArgs e)
+        {
+            ChangePanelAlterstatusVicibility(true);
+        }
+
+        private void BtnCancelAlterStatus_Click(object sender, EventArgs e)
+        {
+            ChangePanelAlterstatusVicibility(false);
+        }
+
+        private void BtnAlterStatus_Click(object sender, EventArgs e)
+        {
+            EditStatus();
+        }
+
+        private void BtnMark_Click(object sender, EventArgs e)
+        {
+            FormLoader.OpenChildForm(new FrmMarkEditConsultation());
+        }
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            Edit();
         }
     }
 }

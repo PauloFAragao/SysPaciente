@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
+using static System.Windows.Forms.AxHost;
+using System.Runtime.ConstrainedExecution;
+using System.Xml.Linq;
 
 namespace SysPaciente.Entities
 {
@@ -126,6 +129,52 @@ namespace SysPaciente.Entities
                 }
             }
             return dtResult;
+        }
+
+        // método que vai pesquisar um paciente pelo id e retornar o nome, o telefone e a data de nascimento
+        public static string[] SearchCliente(int idClient)
+        {
+            string[] str = new string[3];
+
+            // Objeto da conexão com o banco de dados
+            using (SqlConnection SqlCon = new SqlConnection(Connection.Cn))
+            {
+                try
+                {
+                    // Abrindo a conexão ao banco de dados
+                    SqlCon.Open();
+
+                    // Configurando o comando SQL
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_search_client_name", SqlCon))
+                    {
+                        // chamando um procedimento armazenado no banco de dados.
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        // Adicionando o parâmetro ao comando SQL
+                        sqlCmd.Parameters.Add(CreateSqlParameter(idClient, "@idClient"));
+
+                        //executando e capturando o a resposta da procidure
+                        SqlDataReader reader = sqlCmd.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            str[0] = reader["name"].ToString(); // Capturando o nome do cliente
+                            str[1] = reader["telephone"].ToString(); // Capturando o telefone
+                            str[2] = reader["dateOfBirth"].ToString(); // Capturando a data de nascimento
+
+                            Debug.WriteLine("Name: " + reader["name"].ToString());
+                            Debug.WriteLine("telephone: " + reader["telephone"].ToString());
+                            Debug.WriteLine("dateOfBirth: " + reader["dateOfBirth"].ToString());
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    str = null;
+                    Debug.WriteLine("Exception: " + ex.Message);
+                }
+            }
+
+            return str;
         }
 
         // método que vai inserir um cliente no banco de dados
@@ -461,6 +510,150 @@ namespace SysPaciente.Entities
 
             //chamando a gambiarra que vai adiconar uma coluna de nomes na tabela
             return EditConsultationsTable(dtResult, names, search);
+        }
+
+        // método que vai inserir os dados da consulta marcada
+        public static string InsertConsultation(DateTime date, TimeSpan timeOfConsultation, int idClient, int status)
+        {
+            string resp = "";
+
+            // Cria uma conexão com o banco de dados e garante que ela será fechada e liberada corretamente após o uso.
+            using (SqlConnection sqlCon = new SqlConnection(Connection.Cn))
+            {
+                try
+                {
+                    // Abrindo conexão
+                    sqlCon.Open();
+
+                    // Cria um comando SQL que vai chamar uma stored procedure
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_insert_consultation", sqlCon))
+                    {
+                        // chamando um procedimento armazenado no banco de dados.
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        // Parâmetro sql para a data da consulta
+                        sqlCmd.Parameters.Add(CreateSqlParameter(date, "@consultationDate"));
+
+                        // Parâmetro sql para a hora da consulta
+                        sqlCmd.Parameters.Add(CreateSqlParameter(timeOfConsultation, "@timeOfConsultation"));
+
+                        // Parâmetro sql para o id do cliente que vai se consultar
+                        sqlCmd.Parameters.Add(CreateSqlParameter(idClient, "@idClient"));
+
+                        // Parâmetro sql para o status da consulta
+                        sqlCmd.Parameters.Add(CreateSqlParameter(status, "@status"));
+
+                        // Executa o comando e captura o código de retorno
+                        int returnCode = Convert.ToInt32(sqlCmd.ExecuteScalar());
+                        if (returnCode == 0)
+                            resp = "Registro inserido com sucesso.";
+                        else
+                            resp = $"Erro ao inserir registro. Código: {returnCode}";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    resp = $"Erro: {ex.Message}";
+                    Debug.WriteLine("Exception: " + ex.Message);
+                }
+            }
+
+            return resp;
+        }
+
+        // método que vai editar os dados da consulta
+        public static string EditConsultation(int idConsultation, DateTime date, TimeSpan timeOfConsultation, int idClient, int status)
+        {
+            string resp = "";
+
+            // Cria uma conexão com o banco de dados e garante que ela será fechada e liberada corretamente após o uso.
+            using (SqlConnection sqlCon = new SqlConnection(Connection.Cn))
+            {
+                try
+                {
+                    // Abrindo conexão
+                    sqlCon.Open();
+
+                    // Cria um comando SQL que vai chamar uma stored procedure
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_edit_consultation", sqlCon))
+                    {
+                        // chamando um procedimento armazenado no banco de dados.
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        // Parâmetro sql para o id da consulta
+                        sqlCmd.Parameters.Add(CreateSqlParameter(idConsultation, "@idConsultation"));
+
+                        // Parâmetro sql para a data da consulta
+                        sqlCmd.Parameters.Add(CreateSqlParameter(date, "@consultationDate"));
+
+                        // Parâmetro sql para a hora da consulta
+                        sqlCmd.Parameters.Add(CreateSqlParameter(timeOfConsultation, "@timeOfConsultation"));
+
+                        // Parâmetro sql para o id do cliente que vai se consultar
+                        sqlCmd.Parameters.Add(CreateSqlParameter(idClient, "@idClient"));
+
+                        // Parâmetro sql para o status da consulta
+                        sqlCmd.Parameters.Add(CreateSqlParameter(status, "@status"));
+
+                        // Executa o comando e captura o código de retorno
+                        int returnCode = Convert.ToInt32(sqlCmd.ExecuteScalar());
+                        if (returnCode == 0)
+                            resp = "Registro editado com sucesso.";
+                        else
+                            resp = $"Erro ao editado registro. Código: {returnCode}";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    resp = $"Erro: {ex.Message}";
+                    Debug.WriteLine("Exception: " + ex.Message);
+                }
+            }
+
+            return resp;
+        }
+
+        // método que vai editar o status da consulta
+        public static string EditConsultationStatus(int idConsultation, int status)
+        {
+            string resp = "";
+
+            // Cria uma conexão com o banco de dados e garante que ela será fechada e liberada corretamente após o uso.
+            using (SqlConnection sqlCon = new SqlConnection(Connection.Cn))
+            {
+                try
+                {
+                    // Abrindo conexão
+                    sqlCon.Open();
+
+                    // Cria um comando SQL que vai chamar uma stored procedure
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_edit_consultation_status", sqlCon))
+                    {
+                        // chamando um procedimento armazenado no banco de dados.
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        // Parâmetro sql para o id da consulta
+                        sqlCmd.Parameters.Add(CreateSqlParameter(idConsultation, "@idConsultation"));
+
+                        // Parâmetro sql para o status da consulta
+                        sqlCmd.Parameters.Add(CreateSqlParameter(status, "@status"));
+
+                        // Executa o comando e captura o código de retorno
+                        int returnCode = Convert.ToInt32(sqlCmd.ExecuteScalar());
+                        if (returnCode == 0)
+                            resp = "Registro editado com sucesso.";
+                        else
+                            resp = $"Erro ao editado registro. Código: {returnCode}";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    resp = $"Erro: {ex.Message}";
+                    Debug.WriteLine("Exception: " + ex.Message);
+                }
+            }
+
+            return resp;
         }
 
         //------------------------------------- SqlParameter -------------------------------------

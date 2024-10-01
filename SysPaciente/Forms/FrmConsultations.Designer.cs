@@ -32,12 +32,17 @@
             this.BtnDate = new System.Windows.Forms.Button();
             this.LblDate = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.BtnView = new System.Windows.Forms.Button();
+            this.BtnMark = new System.Windows.Forms.Button();
             this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnChangeStatus = new System.Windows.Forms.Button();
             this.TxtSearchText = new System.Windows.Forms.TextBox();
             this.LblSearch = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.PanelAlterStatus = new System.Windows.Forms.Panel();
+            this.CbxStatus = new System.Windows.Forms.ComboBox();
+            this.BtnCancelAlterStatus = new System.Windows.Forms.Button();
+            this.BtnAlterStatus = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.PanelChangeDate = new System.Windows.Forms.Panel();
             this.BtnCancelChangeDate = new System.Windows.Forms.Button();
             this.BtnChangeDate = new System.Windows.Forms.Button();
@@ -46,6 +51,7 @@
             this.DgvData = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.PanelAlterStatus.SuspendLayout();
             this.PanelChangeDate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.SuspendLayout();
@@ -56,7 +62,7 @@
             this.panel1.Controls.Add(this.BtnDate);
             this.panel1.Controls.Add(this.LblDate);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.BtnView);
+            this.panel1.Controls.Add(this.BtnMark);
             this.panel1.Controls.Add(this.BtnEdit);
             this.panel1.Controls.Add(this.BtnChangeStatus);
             this.panel1.Controls.Add(this.TxtSearchText);
@@ -64,7 +70,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(992, 98);
+            this.panel1.Size = new System.Drawing.Size(992, 80);
             this.panel1.TabIndex = 1;
             // 
             // BtnDate
@@ -75,7 +81,7 @@
             this.BtnDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnDate.ForeColor = System.Drawing.Color.White;
-            this.BtnDate.Location = new System.Drawing.Point(503, 26);
+            this.BtnDate.Location = new System.Drawing.Point(503, 22);
             this.BtnDate.Name = "BtnDate";
             this.BtnDate.Size = new System.Drawing.Size(104, 35);
             this.BtnDate.TabIndex = 13;
@@ -86,7 +92,7 @@
             // LblDate
             // 
             this.LblDate.AutoSize = true;
-            this.LblDate.Location = new System.Drawing.Point(347, 37);
+            this.LblDate.Location = new System.Drawing.Point(347, 33);
             this.LblDate.Name = "LblDate";
             this.LblDate.Size = new System.Drawing.Size(65, 13);
             this.LblDate.TabIndex = 12;
@@ -95,26 +101,27 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(317, 37);
+            this.label1.Location = new System.Drawing.Point(317, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 11;
             this.label1.Text = "Data:";
             // 
-            // BtnView
+            // BtnMark
             // 
-            this.BtnView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnView.BackColor = System.Drawing.Color.DarkBlue;
-            this.BtnView.FlatAppearance.BorderSize = 0;
-            this.BtnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnView.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnView.ForeColor = System.Drawing.Color.White;
-            this.BtnView.Location = new System.Drawing.Point(852, 26);
-            this.BtnView.Name = "BtnView";
-            this.BtnView.Size = new System.Drawing.Size(128, 35);
-            this.BtnView.TabIndex = 9;
-            this.BtnView.Text = "Marcar consulta";
-            this.BtnView.UseVisualStyleBackColor = false;
+            this.BtnMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnMark.BackColor = System.Drawing.Color.DarkBlue;
+            this.BtnMark.FlatAppearance.BorderSize = 0;
+            this.BtnMark.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnMark.ForeColor = System.Drawing.Color.White;
+            this.BtnMark.Location = new System.Drawing.Point(852, 22);
+            this.BtnMark.Name = "BtnMark";
+            this.BtnMark.Size = new System.Drawing.Size(128, 35);
+            this.BtnMark.TabIndex = 9;
+            this.BtnMark.Text = "Marcar consulta";
+            this.BtnMark.UseVisualStyleBackColor = false;
+            this.BtnMark.Click += new System.EventHandler(this.BtnMark_Click);
             // 
             // BtnEdit
             // 
@@ -124,12 +131,13 @@
             this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnEdit.ForeColor = System.Drawing.Color.White;
-            this.BtnEdit.Location = new System.Drawing.Point(745, 26);
+            this.BtnEdit.Location = new System.Drawing.Point(745, 22);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(97, 35);
             this.BtnEdit.TabIndex = 8;
             this.BtnEdit.Text = "Editar";
             this.BtnEdit.UseVisualStyleBackColor = false;
+            this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // BtnChangeStatus
             // 
@@ -139,16 +147,17 @@
             this.BtnChangeStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnChangeStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnChangeStatus.ForeColor = System.Drawing.Color.White;
-            this.BtnChangeStatus.Location = new System.Drawing.Point(622, 26);
+            this.BtnChangeStatus.Location = new System.Drawing.Point(622, 22);
             this.BtnChangeStatus.Name = "BtnChangeStatus";
             this.BtnChangeStatus.Size = new System.Drawing.Size(107, 35);
             this.BtnChangeStatus.TabIndex = 7;
             this.BtnChangeStatus.Text = "Alterar status";
             this.BtnChangeStatus.UseVisualStyleBackColor = false;
+            this.BtnChangeStatus.Click += new System.EventHandler(this.BtnChangeStatus_Click);
             // 
             // TxtSearchText
             // 
-            this.TxtSearchText.Location = new System.Drawing.Point(98, 34);
+            this.TxtSearchText.Location = new System.Drawing.Point(98, 30);
             this.TxtSearchText.Name = "TxtSearchText";
             this.TxtSearchText.Size = new System.Drawing.Size(209, 20);
             this.TxtSearchText.TabIndex = 1;
@@ -157,7 +166,7 @@
             // LblSearch
             // 
             this.LblSearch.AutoSize = true;
-            this.LblSearch.Location = new System.Drawing.Point(8, 37);
+            this.LblSearch.Location = new System.Drawing.Point(8, 33);
             this.LblSearch.Name = "LblSearch";
             this.LblSearch.Size = new System.Drawing.Size(90, 13);
             this.LblSearch.TabIndex = 0;
@@ -165,13 +174,84 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.PanelAlterStatus);
             this.panel2.Controls.Add(this.PanelChangeDate);
             this.panel2.Controls.Add(this.DgvData);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 98);
+            this.panel2.Location = new System.Drawing.Point(0, 80);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(992, 376);
+            this.panel2.Size = new System.Drawing.Size(992, 394);
             this.panel2.TabIndex = 3;
+            // 
+            // PanelAlterStatus
+            // 
+            this.PanelAlterStatus.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.PanelAlterStatus.Controls.Add(this.CbxStatus);
+            this.PanelAlterStatus.Controls.Add(this.BtnCancelAlterStatus);
+            this.PanelAlterStatus.Controls.Add(this.BtnAlterStatus);
+            this.PanelAlterStatus.Controls.Add(this.label2);
+            this.PanelAlterStatus.Location = new System.Drawing.Point(312, 72);
+            this.PanelAlterStatus.Name = "PanelAlterStatus";
+            this.PanelAlterStatus.Size = new System.Drawing.Size(433, 154);
+            this.PanelAlterStatus.TabIndex = 13;
+            this.PanelAlterStatus.Visible = false;
+            // 
+            // CbxStatus
+            // 
+            this.CbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbxStatus.FormattingEnabled = true;
+            this.CbxStatus.ItemHeight = 13;
+            this.CbxStatus.Items.AddRange(new object[] {
+            "Marcada",
+            "Remarcada",
+            "Realizada",
+            "Faltou",
+            "Cancelada",
+            "Pendente"});
+            this.CbxStatus.Location = new System.Drawing.Point(130, 56);
+            this.CbxStatus.Name = "CbxStatus";
+            this.CbxStatus.Size = new System.Drawing.Size(160, 21);
+            this.CbxStatus.TabIndex = 13;
+            // 
+            // BtnCancelAlterStatus
+            // 
+            this.BtnCancelAlterStatus.BackColor = System.Drawing.Color.SteelBlue;
+            this.BtnCancelAlterStatus.FlatAppearance.BorderSize = 0;
+            this.BtnCancelAlterStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCancelAlterStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCancelAlterStatus.ForeColor = System.Drawing.Color.White;
+            this.BtnCancelAlterStatus.Location = new System.Drawing.Point(249, 92);
+            this.BtnCancelAlterStatus.Name = "BtnCancelAlterStatus";
+            this.BtnCancelAlterStatus.Size = new System.Drawing.Size(137, 35);
+            this.BtnCancelAlterStatus.TabIndex = 12;
+            this.BtnCancelAlterStatus.Text = "Cancelar";
+            this.BtnCancelAlterStatus.UseVisualStyleBackColor = false;
+            this.BtnCancelAlterStatus.Click += new System.EventHandler(this.BtnCancelAlterStatus_Click);
+            // 
+            // BtnAlterStatus
+            // 
+            this.BtnAlterStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
+            this.BtnAlterStatus.FlatAppearance.BorderSize = 0;
+            this.BtnAlterStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAlterStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAlterStatus.ForeColor = System.Drawing.Color.White;
+            this.BtnAlterStatus.Location = new System.Drawing.Point(31, 92);
+            this.BtnAlterStatus.Name = "BtnAlterStatus";
+            this.BtnAlterStatus.Size = new System.Drawing.Size(137, 35);
+            this.BtnAlterStatus.TabIndex = 11;
+            this.BtnAlterStatus.Text = "Confirmar";
+            this.BtnAlterStatus.UseVisualStyleBackColor = false;
+            this.BtnAlterStatus.Click += new System.EventHandler(this.BtnAlterStatus_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(154, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Alterar status";
             // 
             // PanelChangeDate
             // 
@@ -243,7 +323,7 @@
             this.DgvData.Location = new System.Drawing.Point(0, 0);
             this.DgvData.Name = "DgvData";
             this.DgvData.ReadOnly = true;
-            this.DgvData.Size = new System.Drawing.Size(992, 376);
+            this.DgvData.Size = new System.Drawing.Size(992, 394);
             this.DgvData.TabIndex = 1;
             // 
             // FrmConsultations
@@ -258,6 +338,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.PanelAlterStatus.ResumeLayout(false);
+            this.PanelAlterStatus.PerformLayout();
             this.PanelChangeDate.ResumeLayout(false);
             this.PanelChangeDate.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();
@@ -268,7 +350,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button BtnView;
+        private System.Windows.Forms.Button BtnMark;
         private System.Windows.Forms.Button BtnEdit;
         private System.Windows.Forms.Button BtnChangeStatus;
         private System.Windows.Forms.TextBox TxtSearchText;
@@ -283,5 +365,10 @@
         private System.Windows.Forms.Button BtnChangeDate;
         private System.Windows.Forms.DateTimePicker DateTimePicker;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel PanelAlterStatus;
+        private System.Windows.Forms.Button BtnCancelAlterStatus;
+        private System.Windows.Forms.Button BtnAlterStatus;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox CbxStatus;
     }
 }
