@@ -30,13 +30,13 @@
         {
             this.DgvData = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.BtnDel = new System.Windows.Forms.Button();
             this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnSearchMode = new System.Windows.Forms.Button();
             this.TxtSearchText = new System.Windows.Forms.TextBox();
             this.LblSearch = new System.Windows.Forms.Label();
-            this.BtnDel = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -70,6 +70,33 @@
             this.panel1.Size = new System.Drawing.Size(992, 91);
             this.panel1.TabIndex = 3;
             // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(440, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(128, 16);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Modo Administrador";
+            // 
+            // BtnDel
+            // 
+            this.BtnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnDel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(18)))), ((int)(((byte)(23)))));
+            this.BtnDel.FlatAppearance.BorderSize = 0;
+            this.BtnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnDel.ForeColor = System.Drawing.Color.White;
+            this.BtnDel.Location = new System.Drawing.Point(863, 40);
+            this.BtnDel.Name = "BtnDel";
+            this.BtnDel.Size = new System.Drawing.Size(97, 35);
+            this.BtnDel.TabIndex = 9;
+            this.BtnDel.Text = "Deletar";
+            this.BtnDel.UseVisualStyleBackColor = false;
+            this.BtnDel.Click += new System.EventHandler(this.BtnDel_Click);
+            // 
             // BtnEdit
             // 
             this.BtnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -78,7 +105,7 @@
             this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnEdit.ForeColor = System.Drawing.Color.White;
-            this.BtnEdit.Location = new System.Drawing.Point(751, 39);
+            this.BtnEdit.Location = new System.Drawing.Point(751, 40);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(97, 35);
             this.BtnEdit.TabIndex = 8;
@@ -93,7 +120,7 @@
             this.BtnSearchMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnSearchMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnSearchMode.ForeColor = System.Drawing.Color.White;
-            this.BtnSearchMode.Location = new System.Drawing.Point(326, 39);
+            this.BtnSearchMode.Location = new System.Drawing.Point(326, 40);
             this.BtnSearchMode.Name = "BtnSearchMode";
             this.BtnSearchMode.Size = new System.Drawing.Size(137, 35);
             this.BtnSearchMode.TabIndex = 6;
@@ -118,22 +145,6 @@
             this.LblSearch.TabIndex = 0;
             this.LblSearch.Text = "Buscar por nome:";
             // 
-            // BtnDel
-            // 
-            this.BtnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnDel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(18)))), ((int)(((byte)(23)))));
-            this.BtnDel.FlatAppearance.BorderSize = 0;
-            this.BtnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnDel.ForeColor = System.Drawing.Color.White;
-            this.BtnDel.Location = new System.Drawing.Point(863, 39);
-            this.BtnDel.Name = "BtnDel";
-            this.BtnDel.Size = new System.Drawing.Size(97, 35);
-            this.BtnDel.TabIndex = 9;
-            this.BtnDel.Text = "Deletar";
-            this.BtnDel.UseVisualStyleBackColor = false;
-            this.BtnDel.Click += new System.EventHandler(this.BtnDel_Click);
-            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.DgvData);
@@ -142,17 +153,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(992, 383);
             this.panel3.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(439, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 16);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Modo Administrador";
             // 
             // FrmAdmClients
             // 

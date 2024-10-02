@@ -4,14 +4,15 @@ using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
 using SysPaciente.Entities.Enums;
+using System.Xml.Linq;
 
 namespace SysPaciente.Forms
 {
-    public partial class FrmConsultations : Form
+    public partial class FrmAdmConsultations : Form
     {
         private DateTime _date;
 
-        public FrmConsultations()
+        public FrmAdmConsultations()
         {
             InitializeComponent();
 
@@ -43,7 +44,6 @@ namespace SysPaciente.Forms
             }
         }
 
-
         private void HideColumns()
         {
             this.DgvData.Columns[0].Visible = false;//id da colsulta
@@ -69,8 +69,6 @@ namespace SysPaciente.Forms
 
             // Reorganizando as colunas
             dataTable.Columns["Status da consulta"].SetOrdinal(dataTable.Columns["status"].Ordinal + 1);
-
-            Debug.WriteLine("Quantidade de rows: " + dataTable.Rows.Count);
 
             foreach (DataRow row in dataTable.Rows)
             {
@@ -98,7 +96,6 @@ namespace SysPaciente.Forms
                 LoadData();
         }
 
-        //pega a data selecionada no DateTimePicker e guarda na variavel
         private void ChangeDate()
         {
             _date = this.DateTimePicker.Value;
@@ -115,13 +112,26 @@ namespace SysPaciente.Forms
             this.PanelChangeDate.Visible = value;
         }
 
-        private void ChangePanelAlterstatusVicibility(bool value)
+        private void Delete()
         {
             if (DgvData.Rows.Count > 0)
             {
-                this.PanelAlterStatus.Visible = value;
+                int id = Convert.ToInt32(this.DgvData.CurrentRow.Cells["idConsultation"].Value);
 
-                CbxStatus.Text = Convert.ToString(this.DgvData.CurrentRow.Cells["Status da consulta"].Value);
+                
+                if (MessageBox.Show(
+                    "Realmente Deseja Apagar a consulta ?",
+                    "Apagar Consulta?",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    string resp = Data.DeleteConsultation(Convert.ToInt32(this.DgvData.CurrentRow.Cells["idConsultation"].Value));
+
+                    Debug.WriteLine(resp);
+
+                    LoadData();
+                }
+
             }
             else
             {
@@ -129,50 +139,7 @@ namespace SysPaciente.Forms
             }
         }
 
-        private void Edit()
-        {
-            if (DgvData.Rows.Count > 0)
-            {
-                FormLoader.OpenChildForm(new FrmMarkEditConsultation(
-                    Convert.ToInt32(this.DgvData.CurrentRow.Cells["idConsultation"].Value),
-                    Convert.ToInt32(this.DgvData.CurrentRow.Cells["idClient"].Value),
-                    Convert.ToString(this.DgvData.CurrentRow.Cells["consultationDate"].Value),
-                    Convert.ToString(this.DgvData.CurrentRow.Cells["timeOfConsultation"].Value),
-                    Convert.ToString(this.DgvData.CurrentRow.Cells["Status da consulta"].Value)));
-            }
-            else
-            {
-                MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void EditStatus()
-        {
-            string resp = Data.EditConsultationStatus(
-                Convert.ToInt32(this.DgvData.CurrentRow.Cells["idConsultation"].Value),
-                this.CbxStatus.SelectedIndex);
-
-            if (resp == "Registro editado com sucesso.")
-            {
-                MessageBox.Show(resp, "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ChangePanelAlterstatusVicibility(false);
-                LoadData();
-            }
-            else
-                MessageBox.Show(resp, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        //--------------------------------- métodos criados pelo visual studio
-
-        private void BtnChangeDate_Click(object sender, EventArgs e)
-        {
-            ChangeDate();
-        }
-
-        private void BtnCancelChangeDate_Click(object sender, EventArgs e)
-        {
-            ChangePanelChangedateVisibility(false);
-        }
+        // ----------------------- Métodos criados pelo visual studio
 
         private void BtnDate_Click(object sender, EventArgs e)
         {
@@ -184,29 +151,19 @@ namespace SysPaciente.Forms
             Search();
         }
 
-        private void BtnChangeStatus_Click(object sender, EventArgs e)
+        private void BtnChangeDate_Click(object sender, EventArgs e)
         {
-            ChangePanelAlterstatusVicibility(true);
+            ChangeDate();
         }
 
-        private void BtnCancelAlterStatus_Click(object sender, EventArgs e)
+        private void BtnCancelChangeDate_Click(object sender, EventArgs e)
         {
-            ChangePanelAlterstatusVicibility(false);
+            ChangePanelChangedateVisibility(false);
         }
 
-        private void BtnAlterStatus_Click(object sender, EventArgs e)
+        private void BtnDel_Click(object sender, EventArgs e)
         {
-            EditStatus();
-        }
-
-        private void BtnMark_Click(object sender, EventArgs e)
-        {
-            FormLoader.OpenChildForm(new FrmMarkEditConsultation());
-        }
-
-        private void BtnEdit_Click(object sender, EventArgs e)
-        {
-            Edit();
+            Delete();
         }
     }
 }

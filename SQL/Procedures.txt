@@ -231,15 +231,6 @@ GO
 
 ----------------------- consultas -----------------------
 
---procedimento para exibir as 50 primeiras entradas no banco de dados
-CREATE PROC sp_show_consultations
-AS
-BEGIN
-	SELECT TOP 50 * FROM consultations
-	ORDER BY timeOfConsultation ASC
-END;
-GO
-
 --procedimento para pesquisar por data
 CREATE PROC sp_search_date
 	@consultationDate DATE
@@ -248,21 +239,6 @@ BEGIN
 	SELECT TOP 50 * FROM consultations
 	WHERE consultationDate = @consultationDate
 	ORDER BY timeOfConsultation ASC;
-END;
-GO
-
---procedimento para pesquisar por nome do paciente
-CREATE PROC sp_consultation_search_with_client_name
-    @name VARCHAR(100)
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT TOP 50 *
-    FROM consultations c
-    INNER JOIN clients cl ON c.idClient = cl.idClient
-    WHERE cl.name LIKE LTRIM(RTRIM(@name)) + '%'
-    ORDER BY consultationDate ASC;
 END;
 GO
 

@@ -39,6 +39,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.TxtConfirmPassword = new System.Windows.Forms.TextBox();
             this.PainelChangePassword = new System.Windows.Forms.Panel();
+            this.LblConfirmFieldInBlank = new System.Windows.Forms.Label();
+            this.LblPasswordFieldInBlank = new System.Windows.Forms.Label();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.LblPasswordsNotMatch = new System.Windows.Forms.Label();
             this.LblPasswordWrong = new System.Windows.Forms.Label();
@@ -48,8 +50,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LblError = new System.Windows.Forms.Label();
             this.TxtPassord = new System.Windows.Forms.TextBox();
-            this.LblPasswordFieldInBlank = new System.Windows.Forms.Label();
-            this.LblConfirmFieldInBlank = new System.Windows.Forms.Label();
             this.PainelChangePassword.SuspendLayout();
             this.PanelLogin.SuspendLayout();
             this.SuspendLayout();
@@ -84,6 +84,7 @@
             this.BtnDelConsultations.TabIndex = 10;
             this.BtnDelConsultations.Text = "Deletar Consultas";
             this.BtnDelConsultations.UseVisualStyleBackColor = false;
+            this.BtnDelConsultations.Click += new System.EventHandler(this.BtnDelConsultations_Click);
             // 
             // label2
             // 
@@ -189,6 +190,30 @@
             this.PainelChangePassword.Size = new System.Drawing.Size(303, 295);
             this.PainelChangePassword.TabIndex = 19;
             this.PainelChangePassword.Visible = false;
+            // 
+            // LblConfirmFieldInBlank
+            // 
+            this.LblConfirmFieldInBlank.AutoSize = true;
+            this.LblConfirmFieldInBlank.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblConfirmFieldInBlank.ForeColor = System.Drawing.Color.Red;
+            this.LblConfirmFieldInBlank.Location = new System.Drawing.Point(162, 132);
+            this.LblConfirmFieldInBlank.Name = "LblConfirmFieldInBlank";
+            this.LblConfirmFieldInBlank.Size = new System.Drawing.Size(118, 16);
+            this.LblConfirmFieldInBlank.TabIndex = 24;
+            this.LblConfirmFieldInBlank.Text = "Campo em branco";
+            this.LblConfirmFieldInBlank.Visible = false;
+            // 
+            // LblPasswordFieldInBlank
+            // 
+            this.LblPasswordFieldInBlank.AutoSize = true;
+            this.LblPasswordFieldInBlank.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPasswordFieldInBlank.ForeColor = System.Drawing.Color.Red;
+            this.LblPasswordFieldInBlank.Location = new System.Drawing.Point(119, 89);
+            this.LblPasswordFieldInBlank.Name = "LblPasswordFieldInBlank";
+            this.LblPasswordFieldInBlank.Size = new System.Drawing.Size(158, 16);
+            this.LblPasswordFieldInBlank.TabIndex = 23;
+            this.LblPasswordFieldInBlank.Text = "Campo senha em branco";
+            this.LblPasswordFieldInBlank.Visible = false;
             // 
             // BtnCancel
             // 
@@ -302,30 +327,6 @@
             this.TxtPassord.Size = new System.Drawing.Size(225, 20);
             this.TxtPassord.TabIndex = 0;
             this.TxtPassord.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPassord_KeyPress);
-            // 
-            // LblPasswordFieldInBlank
-            // 
-            this.LblPasswordFieldInBlank.AutoSize = true;
-            this.LblPasswordFieldInBlank.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblPasswordFieldInBlank.ForeColor = System.Drawing.Color.Red;
-            this.LblPasswordFieldInBlank.Location = new System.Drawing.Point(119, 89);
-            this.LblPasswordFieldInBlank.Name = "LblPasswordFieldInBlank";
-            this.LblPasswordFieldInBlank.Size = new System.Drawing.Size(158, 16);
-            this.LblPasswordFieldInBlank.TabIndex = 23;
-            this.LblPasswordFieldInBlank.Text = "Campo senha em branco";
-            this.LblPasswordFieldInBlank.Visible = false;
-            // 
-            // LblConfirmFieldInBlank
-            // 
-            this.LblConfirmFieldInBlank.AutoSize = true;
-            this.LblConfirmFieldInBlank.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblConfirmFieldInBlank.ForeColor = System.Drawing.Color.Red;
-            this.LblConfirmFieldInBlank.Location = new System.Drawing.Point(162, 132);
-            this.LblConfirmFieldInBlank.Name = "LblConfirmFieldInBlank";
-            this.LblConfirmFieldInBlank.Size = new System.Drawing.Size(118, 16);
-            this.LblConfirmFieldInBlank.TabIndex = 24;
-            this.LblConfirmFieldInBlank.Text = "Campo em branco";
-            this.LblConfirmFieldInBlank.Visible = false;
             // 
             // FrmAdm
             // 

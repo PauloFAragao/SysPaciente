@@ -183,5 +183,10 @@ namespace SysPaciente.Forms
         {
             this.LblConfirmFieldInBlank.Visible = false;
         }
+
+        private void BtnDelConsultations_Click(object sender, EventArgs e)
+        {
+            FormLoader.OpenChildForm(new FrmAdmConsultations());
+        }
     }
 }

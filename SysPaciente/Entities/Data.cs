@@ -656,6 +656,46 @@ namespace SysPaciente.Entities
             return resp;
         }
 
+        // método que vai deletar uma consulta
+        public static string DeleteConsultation(int idConsultation)
+        {
+            string resp = "";
+
+            // Cria uma conexão com o banco de dados e garante que ela será fechada e liberada corretamente após o uso.
+            using (SqlConnection sqlCon = new SqlConnection(Connection.Cn))
+            {
+                try
+                {
+                    // Abrindo conexão
+                    sqlCon.Open();
+
+                    // Cria um comando SQL que vai chamar uma stored procedure
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_delete_consultation", sqlCon))
+                    {
+                        // chamando um procedimento armazenado no banco de dados.
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        // Parâmetro sql para o id do banco de dados
+                        sqlCmd.Parameters.Add(CreateSqlParameter(idConsultation, "@idConsultation"));
+
+                        // Executa o comando e captura o código de retorno
+                        int returnCode = Convert.ToInt32(sqlCmd.ExecuteScalar());
+                        if (returnCode == 0)
+                            resp = "Registro deletado com sucesso.";
+                        else
+                            resp = $"Erro ao deletar registro. Código: {returnCode}";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    resp = $"Erro: {ex.Message}";
+                    Debug.WriteLine("Exception: " + ex.Message);
+                }
+            }
+
+            return resp;
+        }
+
         //------------------------------------- SqlParameter -------------------------------------
 
         // sobrecarga para criar um parametro do tipo int não output

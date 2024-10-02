@@ -190,7 +190,7 @@
             this.PanelAlterStatus.Controls.Add(this.BtnCancelAlterStatus);
             this.PanelAlterStatus.Controls.Add(this.BtnAlterStatus);
             this.PanelAlterStatus.Controls.Add(this.label2);
-            this.PanelAlterStatus.Location = new System.Drawing.Point(312, 72);
+            this.PanelAlterStatus.Location = new System.Drawing.Point(312, 39);
             this.PanelAlterStatus.Name = "PanelAlterStatus";
             this.PanelAlterStatus.Size = new System.Drawing.Size(433, 154);
             this.PanelAlterStatus.TabIndex = 13;
