@@ -436,16 +436,10 @@ namespace SysPaciente.Entities
         //------------------------------------- consultas -------------------------------------
 
         // método que vai pegar as consultas da data no banco de dados
-        public static DataTable ShowConsultationsByDate(DateTime date, string search)
+        public static DataTable SearchWithDate(DateTime date)
         {
             // Objeto do tipo DataTable
             DataTable dtResult = new DataTable("consultations");
-
-            // string para pegar os ids dos clientes
-            string idList = "";
-
-            // lista para guardar os nomes dos clientes
-            List<string> names = new List<string>();
 
             // Objeto da conexão com o banco de dados
             using (SqlConnection sqlCon = new SqlConnection(Connection.Cn))
@@ -456,7 +450,7 @@ namespace SysPaciente.Entities
                     sqlCon.Open();
 
                     // Comando SQL - que está no banco de dados
-                    using (SqlCommand sqlCmd = new SqlCommand("sp_search_date", sqlCon))
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_search_with_date", sqlCon))
                     {
                         // chamando um procedimento armazenado no banco de dados.
                         sqlCmd.CommandType = CommandType.StoredProcedure;
@@ -471,30 +465,47 @@ namespace SysPaciente.Entities
                             sqlDat.Fill(dtResult);
                         }
                     }
+                }
+                catch (Exception ex)
+                {
+                    dtResult = null;
+                    Debug.WriteLine("Exception: " + ex.Message);
+                }
+            }
+            return dtResult;
+        }
 
-                    //pegado as ids dos clientes
-                    foreach (DataRow row in dtResult.Rows)
-                    {
-                        idList += row["idClient"] + ",";
-                    }
+        // método que vai pegar as consultas da data com nome no banco de dados
+        public static DataTable SearchWithDateAndName(DateTime date, string name)
+        {
+            // Objeto do tipo DataTable
+            DataTable dtResult = new DataTable("consultations");
 
-                    // Pegando os nomes com as ids
-                    using (SqlCommand sqlCmd = new SqlCommand("sp_search_clients_by_ids", sqlCon))
+            // Objeto da conexão com o banco de dados
+            using (SqlConnection sqlCon = new SqlConnection(Connection.Cn))
+            {
+                try
+                {
+                    // Abrindo a conexão ao banco de dados
+                    sqlCon.Open();
+
+                    // Comando SQL - que está no banco de dados
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_search_with_date_and_name", sqlCon))
                     {
+                        // chamando um procedimento armazenado no banco de dados.
                         sqlCmd.CommandType = CommandType.StoredProcedure;
 
-                        // Prepare a string com os IDs separados por vírgula
-                        //string idList = string.Join(",", ids);
-                        sqlCmd.Parameters.AddWithValue("@idList", idList);
+                        // parametro da data
+                        sqlCmd.Parameters.Add(CreateSqlParameter(date, "@consultationDate"));
 
-                        // Recuperando os nomes e guardando em uma lista
-                        using (SqlDataReader sqlDat = sqlCmd.ExecuteReader())
+                        // parametro do nome
+                        sqlCmd.Parameters.Add(CreateSqlParameter(name, "@name", 100));
+
+                        // Objeto que vai guardar informações da tabela
+                        using (SqlDataAdapter sqlDat = new SqlDataAdapter(sqlCmd))
                         {
-                            while (sqlDat.Read())
-                            {
-                                string name = sqlDat["name"].ToString();
-                                names.Add(name);
-                            }
+                            // Preenchendo o DataTable
+                            sqlDat.Fill(dtResult);
                         }
                     }
                 }
@@ -504,9 +515,7 @@ namespace SysPaciente.Entities
                     Debug.WriteLine("Exception: " + ex.Message);
                 }
             }
-
-            //chamando a gambiarra que vai adiconar uma coluna de nomes na tabela
-            return EditConsultationsTable(dtResult, names, search);
+            return dtResult;
         }
 
         // método que vai inserir os dados da consulta marcada
@@ -844,7 +853,7 @@ namespace SysPaciente.Entities
             // Parâmetro output para o tempo médio das consultas
             sqlCmd.Parameters.Add(CreateSqlParameter("@standardConsultationTime", SqlDbType.Int));
 
-            return sqlCmd; 
+            return sqlCmd;
         }
 
         // método que vai capturar os resultados
@@ -874,8 +883,8 @@ namespace SysPaciente.Entities
             settings.workOnSundays = Convert.ToBoolean(sqlCmd.Parameters["@workOnSundays"].Value);
 
             // tentando recuperar os horarios do inicio do trabalho as segundas ---
-            if(TimeSpan.TryParse(
-                sqlCmd.Parameters["@startOfWorkOnMondays"].Value.ToString(), 
+            if (TimeSpan.TryParse(
+                sqlCmd.Parameters["@startOfWorkOnMondays"].Value.ToString(),
                 out TimeSpan startOfWorkOnMondays))
                 settings.startOfWorkOnMondays = startOfWorkOnMondays;
 
@@ -1073,11 +1082,11 @@ namespace SysPaciente.Entities
                         bool result = Convert.ToBoolean(sqlCmd.Parameters["@returnBit"].Value);
 
                         //se já tiver algo no banco de dados
-                        if (result) 
+                        if (result)
                             resp = EditConfigurations(sqlCon, settings);
 
                         //se não cria um novo registro
-                        else 
+                        else
                             resp = CreateConfigurations(sqlCon, settings);
                     }
                 }
@@ -1353,50 +1362,6 @@ namespace SysPaciente.Entities
             };
             return parameter;
         }
-
-        //------------------------------------- Ganbiarra -------------------------------------
-
-        // Método que vai adiconar a coluna name e preencher ela com os nomes que estão na lista
-        private static DataTable EditConsultationsTable(DataTable dtResult, List<string> names, string name)
-        {
-            // Adicionando a nova coluna para o nome do paciente
-            dtResult.Columns.Add("Nome do paciente", typeof(string));
-
-            // Reorganizando as colunas para que "Nome" fique depois de "idConsultation"
-            dtResult.Columns["Nome do paciente"].SetOrdinal(dtResult.Columns["idConsultation"].Ordinal + 1);
-
-            if (name == "")
-            {
-                int index = 0;
-
-                //Adicionando os nomes dos pacientes
-                foreach (DataRow row in dtResult.Rows)
-                {
-                    row["Nome do paciente"] = names[index];
-
-                    index++;
-                }
-            }
-            else
-            {
-                int index = 0;
-
-                //Adicionando os nomes dos pacientes
-                foreach (DataRow row in dtResult.Rows)
-                {
-                    if (names[index].StartsWith(name, StringComparison.OrdinalIgnoreCase))
-                        row["Nome do paciente"] = names[index];
-
-                    else
-                        row.Delete();// marca para deletar
-
-                    index++;
-                }
-
-                dtResult.AcceptChanges();// aqui deleta o que estava marcado para deletar
-            }
-
-            return dtResult;
-        }
+    
     }
 }

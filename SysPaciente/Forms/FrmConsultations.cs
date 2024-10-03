@@ -30,11 +30,14 @@ namespace SysPaciente.Forms
 
         private bool LoadData()
         {
-            DataTable dataTable = Data.ShowConsultationsByDate(_date, "");
+            //DataTable dataTable = Data.ShowConsultationsByDate(_date, "");
+
+            DataTable dataTable = Data.SearchWithDate(_date);
 
             if (dataTable != null)
             {
-                this.DgvData.DataSource = ChangeStatus(dataTable);
+                //this.DgvData.DataSource = ChangeStatus(dataTable);
+                this.DgvData.DataSource = dataTable;
                 return true;
             }
             else
@@ -42,7 +45,6 @@ namespace SysPaciente.Forms
                 return false;
             }
         }
-
 
         private void HideColumns()
         {
@@ -54,45 +56,28 @@ namespace SysPaciente.Forms
 
         private void ChangeColumns()
         {
-            //mudando o tamanho da coluna para os valores serem coretamente exibidos
+            // Altera o texto do cabeçalho da coluna 1 para "Nome do paciente"
+            this.DgvData.Columns[1].HeaderText = "Nome do paciente";
             this.DgvData.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             // Altera o texto do cabeçalho da coluna 3 para "Horário da colsulta"
             this.DgvData.Columns[3].HeaderText = "Horário da colsulta";
             this.DgvData.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-        }
 
-        private DataTable ChangeStatus(DataTable dataTable)
-        {
-            // Adicionando a nova coluna
-            dataTable.Columns.Add("Status da consulta", typeof(string));
-
-            // Reorganizando as colunas
-            dataTable.Columns["Status da consulta"].SetOrdinal(dataTable.Columns["status"].Ordinal + 1);
-
-            Debug.WriteLine("Quantidade de rows: " + dataTable.Rows.Count);
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                if (row != null)
-                {
-                    string status = Enum.GetName(typeof(Status), Convert.ToInt32(row["status"]));
-
-                    row["Status da consulta"] = status;
-                }
-            }
-
-            return dataTable;
+            // Altera o texto do cabeçalho da coluna 6 para "Horário da colsulta"
+            this.DgvData.Columns[6].HeaderText = "Status";
+            this.DgvData.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
 
         private void Search()
         {
             if (!String.IsNullOrWhiteSpace(this.TxtSearchText.Text))
             {
-                DataTable dataTable = Data.ShowConsultationsByDate(_date, this.TxtSearchText.Text);
+                //DataTable dataTable = Data.ShowConsultationsByDate(_date, this.TxtSearchText.Text);
+                DataTable dataTable = Data.SearchWithDateAndName(_date, this.TxtSearchText.Text);
 
                 if (dataTable != null)
-                    this.DgvData.DataSource = ChangeStatus(dataTable);
+                    this.DgvData.DataSource = dataTable;//ChangeStatus(dataTable);
             }
             else
                 LoadData();

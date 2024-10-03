@@ -232,12 +232,61 @@ GO
 ----------------------- consultas -----------------------
 
 --procedimento para pesquisar por data
-CREATE PROC sp_search_date
+CREATE PROC sp_search_with_date
 	@consultationDate DATE
 AS
 BEGIN
-	SELECT TOP 50 * FROM consultations
-	WHERE consultationDate = @consultationDate
+SELECT
+	co.idConsultation,
+	co.consultationDate,
+	co.timeOfConsultation,
+	c.name,
+	co.idClient,
+	co.status,
+
+	CASE
+		WHEN co.status = 0 THEN 'Marcada'
+		WHEN co.status = 1 THEN 'Remarcada'
+		WHEN co.status = 2 THEN 'Realizada'
+		WHEN co.status = 3 THEN 'Faltou'
+		WHEN co.status = 4 THEN 'Cancelada'
+		WHEN co.status = 5 THEN 'Pendente'
+	END AS statusDescription
+
+	FROM consultations co
+	JOIN clients c ON co.idClient = c.idClient
+	WHERE co.consultationDate = @consultationDate  -- Filtra pela data da consulta
+	ORDER BY timeOfConsultation ASC;
+END;
+GO
+
+--procedimento para pesquisar por data e nomes
+CREATE PROC sp_search_with_date_and_name
+	@consultationDate DATE,
+	@name VARCHAR(100)
+AS
+BEGIN
+	SELECT 
+	co.idConsultation,
+	c.name,
+	co.consultationDate,
+	co.timeOfConsultation,
+	co.idClient,
+	co.status,
+
+	CASE
+		WHEN co.status = 0 THEN 'Marcada'
+		WHEN co.status = 1 THEN 'Remarcada'
+		WHEN co.status = 2 THEN 'Realizada'
+		WHEN co.status = 3 THEN 'Faltou'
+		WHEN co.status = 4 THEN 'Cancelada'
+		WHEN co.status = 5 THEN 'Pendente'
+	END AS statusDescription
+
+	FROM consultations co
+	JOIN clients c ON co.idClient = c.idClient
+	WHERE co.consultationDate = @consultationDate 
+	AND c.name LIKE @name + '%'
 	ORDER BY timeOfConsultation ASC;
 END;
 GO
