@@ -111,7 +111,6 @@
             this.CbMonday.TabIndex = 0;
             this.CbMonday.Text = "Segunda-Feira";
             this.CbMonday.UseVisualStyleBackColor = true;
-            this.CbMonday.CheckedChanged += new System.EventHandler(this.CbMonday_CheckedChanged);
             // 
             // label1
             // 
@@ -133,7 +132,6 @@
             this.CbTuesday.TabIndex = 2;
             this.CbTuesday.Text = "Terça-Feira";
             this.CbTuesday.UseVisualStyleBackColor = true;
-            this.CbTuesday.CheckedChanged += new System.EventHandler(this.CbTuesday_CheckedChanged);
             // 
             // CbWednesday
             // 
@@ -145,7 +143,6 @@
             this.CbWednesday.TabIndex = 3;
             this.CbWednesday.Text = "Quarta-Feira";
             this.CbWednesday.UseVisualStyleBackColor = true;
-            this.CbWednesday.CheckedChanged += new System.EventHandler(this.CbWednesday_CheckedChanged);
             // 
             // CbThursday
             // 
@@ -157,7 +154,6 @@
             this.CbThursday.TabIndex = 4;
             this.CbThursday.Text = "Quinta-Feira";
             this.CbThursday.UseVisualStyleBackColor = true;
-            this.CbThursday.CheckedChanged += new System.EventHandler(this.CbThursday_CheckedChanged);
             // 
             // CbSunday
             // 
@@ -169,7 +165,6 @@
             this.CbSunday.TabIndex = 7;
             this.CbSunday.Text = "Domingo";
             this.CbSunday.UseVisualStyleBackColor = true;
-            this.CbSunday.CheckedChanged += new System.EventHandler(this.CbSunday_CheckedChanged);
             // 
             // CbSaturday
             // 
@@ -181,7 +176,6 @@
             this.CbSaturday.TabIndex = 6;
             this.CbSaturday.Text = "Sábado";
             this.CbSaturday.UseVisualStyleBackColor = true;
-            this.CbSaturday.CheckedChanged += new System.EventHandler(this.CbSaturday_CheckedChanged);
             // 
             // CbFriday
             // 
@@ -193,7 +187,6 @@
             this.CbFriday.TabIndex = 5;
             this.CbFriday.Text = "Sexta-Feira";
             this.CbFriday.UseVisualStyleBackColor = true;
-            this.CbFriday.CheckedChanged += new System.EventHandler(this.CbFriday_CheckedChanged);
             // 
             // label2
             // 
@@ -211,7 +204,6 @@
             this.TxtStandardConsultationTime.Name = "TxtStandardConsultationTime";
             this.TxtStandardConsultationTime.Size = new System.Drawing.Size(57, 20);
             this.TxtStandardConsultationTime.TabIndex = 10;
-            this.TxtStandardConsultationTime.TextChanged += new System.EventHandler(this.TxtStandardConsultationTime_TextChanged);
             // 
             // label3
             // 
@@ -239,7 +231,6 @@
             this.TxtStartOfWorkOnMondays.Name = "TxtStartOfWorkOnMondays";
             this.TxtStartOfWorkOnMondays.Size = new System.Drawing.Size(57, 20);
             this.TxtStartOfWorkOnMondays.TabIndex = 13;
-            this.TxtStartOfWorkOnMondays.TextChanged += new System.EventHandler(this.TxtStartOfWorkOnMondays_TextChanged);
             // 
             // label5
             // 
@@ -267,7 +258,6 @@
             this.TxtEndOfWorkOnMondays.Name = "TxtEndOfWorkOnMondays";
             this.TxtEndOfWorkOnMondays.Size = new System.Drawing.Size(57, 20);
             this.TxtEndOfWorkOnMondays.TabIndex = 15;
-            this.TxtEndOfWorkOnMondays.TextChanged += new System.EventHandler(this.TxtEndOfWorkOnMondays_TextChanged);
             // 
             // label7
             // 
@@ -285,7 +275,6 @@
             this.TxtEndOfBreakOnMondays.Name = "TxtEndOfBreakOnMondays";
             this.TxtEndOfBreakOnMondays.Size = new System.Drawing.Size(57, 20);
             this.TxtEndOfBreakOnMondays.TabIndex = 20;
-            this.TxtEndOfBreakOnMondays.TextChanged += new System.EventHandler(this.TxtEndOfBreakOnMondays_TextChanged);
             // 
             // label8
             // 
@@ -303,7 +292,6 @@
             this.TxtStartOfBreakOnMondays.Name = "TxtStartOfBreakOnMondays";
             this.TxtStartOfBreakOnMondays.Size = new System.Drawing.Size(57, 20);
             this.TxtStartOfBreakOnMondays.TabIndex = 18;
-            this.TxtStartOfBreakOnMondays.TextChanged += new System.EventHandler(this.TxtStartOfBreakOnMondays_TextChanged);
             // 
             // label9
             // 
@@ -331,7 +319,6 @@
             this.TxtEndOfBreakOnTuesdays.Name = "TxtEndOfBreakOnTuesdays";
             this.TxtEndOfBreakOnTuesdays.Size = new System.Drawing.Size(57, 20);
             this.TxtEndOfBreakOnTuesdays.TabIndex = 28;
-            this.TxtEndOfBreakOnTuesdays.TextChanged += new System.EventHandler(this.TxtEndOfBreakOnTuesdays_TextChanged);
             // 
             // label11
             // 
@@ -349,7 +336,6 @@
             this.TxtStartOfBreakOnTuesdays.Name = "TxtStartOfBreakOnTuesdays";
             this.TxtStartOfBreakOnTuesdays.Size = new System.Drawing.Size(57, 20);
             this.TxtStartOfBreakOnTuesdays.TabIndex = 26;
-            this.TxtStartOfBreakOnTuesdays.TextChanged += new System.EventHandler(this.TxtStartOfBreakOnTuesdays_TextChanged);
             // 
             // label12
             // 
@@ -367,7 +353,6 @@
             this.TxtEndOfWorkOnTuesdays.Name = "TxtEndOfWorkOnTuesdays";
             this.TxtEndOfWorkOnTuesdays.Size = new System.Drawing.Size(57, 20);
             this.TxtEndOfWorkOnTuesdays.TabIndex = 24;
-            this.TxtEndOfWorkOnTuesdays.TextChanged += new System.EventHandler(this.TxtEndOfWorkOnTuesdays_TextChanged);
             // 
             // label13
             // 
@@ -385,7 +370,6 @@
             this.TxtStartOfWorkOnTuesdays.Name = "TxtStartOfWorkOnTuesdays";
             this.TxtStartOfWorkOnTuesdays.Size = new System.Drawing.Size(57, 20);
             this.TxtStartOfWorkOnTuesdays.TabIndex = 22;
-            this.TxtStartOfWorkOnTuesdays.TextChanged += new System.EventHandler(this.TxtStartOfWorkOnTuesdays_TextChanged);
             // 
             // label14
             // 
@@ -403,7 +387,6 @@
             this.TxtEndOfBreakOnWednesdays.Name = "TxtEndOfBreakOnWednesdays";
             this.TxtEndOfBreakOnWednesdays.Size = new System.Drawing.Size(57, 20);
             this.TxtEndOfBreakOnWednesdays.TabIndex = 36;
-            this.TxtEndOfBreakOnWednesdays.TextChanged += new System.EventHandler(this.TxtEndOfBreakOnWednesdays_TextChanged);
             // 
             // label15
             // 
@@ -421,7 +404,6 @@
             this.TxtStartOfBreakOnWednesdays.Name = "TxtStartOfBreakOnWednesdays";
             this.TxtStartOfBreakOnWednesdays.Size = new System.Drawing.Size(57, 20);
             this.TxtStartOfBreakOnWednesdays.TabIndex = 34;
-            this.TxtStartOfBreakOnWednesdays.TextChanged += new System.EventHandler(this.TxtStartOfBreakOnWednesdays_TextChanged);
             // 
             // label16
             // 
@@ -439,7 +421,6 @@
             this.TxtEndOfWorkOnWednesdays.Name = "TxtEndOfWorkOnWednesdays";
             this.TxtEndOfWorkOnWednesdays.Size = new System.Drawing.Size(57, 20);
             this.TxtEndOfWorkOnWednesdays.TabIndex = 32;
-            this.TxtEndOfWorkOnWednesdays.TextChanged += new System.EventHandler(this.TxtEndOfWorkOnWednesdays_TextChanged);
             // 
             // label17
             // 
@@ -457,7 +438,6 @@
             this.TxtStartOfWorkOnWednesdays.Name = "TxtStartOfWorkOnWednesdays";
             this.TxtStartOfWorkOnWednesdays.Size = new System.Drawing.Size(57, 20);
             this.TxtStartOfWorkOnWednesdays.TabIndex = 30;
-            this.TxtStartOfWorkOnWednesdays.TextChanged += new System.EventHandler(this.TxtStartOfWorkOnWednesdays_TextChanged);
             // 
             // label18
             // 
@@ -475,7 +455,6 @@
             this.TxtEndOfBreakOnThursdays.Name = "TxtEndOfBreakOnThursdays";
             this.TxtEndOfBreakOnThursdays.Size = new System.Drawing.Size(57, 20);
             this.TxtEndOfBreakOnThursdays.TabIndex = 44;
-            this.TxtEndOfBreakOnThursdays.TextChanged += new System.EventHandler(this.TxtEndOfBreakOnThursdays_TextChanged);
             // 
             // label19
             // 
@@ -493,7 +472,6 @@
             this.TxtStartOfBreakOnThursdays.Name = "TxtStartOfBreakOnThursdays";
             this.TxtStartOfBreakOnThursdays.Size = new System.Drawing.Size(57, 20);
             this.TxtStartOfBreakOnThursdays.TabIndex = 42;
-            this.TxtStartOfBreakOnThursdays.TextChanged += new System.EventHandler(this.TxtStartOfBreakOnThursdays_TextChanged);
             // 
             // label20
             // 
@@ -511,7 +489,6 @@
             this.TxtEndOfWorkOnThursdays.Name = "TxtEndOfWorkOnThursdays";
             this.TxtEndOfWorkOnThursdays.Size = new System.Drawing.Size(57, 20);
             this.TxtEndOfWorkOnThursdays.TabIndex = 40;
-            this.TxtEndOfWorkOnThursdays.TextChanged += new System.EventHandler(this.TxtEndOfWorkOnThursdays_TextChanged);
             // 
             // label21
             // 
@@ -529,7 +506,6 @@
             this.TxtStartOfWorkOnThursdays.Name = "TxtStartOfWorkOnThursdays";
             this.TxtStartOfWorkOnThursdays.Size = new System.Drawing.Size(57, 20);
             this.TxtStartOfWorkOnThursdays.TabIndex = 38;
-            this.TxtStartOfWorkOnThursdays.TextChanged += new System.EventHandler(this.TxtStartOfWorkOnThursdays_TextChanged);
             // 
             // label22
             // 
@@ -547,7 +523,6 @@
             this.TxtEndOfBreakOnFridays.Name = "TxtEndOfBreakOnFridays";
             this.TxtEndOfBreakOnFridays.Size = new System.Drawing.Size(57, 20);
             this.TxtEndOfBreakOnFridays.TabIndex = 52;
-            this.TxtEndOfBreakOnFridays.TextChanged += new System.EventHandler(this.TxtEndOfBreakOnFridays_TextChanged);
             // 
             // label23
             // 
@@ -565,7 +540,6 @@
             this.TxtStartOfBreakOnFridays.Name = "TxtStartOfBreakOnFridays";
             this.TxtStartOfBreakOnFridays.Size = new System.Drawing.Size(57, 20);
             this.TxtStartOfBreakOnFridays.TabIndex = 50;
-            this.TxtStartOfBreakOnFridays.TextChanged += new System.EventHandler(this.TxtStartOfBreakOnFridays_TextChanged);
             // 
             // label24
             // 
@@ -583,7 +557,6 @@
             this.TxtEndOfWorkOnFridays.Name = "TxtEndOfWorkOnFridays";
             this.TxtEndOfWorkOnFridays.Size = new System.Drawing.Size(57, 20);
             this.TxtEndOfWorkOnFridays.TabIndex = 48;
-            this.TxtEndOfWorkOnFridays.TextChanged += new System.EventHandler(this.TxtEndOfWorkOnFridays_TextChanged);
             // 
             // label25
             // 
@@ -601,7 +574,6 @@
             this.TxtStartOfWorkOnFridays.Name = "TxtStartOfWorkOnFridays";
             this.TxtStartOfWorkOnFridays.Size = new System.Drawing.Size(57, 20);
             this.TxtStartOfWorkOnFridays.TabIndex = 46;
-            this.TxtStartOfWorkOnFridays.TextChanged += new System.EventHandler(this.TxtStartOfWorkOnFridays_TextChanged);
             // 
             // label26
             // 
@@ -619,7 +591,6 @@
             this.TxtEndOfBreakOnSaturdays.Name = "TxtEndOfBreakOnSaturdays";
             this.TxtEndOfBreakOnSaturdays.Size = new System.Drawing.Size(57, 20);
             this.TxtEndOfBreakOnSaturdays.TabIndex = 60;
-            this.TxtEndOfBreakOnSaturdays.TextChanged += new System.EventHandler(this.TxtEndOfBreakOnSaturdays_TextChanged);
             // 
             // label27
             // 
@@ -637,7 +608,6 @@
             this.TxtStartOfBreakOnSaturdays.Name = "TxtStartOfBreakOnSaturdays";
             this.TxtStartOfBreakOnSaturdays.Size = new System.Drawing.Size(57, 20);
             this.TxtStartOfBreakOnSaturdays.TabIndex = 58;
-            this.TxtStartOfBreakOnSaturdays.TextChanged += new System.EventHandler(this.TxtStartOfBreakOnSaturdays_TextChanged);
             // 
             // label28
             // 
@@ -655,7 +625,6 @@
             this.TxtEndOfWorkOnSaturdays.Name = "TxtEndOfWorkOnSaturdays";
             this.TxtEndOfWorkOnSaturdays.Size = new System.Drawing.Size(57, 20);
             this.TxtEndOfWorkOnSaturdays.TabIndex = 56;
-            this.TxtEndOfWorkOnSaturdays.TextChanged += new System.EventHandler(this.TxtEndOfWorkOnSaturdays_TextChanged);
             // 
             // label29
             // 
@@ -673,7 +642,6 @@
             this.TxtStartOfWorkOnSaturdays.Name = "TxtStartOfWorkOnSaturdays";
             this.TxtStartOfWorkOnSaturdays.Size = new System.Drawing.Size(57, 20);
             this.TxtStartOfWorkOnSaturdays.TabIndex = 54;
-            this.TxtStartOfWorkOnSaturdays.TextChanged += new System.EventHandler(this.TxtStartOfWorkOnSaturdays_TextChanged);
             // 
             // label30
             // 
@@ -691,7 +659,6 @@
             this.TxtEndOfBreakOnSundays.Name = "TxtEndOfBreakOnSundays";
             this.TxtEndOfBreakOnSundays.Size = new System.Drawing.Size(57, 20);
             this.TxtEndOfBreakOnSundays.TabIndex = 68;
-            this.TxtEndOfBreakOnSundays.TextChanged += new System.EventHandler(this.TxtEndOfBreakOnSundays_TextChanged);
             // 
             // label31
             // 
@@ -709,7 +676,6 @@
             this.TxtStartOfBreakOnSundays.Name = "TxtStartOfBreakOnSundays";
             this.TxtStartOfBreakOnSundays.Size = new System.Drawing.Size(57, 20);
             this.TxtStartOfBreakOnSundays.TabIndex = 66;
-            this.TxtStartOfBreakOnSundays.TextChanged += new System.EventHandler(this.TxtStartOfBreakOnSundays_TextChanged);
             // 
             // label32
             // 
@@ -727,7 +693,6 @@
             this.TxtEndOfWorkOnSundays.Name = "TxtEndOfWorkOnSundays";
             this.TxtEndOfWorkOnSundays.Size = new System.Drawing.Size(57, 20);
             this.TxtEndOfWorkOnSundays.TabIndex = 64;
-            this.TxtEndOfWorkOnSundays.TextChanged += new System.EventHandler(this.TxtEndOfWorkOnSundays_TextChanged);
             // 
             // label33
             // 
@@ -745,7 +710,6 @@
             this.TxtStartOfWorkOnSundays.Name = "TxtStartOfWorkOnSundays";
             this.TxtStartOfWorkOnSundays.Size = new System.Drawing.Size(57, 20);
             this.TxtStartOfWorkOnSundays.TabIndex = 62;
-            this.TxtStartOfWorkOnSundays.TextChanged += new System.EventHandler(this.TxtStartOfWorkOnSundays_TextChanged);
             // 
             // BtnConfirm
             // 

@@ -343,6 +343,20 @@ GO
 
 ----------------------- configurações -----------------------
 
+CREATE PROC sp_verify_configurations
+AS
+BEGIN
+    DECLARE @returnBit BIT;
+
+    IF EXISTS (SELECT 1 FROM dbo.settings WHERE id = 1)
+        SET @returnBit = 1;  -- Tem dados
+    ELSE
+        SET @returnBit = 0;  -- Não tem dados
+
+    RETURN @returnBit;
+END;
+GO
+
 --procedimento para ler as configurações
 CREATE PROC sp_read_configurations
 	--
@@ -467,57 +481,43 @@ BEGIN
 END;
 GO
 
---procedimento para verificar se existe alguma configuração
-CREATE PROC sp_verify_settings_data
-	@registered BIT OUTPUT
-AS
-BEGIN
-	SET @registered = 0;
-	
-	IF EXISTS(SELECT 1 FROM settings)
-	BEGIN
-		SET @registered = 1;
-	END;
-END;
-GO
-
 CREATE PROC sp_insert_settings
-	@workOnMondays BIT OUTPUT,
-	@workOnTuesdays BIT OUTPUT,
-	@workOnWednesdays BIT OUTPUT,
-	@workOnThursdays BIT OUTPUT,
-	@workOnFridays BIT OUTPUT,
-	@workOnSaturdays BIT OUTPUT,
-	@workOnSundays BIT OUTPUT,
-	@startOfWorkOnMondays TIME OUTPUT,
-	@endOfWorkOnMondays TIME OUTPUT,
-	@startOfWorkOnTuesdays TIME OUTPUT,
-	@endOfWorkOnTuesdays TIME OUTPUT,
-	@startOfWorkOnWednesdays TIME OUTPUT,
-	@endOfWorkOnWednesdays TIME OUTPUT,
-	@startOfWorkOnThursdays TIME OUTPUT,
-	@endOfWorkOnThursdays TIME OUTPUT,
-	@startOfWorkOnFridays TIME OUTPUT,
-	@endOfWorkOnFridays TIME OUTPUT,
-	@startOfWorkOnSaturdays TIME OUTPUT,
-	@endOfWorkOnSaturdays TIME OUTPUT,
-	@startOfWorkOnSundays TIME OUTPUT,
-	@endOfWorkOnSundays TIME OUTPUT,
-	@startOfBreakOnMondays TIME OUTPUT,
-	@endOfBreakOnMondays TIME OUTPUT,
-	@startOfBreakOnTuesdays TIME OUTPUT,
-	@endOfBreakOnTuesdays TIME OUTPUT,
-	@startOfBreakOnWednesdays TIME OUTPUT,
-	@endOfBreakOnWednesdays TIME OUTPUT,
-	@startOfBreakOnThursdays TIME OUTPUT,
-	@endOfBreakOnThursdays TIME OUTPUT,
-	@startOfBreakOnFridays TIME OUTPUT,
-	@endOfBreakOnFridays TIME OUTPUT,
-	@startOfBreakOnSaturdays TIME OUTPUT,
-	@endOfBreakOnSaturdays TIME OUTPUT,
-	@startOfBreakOnSundays TIME OUTPUT,
-	@endOfBreakOnSundays TIME OUTPUT,
-	@standardConsultationTime INT OUTPUT
+	@workOnMondays BIT,
+	@workOnTuesdays BIT,
+	@workOnWednesdays BIT,
+	@workOnThursdays BIT,
+	@workOnFridays BIT,
+	@workOnSaturdays BIT,
+	@workOnSundays BIT,
+	@startOfWorkOnMondays TIME,
+	@endOfWorkOnMondays TIME,
+	@startOfWorkOnTuesdays TIME,
+	@endOfWorkOnTuesdays TIME,
+	@startOfWorkOnWednesdays TIME,
+	@endOfWorkOnWednesdays TIME,
+	@startOfWorkOnThursdays TIME,
+	@endOfWorkOnThursdays TIME,
+	@startOfWorkOnFridays TIME,
+	@endOfWorkOnFridays TIME,
+	@startOfWorkOnSaturdays TIME,
+	@endOfWorkOnSaturdays TIME,
+	@startOfWorkOnSundays TIME,
+	@endOfWorkOnSundays TIME,
+	@startOfBreakOnMondays TIME,
+	@endOfBreakOnMondays TIME,
+	@startOfBreakOnTuesdays TIME,
+	@endOfBreakOnTuesdays TIME,
+	@startOfBreakOnWednesdays TIME,
+	@endOfBreakOnWednesdays TIME,
+	@startOfBreakOnThursdays TIME,
+	@endOfBreakOnThursdays TIME,
+	@startOfBreakOnFridays TIME,
+	@endOfBreakOnFridays TIME,
+	@startOfBreakOnSaturdays TIME,
+	@endOfBreakOnSaturdays TIME,
+	@startOfBreakOnSundays TIME,
+	@endOfBreakOnSundays TIME,
+	@standardConsultationTime INT
 AS
 BEGIN
 	DECLARE @returnCode INT;
@@ -609,42 +609,42 @@ END;
 GO
 
 CREATE PROC sp_edit_all_settings
-	@workOnMondays BIT OUTPUT,
-	@workOnTuesdays BIT OUTPUT,
-	@workOnWednesdays BIT OUTPUT,
-	@workOnThursdays BIT OUTPUT,
-	@workOnFridays BIT OUTPUT,
-	@workOnSaturdays BIT OUTPUT,
-	@workOnSundays BIT OUTPUT,
-	@startOfWorkOnMondays TIME OUTPUT,
-	@endOfWorkOnMondays TIME OUTPUT,
-	@startOfWorkOnTuesdays TIME OUTPUT,
-	@endOfWorkOnTuesdays TIME OUTPUT,
-	@startOfWorkOnWednesdays TIME OUTPUT,
-	@endOfWorkOnWednesdays TIME OUTPUT,
-	@startOfWorkOnThursdays TIME OUTPUT,
-	@endOfWorkOnThursdays TIME OUTPUT,
-	@startOfWorkOnFridays TIME OUTPUT,
-	@endOfWorkOnFridays TIME OUTPUT,
-	@startOfWorkOnSaturdays TIME OUTPUT,
-	@endOfWorkOnSaturdays TIME OUTPUT,
-	@startOfWorkOnSundays TIME OUTPUT,
-	@endOfWorkOnSundays TIME OUTPUT,
-	@startOfBreakOnMondays TIME OUTPUT,
-	@endOfBreakOnMondays TIME OUTPUT,
-	@startOfBreakOnTuesdays TIME OUTPUT,
-	@endOfBreakOnTuesdays TIME OUTPUT,
-	@startOfBreakOnWednesdays TIME OUTPUT,
-	@endOfBreakOnWednesdays TIME OUTPUT,
-	@startOfBreakOnThursdays TIME OUTPUT,
-	@endOfBreakOnThursdays TIME OUTPUT,
-	@startOfBreakOnFridays TIME OUTPUT,
-	@endOfBreakOnFridays TIME OUTPUT,
-	@startOfBreakOnSaturdays TIME OUTPUT,
-	@endOfBreakOnSaturdays TIME OUTPUT,
-	@startOfBreakOnSundays TIME OUTPUT,
-	@endOfBreakOnSundays TIME OUTPUT,
-	@standardConsultationTime INT OUTPUT
+	@workOnMondays BIT,
+	@workOnTuesdays BIT,
+	@workOnWednesdays BIT,
+	@workOnThursdays BIT,
+	@workOnFridays BIT,
+	@workOnSaturdays BIT,
+	@workOnSundays BIT,
+	@startOfWorkOnMondays TIME,
+	@endOfWorkOnMondays TIME,
+	@startOfWorkOnTuesdays TIME,
+	@endOfWorkOnTuesdays TIME,
+	@startOfWorkOnWednesdays TIME,
+	@endOfWorkOnWednesdays TIME,
+	@startOfWorkOnThursdays TIME,
+	@endOfWorkOnThursdays TIME,
+	@startOfWorkOnFridays TIME,
+	@endOfWorkOnFridays TIME,
+	@startOfWorkOnSaturdays TIME,
+	@endOfWorkOnSaturdays TIME,
+	@startOfWorkOnSundays TIME,
+	@endOfWorkOnSundays TIME,
+	@startOfBreakOnMondays TIME,
+	@endOfBreakOnMondays TIME,
+	@startOfBreakOnTuesdays TIME,
+	@endOfBreakOnTuesdays TIME,
+	@startOfBreakOnWednesdays TIME,
+	@endOfBreakOnWednesdays TIME,
+	@startOfBreakOnThursdays TIME,
+	@endOfBreakOnThursdays TIME,
+	@startOfBreakOnFridays TIME,
+	@endOfBreakOnFridays TIME,
+	@startOfBreakOnSaturdays TIME,
+	@endOfBreakOnSaturdays TIME,
+	@startOfBreakOnSundays TIME,
+	@endOfBreakOnSundays TIME,
+	@standardConsultationTime INT
 AS
 BEGIN
 	DECLARE @returnCode INT;
@@ -686,7 +686,7 @@ BEGIN
 			startOfBreakOnSundays = @startOfBreakOnSundays,
 			endOfBreakOnSundays = @endOfBreakOnSundays,
 			standardConsultationTime = @standardConsultationTime
-		WHERE TOP 1
+		WHERE id = 1
 	
 		SET @returnCode = 0; -- Código de sucesso
 	END TRY

@@ -4,7 +4,6 @@ using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
 using SysPaciente.Entities.Enums;
-using System.Xml.Linq;
 
 namespace SysPaciente.Forms
 {
