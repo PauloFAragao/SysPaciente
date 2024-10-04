@@ -106,7 +106,7 @@ namespace SysPaciente.Forms
             {
                 this.PanelAlterStatus.Visible = value;
 
-                CbxStatus.Text = Convert.ToString(this.DgvData.CurrentRow.Cells["Status da consulta"].Value);
+                CbxStatus.Text = Convert.ToString(this.DgvData.CurrentRow.Cells["statusDescription"].Value);
             }
             else
             {
@@ -123,7 +123,7 @@ namespace SysPaciente.Forms
                     Convert.ToInt32(this.DgvData.CurrentRow.Cells["idClient"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["consultationDate"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["timeOfConsultation"].Value),
-                    Convert.ToString(this.DgvData.CurrentRow.Cells["Status da consulta"].Value)));
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["statusDescription"].Value)));
             }
             else
             {

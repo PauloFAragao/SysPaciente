@@ -1,33 +1,39 @@
 USE dbpatients
 
---procidure que vai receber uma string e dividir
-CREATE FUNCTION dbo.SplitString
-(
-    @List NVARCHAR(MAX),
-    @Delimiter CHAR(1)
-)
-RETURNS @Output TABLE (IdClient INT)
+----------------------- senha -----------------------
+
+--procedimento que vai recuperar a senha
+CREATE PROC sp_get_password
 AS
 BEGIN
-    DECLARE @Start INT, @End INT
-    SET @Start = 1
+	SELECT TOP 1 password FROM password;
+END;
+GO
 
-    WHILE CHARINDEX(@Delimiter, @List, @Start) > 0
-    BEGIN
-        SET @End = CHARINDEX(@Delimiter, @List, @Start)
-        INSERT INTO @Output (IdClient) 
-        VALUES (CAST(SUBSTRING(@List, @Start, @End - @Start) AS INT))
-        SET @Start = @End + 1
-    END
-
-    -- Adicionar o último ID
-    IF @Start <= LEN(@List)
-    BEGIN
-        INSERT INTO @Output (IdClient) 
-        VALUES (CAST(SUBSTRING(@List, @Start, LEN(@List) - @Start + 1) AS INT))
-    END
-
-    RETURN
+--procedimento que vai editar ou adicionar a senha
+CREATE PROC sp_password_edit
+	@password VARCHAR(100)
+AS
+BEGIN
+	DECLARE @returnCode INT;
+	
+	BEGIN TRY
+		IF NOT EXISTS (SELECT 1 FROM password)
+		BEGIN
+			Insert Into password values (@password);
+		END;
+		ELSE
+		BEGIN
+			Update password Set password = @password;
+		END;
+		
+		SET @returnCode = 0; -- Código de sucesso
+	END TRY
+	BEGIN CATCH
+		SET @returnCode = ERROR_NUMBER(); -- Captura do erro
+	END CATCH;
+	
+	RETURN @returnCode; -- Retorna o código
 END;
 GO
 

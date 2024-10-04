@@ -34,6 +34,10 @@ CREATE TABLE consultations(
 	FOREIGN KEY (idClient) REFERENCES clients(idClient) ON DELETE CASCADE,
 );
 
+CREATE TABLE password(
+	password VARCHAR(30)
+);
+
 CREATE TABLE settings(
 	id INT PRIMARY KEY CHECK (Id = 1),
 	--dias trabalhados

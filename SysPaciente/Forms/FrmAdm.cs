@@ -2,7 +2,6 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using SysPaciente.Forms;
 
 namespace SysPaciente.Forms
 {
@@ -15,10 +14,16 @@ namespace SysPaciente.Forms
         {
             InitializeComponent();
 
-            _password = "123";
+            //_password = "123";
+            LoadPassword();
 
             //focus no campo não funciona
             this.TxtPassord.Focus();
+        }
+
+        private void LoadPassword()
+        {
+            _password = Data.GetPassword();
         }
 
         private void VerifyPassword()
@@ -65,13 +70,25 @@ namespace SysPaciente.Forms
             else
             {
                 //captura a nova senha
-                _password = this.TxtNewPassword.Text;
+                //_password = this.TxtNewPassword.Text;
+                string newPassword = this.TxtNewPassword.Text;
 
                 //torna o botão para alterar senha visivel
                 this.BtnChangePassword.Visible = true;
 
                 //torna o painel invisivel
                 this.PainelChangePassword.Visible = false;
+
+                string resp = Data.SetPassword(newPassword);
+
+                if(resp == "Registro editado com sucesso.")
+                {
+                    _password = newPassword;
+                }
+                else
+                {
+                    MessageBox.Show(resp, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

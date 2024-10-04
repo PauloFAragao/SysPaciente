@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
@@ -1274,6 +1273,85 @@ namespace SysPaciente.Entities
             return sqlCmd;
         }
 
+        //------------------------------------- senha -------------------------------------
+
+        // método que vai pegar a senha do adm no banco de dados
+        public static string GetPassword()
+        {
+            string resp = "123";
+
+            // Objeto da conexão com o banco de dados
+            using (SqlConnection sqlCon = new SqlConnection(Connection.Cn))
+            {
+                try
+                {
+                    // Abrindo a conexão ao banco de dados
+                    sqlCon.Open();
+
+                    // Comando SQL - que está no banco de dados
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_get_password", sqlCon))
+                    {
+                        // chamando um procedimento armazenado no banco de dados.
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        // Executa o comando e recupera um SqlDataReader
+                        using (SqlDataReader reader = sqlCmd.ExecuteReader())
+                        {
+                            // Verifica se há resultados
+                            if (reader.Read()) // Lê a primeira linha do resultado
+                            {
+                                resp = reader["password"].ToString(); // Obtém o valor da coluna "password"
+                            }
+                        }
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception: " + ex.Message);
+                }
+            }
+            return resp;
+        }
+
+        // método que vai escrever a nova senha do adm no banco de dados
+        public static string SetPassword(string password)
+        {
+            string resp = "";
+
+            // Objeto da conexão com o banco de dados
+            using (SqlConnection sqlCon = new SqlConnection(Connection.Cn))
+            {
+                try
+                {
+                    // Abrindo a conexão ao banco de dados
+                    sqlCon.Open();
+
+                    // Comando SQL - que está no banco de dados
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_password_edit", sqlCon))
+                    {
+                        // chamando um procedimento armazenado no banco de dados.
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        // criando o parametro com a nova senha
+                        sqlCmd.Parameters.Add(CreateSqlParameter(password, "@password", 30));
+
+                        // Executa o comando e captura o código de retorno
+                        int returnCode = Convert.ToInt32(sqlCmd.ExecuteScalar());
+                        if (returnCode == 0)
+                            resp = "Registro editado com sucesso.";
+                        else
+                            resp = $"Erro ao editar registro. Código: {returnCode}";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception: " + ex.Message);
+                }
+            }
+            return resp;
+        }
+
         //------------------------------------- SqlParameter -------------------------------------
 
         // sobrecarga para criar um parametro do tipo int não output
@@ -1362,6 +1440,19 @@ namespace SysPaciente.Entities
             };
             return parameter;
         }
-    
+
+        // sobrecarga para criar um paramentro ParameterDirection.Output string
+        private static SqlParameter CreateSqlParameter(string varName, int size)
+        {
+            SqlParameter parameter = new SqlParameter
+            {
+                Direction = ParameterDirection.Output,
+                SqlDbType = SqlDbType.VarChar,
+                Size = size,
+                ParameterName = varName
+            };
+            return parameter;
+        }
+
     }
 }
