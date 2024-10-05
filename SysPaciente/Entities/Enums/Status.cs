@@ -2,11 +2,11 @@
 {
     enum Status : int
     {
-        Marcada = 0, 
-        Remarcada = 1, 
-        Realizada = 2, 
-        Faltou = 3, 
-        Cancelada = 4,
-        Pendente = 5
+        Marcada = 0,
+        Realizada = 1,
+        Faltou = 2,
+        Cancelada = 3,
+        Pendente = 4,
+        Remarcada = 5
     }
 }

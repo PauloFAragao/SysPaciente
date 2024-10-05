@@ -3,24 +3,20 @@
   "WorkspaceRootPath": "C:\\Sistemas\\SysPaciente\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|c:\\sistemas\\syspaciente\\syspaciente\\forms\\frmadm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|solutionrelative:syspaciente\\forms\\frmadm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|C:\\Sistemas\\SysPaciente\\syspaciente\\forms\\frmmarkeditconsultation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|solutionrelative:syspaciente\\forms\\frmmarkeditconsultation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|C:\\Sistemas\\SysPaciente\\syspaciente\\forms\\frmaddeditclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|solutionrelative:syspaciente\\forms\\frmaddeditclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|c:\\sistemas\\syspaciente\\syspaciente\\forms\\frmmarkeditconsultation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|solutionrelative:syspaciente\\forms\\frmmarkeditconsultation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|C:\\Sistemas\\SysPaciente\\syspaciente\\forms\\frmaddeditclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|solutionrelative:syspaciente\\forms\\frmaddeditclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|C:\\Sistemas\\SysPaciente\\syspaciente\\entities\\schedules.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|solutionrelative:syspaciente\\entities\\schedules.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|C:\\Sistemas\\SysPaciente\\syspaciente\\entities\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|solutionrelative:syspaciente\\entities\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|C:\\Sistemas\\SysPaciente\\syspaciente\\forms\\frmadm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|solutionrelative:syspaciente\\forms\\frmadm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|C:\\Sistemas\\SysPaciente\\syspaciente\\entities\\schedulemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0A5ED20-7E69-4119-83BE-74B308ED3D90}|SysPaciente\\SysPaciente.csproj|solutionrelative:syspaciente\\entities\\schedulemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,66 +26,57 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FrmAddEditClient.cs",
-              "DocumentMoniker": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmAddEditClient.cs",
-              "RelativeDocumentMoniker": "SysPaciente\\Forms\\FrmAddEditClient.cs",
-              "ToolTip": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmAddEditClient.cs",
-              "RelativeToolTip": "SysPaciente\\Forms\\FrmAddEditClient.cs",
-              "ViewState": "AgIAAAUBAAAAAAAAAAAiwBoBAAAxAAAAAAAAAA==",
+              "Title": "FrmMarkEditConsultation.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmMarkEditConsultation.cs",
+              "RelativeDocumentMoniker": "SysPaciente\\Forms\\FrmMarkEditConsultation.cs",
+              "ToolTip": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmMarkEditConsultation.cs",
+              "RelativeToolTip": "SysPaciente\\Forms\\FrmMarkEditConsultation.cs",
+              "ViewState": "AgIAAM0BAAAAAAAAAAAIwNgBAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-03T18:19:10.765Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FrmAddEditClient.cs [Design]",
-              "DocumentMoniker": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmAddEditClient.cs",
-              "RelativeDocumentMoniker": "SysPaciente\\Forms\\FrmAddEditClient.cs",
-              "ToolTip": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmAddEditClient.cs [Design]",
-              "RelativeToolTip": "SysPaciente\\Forms\\FrmAddEditClient.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-03T18:19:09.035Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FrmAdm.cs",
-              "DocumentMoniker": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmAdm.cs",
-              "RelativeDocumentMoniker": "SysPaciente\\Forms\\FrmAdm.cs",
-              "ToolTip": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmAdm.cs",
-              "RelativeToolTip": "SysPaciente\\Forms\\FrmAdm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-03T18:10:10.14Z",
+              "WhenOpened": "2024-10-05T03:22:51.719Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "FrmAdm.cs [Design]",
-              "DocumentMoniker": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmAdm.cs",
-              "RelativeDocumentMoniker": "SysPaciente\\Forms\\FrmAdm.cs",
-              "ToolTip": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmAdm.cs [Design]",
-              "RelativeToolTip": "SysPaciente\\Forms\\FrmAdm.cs [Design]",
+              "DocumentIndex": 0,
+              "Title": "FrmMarkEditConsultation.cs [Design]",
+              "DocumentMoniker": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmMarkEditConsultation.cs",
+              "RelativeDocumentMoniker": "SysPaciente\\Forms\\FrmMarkEditConsultation.cs",
+              "ToolTip": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Forms\\FrmMarkEditConsultation.cs [Design]",
+              "RelativeToolTip": "SysPaciente\\Forms\\FrmMarkEditConsultation.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-03T18:10:06.945Z"
+              "WhenOpened": "2024-10-05T04:43:51.663Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Schedules.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Entities\\Schedules.cs",
+              "RelativeDocumentMoniker": "SysPaciente\\Entities\\Schedules.cs",
+              "ToolTip": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Entities\\Schedules.cs",
+              "RelativeToolTip": "SysPaciente\\Entities\\Schedules.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T02:44:21.69Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Data.cs",
-              "DocumentMoniker": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Entities\\Data.cs",
-              "RelativeDocumentMoniker": "SysPaciente\\Entities\\Data.cs",
-              "ToolTip": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Entities\\Data.cs",
-              "RelativeToolTip": "SysPaciente\\Entities\\Data.cs",
-              "ViewState": "AgIAADEFAAAAAAAAAAAkwD0FAABBAAAAAAAAAA==",
+              "Title": "ScheduleManager.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Entities\\ScheduleManager.cs",
+              "RelativeDocumentMoniker": "SysPaciente\\Entities\\ScheduleManager.cs",
+              "ToolTip": "C:\\Sistemas\\SysPaciente\\SysPaciente\\Entities\\ScheduleManager.cs",
+              "RelativeToolTip": "SysPaciente\\Entities\\ScheduleManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-03T14:45:23.078Z"
+              "WhenOpened": "2024-10-04T14:58:06.502Z"
             }
           ]
         }

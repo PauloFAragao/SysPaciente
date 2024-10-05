@@ -203,7 +203,6 @@
             this.CbxStatus.ItemHeight = 13;
             this.CbxStatus.Items.AddRange(new object[] {
             "Marcada",
-            "Remarcada",
             "Realizada",
             "Faltou",
             "Cancelada",

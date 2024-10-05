@@ -156,10 +156,6 @@ namespace SysPaciente.Entities
                             str[0] = reader["name"].ToString(); // Capturando o nome do cliente
                             str[1] = reader["telephone"].ToString(); // Capturando o telefone
                             str[2] = reader["dateOfBirth"].ToString(); // Capturando a data de nascimento
-
-                            Debug.WriteLine("Name: " + reader["name"].ToString());
-                            Debug.WriteLine("telephone: " + reader["telephone"].ToString());
-                            Debug.WriteLine("dateOfBirth: " + reader["dateOfBirth"].ToString());
                         }
                     }
                 }
@@ -701,6 +697,47 @@ namespace SysPaciente.Entities
             return resp;
         }
 
+        // método que vai pegar os horarios com consulta marcada
+        public static DataTable TakeTheScheduledTimes(DateTime date)
+        {
+            // Objeto do tipo DataTable
+            DataTable dtResult = new DataTable("scheduledTimes");
+
+            // Objeto da conexão com o banco de dados
+            using (SqlConnection sqlCon = new SqlConnection(Connection.Cn))
+            {
+                try
+                {
+                    // Abrindo a conexão ao banco de dados
+                    sqlCon.Open();
+
+                    // Comando SQL - que está no banco de dados
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_take_the_scheduled_times", sqlCon))
+                    {
+                        // chamando um procedimento armazenado no banco de dados.
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        // Adicionando o parâmetro ao comando SQL
+                        sqlCmd.Parameters.Add(CreateSqlParameter(date, "@date"));
+
+                        // Objeto que vai guardar informações da tabela
+                        using (SqlDataAdapter sqlDat = new SqlDataAdapter(sqlCmd))
+                        {
+                            // Preenchendo o DataTable
+                            sqlDat.Fill(dtResult);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    dtResult = null;
+                    Debug.WriteLine("Exception: " + ex.Message);
+                }
+            }
+
+            return dtResult;
+        }
+
         //------------------------------------- configurações -------------------------------------
 
         // método que vai ler as configurações no banco de dados
@@ -739,7 +776,7 @@ namespace SysPaciente.Entities
             return settings;
         }
 
-        // método que vai colocar os sqlParameters dentro do SqlCommand
+        // método que vai colocar os sqlParameters dentro do SqlCommand - este méto existe para simplificar o método GetSettings
         private static SqlCommand FillSqlCommandOutPut(SqlConnection sqlCon)
         {
             SqlCommand sqlCmd = new SqlCommand("sp_read_configurations", sqlCon);
@@ -855,7 +892,7 @@ namespace SysPaciente.Entities
             return sqlCmd;
         }
 
-        // método que vai capturar os resultados
+        // método que vai capturar os resultados - este méto existe para simplificar o método GetSettings
         private static Settings CaptureOutPuts(SqlCommand sqlCmd)
         {
             Settings settings = new Settings();
@@ -1098,7 +1135,7 @@ namespace SysPaciente.Entities
             return resp;
         }
 
-        // método que vai ser chamado se não houverem configurações no banco
+        // método que vai ser chamado se não houverem configurações no banco - este méto existe para simplificar o método InsertSettings
         private static string CreateConfigurations(SqlConnection sqlCon, Settings settings)
         {
             string resp = "";
@@ -1126,7 +1163,7 @@ namespace SysPaciente.Entities
             return resp;
         }
 
-        // método que vai ser chamado se houverem configurações no banco
+        // método que vai ser chamado se houverem configurações no banco - este méto existe para simplificar o método InsertSettings
         private static string EditConfigurations(SqlConnection sqlCon, Settings settings)
         {
             string resp = "";
@@ -1157,7 +1194,7 @@ namespace SysPaciente.Entities
             return resp;
         }
 
-        // método que vai colocar os sqlParameters dentro do SqlCommand
+        // método que vai colocar os sqlParameters dentro do SqlCommand - este méto existe para simplificar o método InsertSettings
         private static SqlCommand FillSqlCommand(string procedure, SqlConnection sqlCon, Settings settings)
         {
             SqlCommand sqlCmd = new SqlCommand(procedure, sqlCon);
@@ -1271,6 +1308,47 @@ namespace SysPaciente.Entities
             sqlCmd.Parameters.Add(CreateSqlParameter(settings.standardConsultationTime, "@standardConsultationTime"));
 
             return sqlCmd;
+        }
+
+        // método que vai pegar a quantidade de consultas marcadas no dia
+        public static int GetConsultationsAmount(DateTime date)
+        {
+            int resp = 0;
+
+            // Objeto da conexão com o banco de dados
+            using (SqlConnection sqlCon = new SqlConnection(Connection.Cn))
+            {
+                try
+                {
+                    // Abrindo a conexão ao banco de dados
+                    sqlCon.Open();
+
+                    // Comando SQL - que está no banco de dados
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_get_consultations_of_day", sqlCon))
+                    {
+                        // chamando um procedimento armazenado no banco de dados.
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        // criando o parametro da data que vai ser consultado no banco de dados
+                        sqlCmd.Parameters.Add(CreateSqlParameter(date, "date"));
+
+                        // criando o parametro output que vai receber a quantidade
+                        sqlCmd.Parameters.Add(CreateSqlParameter("@amount", SqlDbType.Int));
+
+                        // Executar a stored procedure
+                        sqlCmd.ExecuteNonQuery();
+
+                        // recuperando a quantidade de consultas
+                        resp = Convert.ToInt32(sqlCmd.Parameters["@amount"].Value);
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception: " + ex.Message);
+                }
+            }
+            return resp;
         }
 
         //------------------------------------- senha -------------------------------------

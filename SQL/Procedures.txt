@@ -242,21 +242,22 @@ CREATE PROC sp_search_with_date
 	@consultationDate DATE
 AS
 BEGIN
-SELECT
+	SELECT
 	co.idConsultation,
+	c.name,
 	co.consultationDate,
 	co.timeOfConsultation,
-	c.name,
 	co.idClient,
 	co.status,
 
 	CASE
 		WHEN co.status = 0 THEN 'Marcada'
-		WHEN co.status = 1 THEN 'Remarcada'
-		WHEN co.status = 2 THEN 'Realizada'
-		WHEN co.status = 3 THEN 'Faltou'
-		WHEN co.status = 4 THEN 'Cancelada'
-		WHEN co.status = 5 THEN 'Pendente'
+		WHEN co.status = 1 THEN 'Realizada'
+		WHEN co.status = 2 THEN 'Faltou'
+		WHEN co.status = 3 THEN 'Cancelada'
+		WHEN co.status = 4 THEN 'Pendente'
+		WHEN co.status = 5 THEN 'Remarcada'
+		
 	END AS statusDescription
 
 	FROM consultations co
@@ -282,11 +283,11 @@ BEGIN
 
 	CASE
 		WHEN co.status = 0 THEN 'Marcada'
-		WHEN co.status = 1 THEN 'Remarcada'
-		WHEN co.status = 2 THEN 'Realizada'
-		WHEN co.status = 3 THEN 'Faltou'
-		WHEN co.status = 4 THEN 'Cancelada'
-		WHEN co.status = 5 THEN 'Pendente'
+		WHEN co.status = 1 THEN 'Realizada'
+		WHEN co.status = 2 THEN 'Faltou'
+		WHEN co.status = 3 THEN 'Cancelada'
+		WHEN co.status = 4 THEN 'Pendente'
+		WHEN co.status = 5 THEN 'Remarcada'
 	END AS statusDescription
 
 	FROM consultations co
@@ -393,6 +394,30 @@ BEGIN
 	END CATCH;
 	
 	RETURN @returnCode; -- Retorna o código
+END;
+GO
+
+--procedimento que vai recuperar a quantidade de consultas do dia
+CREATE PROC sp_get_consultations_of_day
+	@amount INT OUTPUT,
+	@date Date	
+AS
+BEGIN
+	SET @amount = 0;
+	SELECT @amount = COUNT(*) FROM consultations 
+	WHERE consultationDate = @date;
+END;
+GO
+
+--procedimento que vai capturar todas as horas das consultas marcadas na data
+CREATE PROC sp_take_the_scheduled_times
+	@date DATE
+AS 
+BEGIN
+	Select timeOfConsultation 
+	From consultations 
+	Where consultationDate = @date 
+	And status = 0 ;
 END;
 GO
 

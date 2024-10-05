@@ -1,0 +1,5 @@
+-agora quando remarcar uma consulta cria uma nova consulta
+-agora só é possivel mudar o status de uma consulta para remarcada na tela de editar consulta
+-agora o programa apresenta o proximo horario disponivel para marcação de consulta
+-agora na tela de marcação/edição de consulta tem um botão para cada horario disponivel de marcação
+onde os botões relativos aos horarios já marcados ficam cinzas

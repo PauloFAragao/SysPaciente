@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LblConsultationsAmount = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.LblFreeTime = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -51,14 +51,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Consultas Marcadas para Hoje:";
             // 
-            // label2
+            // LblConsultationsAmount
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(186, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(13, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "0";
+            this.LblConsultationsAmount.AutoSize = true;
+            this.LblConsultationsAmount.Location = new System.Drawing.Point(186, 33);
+            this.LblConsultationsAmount.Name = "LblConsultationsAmount";
+            this.LblConsultationsAmount.Size = new System.Drawing.Size(13, 13);
+            this.LblConsultationsAmount.TabIndex = 1;
+            this.LblConsultationsAmount.Text = "0";
             // 
             // label3
             // 
@@ -69,14 +69,14 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Próximo horário disponível para marcação:";
             // 
-            // label4
+            // LblFreeTime
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(248, 57);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Dia: - horario:";
+            this.LblFreeTime.AutoSize = true;
+            this.LblFreeTime.Location = new System.Drawing.Point(240, 57);
+            this.LblFreeTime.Name = "LblFreeTime";
+            this.LblFreeTime.Size = new System.Drawing.Size(155, 13);
+            this.LblFreeTime.TabIndex = 3;
+            this.LblFreeTime.Text = "Dia: 01/01/2000 horário: 00:00";
             // 
             // label5
             // 
@@ -102,30 +102,30 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(992, 321);
+            this.dataGridView1.Size = new System.Drawing.Size(992, 340);
             this.dataGridView1.TabIndex = 6;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.LblConsultationsAmount);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.LblFreeTime);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(992, 153);
+            this.panel1.Size = new System.Drawing.Size(992, 134);
             this.panel1.TabIndex = 7;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.dataGridView1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 153);
+            this.panel2.Location = new System.Drawing.Point(0, 134);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(992, 321);
+            this.panel2.Size = new System.Drawing.Size(992, 340);
             this.panel2.TabIndex = 8;
             // 
             // FrmHome
@@ -149,9 +149,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LblConsultationsAmount;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label LblFreeTime;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dataGridView1;
