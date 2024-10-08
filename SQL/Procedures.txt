@@ -421,6 +421,60 @@ BEGIN
 END;
 GO
 
+--procedimento que vai pesquisar todas as consultas com status de felta e pendente
+Create Proc sp_search_pending_issues
+AS
+BEGIN
+	Select 
+		co.idConsultation,
+		co.idClient,
+		c.name,
+		c.telephone,
+		co.consultationDate,
+		co.timeOfConsultation,
+		CASE
+			WHEN co.status = 0 THEN 'Marcada'
+			WHEN co.status = 1 THEN 'Realizada'
+			WHEN co.status = 2 THEN 'Faltou'
+			WHEN co.status = 3 THEN 'Cancelada'
+			WHEN co.status = 4 THEN 'Pendente'
+			WHEN co.status = 5 THEN 'Remarcada'
+		END AS statusDescription
+	From consultations co
+	JOIN clients c ON co.idClient = c.idClient
+	Where co.status IN (2, 4);
+END;
+GO
+
+--procedure que vai pesquisar as consultas com data e horario passado 
+CREATE PROC sp_search_entries_that_need_to_be_updated
+	@date date,
+	@timeOfConsultation time
+AS
+Begin
+	Select 
+	co.idConsultation,
+	co.idClient,
+	c.name,
+	c.telephone,
+	co.consultationDate,
+	co.timeOfConsultation,
+	CASE
+			WHEN co.status = 0 THEN 'Marcada'
+			WHEN co.status = 1 THEN 'Realizada'
+			WHEN co.status = 2 THEN 'Faltou'
+			WHEN co.status = 3 THEN 'Cancelada'
+			WHEN co.status = 4 THEN 'Pendente'
+			WHEN co.status = 5 THEN 'Remarcada'
+		END AS statusDescription
+	From consultations co
+	JOIN clients c ON co.idClient = c.idClient
+	where consultationDate <= @date
+	And timeOfConsultation <= @timeOfConsultation 
+	And status = 0;
+End;
+GO
+
 ----------------------- configurações -----------------------
 
 CREATE PROC sp_verify_configurations

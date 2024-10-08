@@ -738,6 +738,87 @@ namespace SysPaciente.Entities
             return dtResult;
         }
 
+        // método que vai pesquisar todas as consultas com status de felta e pendente
+        public static DataTable SearchPendingIssues()
+        {
+            // Objeto do tipo DataTable
+            DataTable dtResult = new DataTable("pendingIssues");
+
+            // Objeto da conexão com o banco de dados
+            using (SqlConnection sqlCon = new SqlConnection(Connection.Cn))
+            {
+                try
+                {
+                    // Abrindo a conexão ao banco de dados
+                    sqlCon.Open();
+
+                    // Comando SQL - que está no banco de dados
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_search_pending_issues", sqlCon))
+                    {
+                        // chamando um procedimento armazenado no banco de dados.
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        // Objeto que vai guardar informações da tabela
+                        using (SqlDataAdapter sqlDat = new SqlDataAdapter(sqlCmd))
+                        {
+                            // Preenchendo o DataTable
+                            sqlDat.Fill(dtResult);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    dtResult = null;
+                    Debug.WriteLine("Exception: " + ex.Message);
+                }
+            }
+
+            return dtResult;
+        }
+
+        public static DataTable SearchEntriesThatNeedToBeUpdated()
+        {
+            // Objeto do tipo DataTable
+            DataTable dtResult = new DataTable("schedules");
+
+            // Objeto da conexão com o banco de dados
+            using (SqlConnection sqlCon = new SqlConnection(Connection.Cn))
+            {
+                try
+                {
+                    // Abrindo a conexão ao banco de dados
+                    sqlCon.Open();
+
+                    // Comando SQL - que está no banco de dados
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_search_entries_that_need_to_be_updated", sqlCon))
+                    {
+                        // chamando um procedimento armazenado no banco de dados.
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        // Adicionando o parâmetro data
+                        sqlCmd.Parameters.Add(CreateSqlParameter(DateTime.Now, "@date"));
+
+                        // Adicionando o parâmetro hora
+                        sqlCmd.Parameters.Add(CreateSqlParameter(DateTime.Now.TimeOfDay, "@timeOfConsultation"));
+
+                        // Objeto que vai guardar informações da tabela
+                        using (SqlDataAdapter sqlDat = new SqlDataAdapter(sqlCmd))
+                        {
+                            // Preenchendo o DataTable
+                            sqlDat.Fill(dtResult);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    dtResult = null;
+                    Debug.WriteLine("Exception: " + ex.Message);
+                }
+            }
+
+            return dtResult;
+        }
+
         //------------------------------------- configurações -------------------------------------
 
         // método que vai ler as configurações no banco de dados

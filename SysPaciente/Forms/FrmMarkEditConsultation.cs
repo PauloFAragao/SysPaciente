@@ -3,7 +3,6 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 using SysPaciente.Entities.Enums;
-using System.Diagnostics;
 using System.Collections.Generic;
 
 namespace SysPaciente.Forms
@@ -73,8 +72,6 @@ namespace SysPaciente.Forms
 
             if (schedule != null)
             {
-                //Debug.WriteLine("Count: "+ schedule.Times.Count);
-
                 int count = schedule.Times.Count;
                 int verifier = 5;
 
@@ -347,7 +344,7 @@ namespace SysPaciente.Forms
         private bool CaptureAndVerifyData()
         {
 
-            if (DateTime.Now > Convert.ToDateTime(DateTimePicker))
+            if (DateTime.Now > Convert.ToDateTime(DateTimePicker.Value))
             {
                 MessageBox.Show("Só é possível marcar consultas em datas e horários futuros",
                     "Data Invalida", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -388,6 +385,10 @@ namespace SysPaciente.Forms
                     if (resp == "Registro inserido com sucesso.")
                     {
                         MessageBox.Show(resp, "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        //passando o botão que deve ficar selecionado
+                        MenuButtonController.SetBtnConsultationsSelected();
+
                         FormLoader.OpenChildForm(new FrmConsultations());
                     }
 
@@ -421,6 +422,10 @@ namespace SysPaciente.Forms
                             if (resp == "Registro inserido com sucesso.")
                             {
                                 MessageBox.Show(resp, "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                //passando o botão que deve ficar selecionado
+                                MenuButtonController.SetBtnConsultationsSelected();
+
                                 FormLoader.OpenChildForm(new FrmConsultations());
                             }
 
@@ -437,6 +442,10 @@ namespace SysPaciente.Forms
                         if (resp == "Registro editado com sucesso.")
                         {
                             MessageBox.Show(resp, "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            //passando o botão que deve ficar selecionado
+                            MenuButtonController.SetBtnConsultationsSelected();
+
                             FormLoader.OpenChildForm(new FrmConsultations());
                         }
 
@@ -511,6 +520,9 @@ namespace SysPaciente.Forms
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
+            //passando o botão que deve ficar selecionado
+            MenuButtonController.SetBtnConsultationsSelected();
+
             FormLoader.OpenChildForm(new FrmConsultations());
         }
 

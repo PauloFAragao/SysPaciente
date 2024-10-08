@@ -12,3 +12,13 @@ os botões da interface ficam desabilitados
 -agora não é possivel marcar consultas em horarios e dias passados
 -corrigido um bug que fazia os botões dos horarios não serem exebidos na tela de marcação de 
 consultas
+
+-agora na tela inicial o DataGridView recebe as informações das consultas com o status faltou e 
+pentende
+-as consultas no dia que estão com status marcada mais que o horario já passou tambem aparecem
+no DataGridView
+-a tela inicial agora tem um botão alterar status que faz uma janela com um ComboBox com todos os
+possivel status ficar visivel
+-a tela inicial agora tem um botão para editar a consulta diretamente
+-os dados do DataGridView são atualizados a cada 1 minuto
+-a quantidade de pendencias aparece em um contador de pendencias
