@@ -58,31 +58,43 @@ namespace SysPaciente.Forms
             _searchForName = true;// inicia buscando por nome
             _idClient = -1;// inicia assim para indicar que não foi selecionado um cliente
 
-            // cuida dos botões dinamicos e do tamanho do panel
-            LoadSchedule();
-
             // configura os elementos da janela
             ConfigureFilds();
+
+            // cuida dos botões dinamicos e do tamanho do panel
+            LoadSchedule();
         }
 
         private void LoadSchedule()
         {
-            Schedules schedule= ScheduleManager.GetSchedules(DateTimePicker.Value);
+            Schedules schedule = ScheduleManager.GetSchedules(DateTimePicker.Value);
 
             int x = 13, y = 110;
 
-            if (schedule != null) 
+            if (schedule != null)
             {
+                //Debug.WriteLine("Count: "+ schedule.Times.Count);
+
                 int count = schedule.Times.Count;
                 int verifier = 5;
 
                 for (int i = 0; i < count; i++)
                 {
-                    CreateButton(x, y, schedule.Times[i].Item1.ToString(@"hh\:mm"), schedule.Times[i].Item2);
+                    bool enableButton = schedule.Times[i].Item2;
 
-                    x += 85;
-                    
-                    if( i == verifier)
+                    // verifica se as datas são iguais e se o horario já passou
+                    if (DateTime.Now.Date == schedule.Date.Date &&
+                        DateTime.Now.TimeOfDay > schedule.Times[i].Item1 )
+                    {
+                        enableButton = false;
+                    }
+
+                    // cria o botão
+                    CreateButton(x, y, schedule.Times[i].Item1.ToString(@"hh\:mm"), enableButton);
+
+                    x += 85;// muda a posição do botão na horizontal
+
+                    if (i == verifier)// verifica se chegou ao limite de botões na fileira horizontal
                     {
                         x = 13;
                         y += 33;
@@ -91,17 +103,25 @@ namespace SysPaciente.Forms
                     }
                 }
 
+                // tamanho do panel para a quantidad de botões
                 if (count <= 6)
-                    this.Panel.Height = 234 + 33;
+                    this.Panel.Height = 267;//234 + 33;
 
                 else if (count <= 12)
-                    this.Panel.Height = 234 + 33 * 2;
+                    this.Panel.Height = 300;//234 + 33 * 2;
 
                 else if (count <= 18)
-                    this.Panel.Height = 234 + 33 * 3;
+                    this.Panel.Height = 333;//234 + 33 * 3;
 
                 else if (count <= 24)
-                    this.Panel.Height = 234 + 33 * 4;
+                    this.Panel.Height = 366;//234 + 33 * 4;
+
+                else if (count <= 30)
+                    this.Panel.Height = 399;//234 + 33 * 4;
+
+                else if (count <= 36)
+                    this.Panel.Height = 432;
+                
             }
         }
 
@@ -127,7 +147,7 @@ namespace SysPaciente.Forms
         // muda a cor do botão para ele ficar selecionado
         private void ChangeButtonCollor(Button sender)
         {
-            if(_selectedButton != null)
+            if (_selectedButton != null)
             {
                 _selectedButton.BackColor = System.Drawing.Color.SteelBlue;
                 _selectedButton.ForeColor = System.Drawing.Color.White;
@@ -220,7 +240,7 @@ namespace SysPaciente.Forms
             this.TxtSearchText.Focus();
         }
 
-        private void ChangePanelPanelclientsVisibility()
+        private void ChangePanelclientsVisibility()
         {
             this.PanelClients.Visible = true;// tornando o campo visivel
             if (LoadClientsData()) // carregando os dados
@@ -326,9 +346,19 @@ namespace SysPaciente.Forms
 
         private bool CaptureAndVerifyData()
         {
+
+            if (DateTime.Now > Convert.ToDateTime(DateTimePicker))
+            {
+                MessageBox.Show("Só é possível marcar consultas em datas e horários futuros",
+                    "Data Invalida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
+            }
+
             if (TimeSpan.TryParse(this.TxtTimeOfConsultation.Text, out TimeSpan value))
             {
                 _timeOfConsultation = value;
+
                 return true;
             }
             else
@@ -338,6 +368,7 @@ namespace SysPaciente.Forms
 
                 return false;
             }
+
         }
 
         private void Confirm()
@@ -369,10 +400,10 @@ namespace SysPaciente.Forms
                     if (this.CbxStatus.SelectedIndex == (int)Status.Remarcada)
                     {
                         // mesma data e mesmo horario
-                        if(_consultationDateMemory == _consultationDate && 
-                            _timeOfConsultation == _timeOfConsultationMemory )
+                        if (_consultationDateMemory == _consultationDate &&
+                            _timeOfConsultation == _timeOfConsultationMemory)
                         {
-                            MessageBox.Show("Para remarcar a data e o horario não podem ser iguais", 
+                            MessageBox.Show("Para remarcar a data e o horario não podem ser iguais",
                                 "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                             return;
@@ -442,8 +473,8 @@ namespace SysPaciente.Forms
         private void DinamicButton_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            
-            if(_selectedButton == btn)
+
+            if (_selectedButton == btn)
                 return;
 
             ChangeButtonCollor(btn);
@@ -455,7 +486,7 @@ namespace SysPaciente.Forms
 
         private void BtnPickClient_Click(object sender, EventArgs e)
         {
-            ChangePanelPanelclientsVisibility();
+            ChangePanelclientsVisibility();
         }
 
         private void BtnSearchMode_Click(object sender, EventArgs e)

@@ -3,3 +3,12 @@
 -agora o programa apresenta o proximo horario disponivel para marcação de consulta
 -agora na tela de marcação/edição de consulta tem um botão para cada horario disponivel de marcação
 onde os botões relativos aos horarios já marcados ficam cinzas
+
+-agora nas configurações quando uma alteração e confirmada o botão fica desabilitado até que alguma
+alteração nas configurações seja feita
+-agora ao alterar as configurações a coleção te horarios disponiveis para marcação é refeita
+-agora na tela de consultas quando as janelas de alterar status e alterar data estão visiveis
+os botões da interface ficam desabilitados
+-agora não é possivel marcar consultas em horarios e dias passados
+-corrigido um bug que fazia os botões dos horarios não serem exebidos na tela de marcação de 
+consultas

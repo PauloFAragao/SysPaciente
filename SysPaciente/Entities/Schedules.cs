@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 
 namespace SysPaciente.Entities
 {
@@ -50,6 +51,8 @@ namespace SysPaciente.Entities
         // cria todos os horarios disponiveis no dia considerando as configurações de horarios de trabalho
         private void Fill()
         {
+            //Debug.WriteLine("Chamou o FILL: "+Date);
+
             TimeSpan index;
 
             //Debug.WriteLine(" workStartTime: " + _workStartTime);

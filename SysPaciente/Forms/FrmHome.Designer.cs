@@ -34,10 +34,10 @@
             this.LblFreeTime = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.DgvData = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -45,7 +45,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 33);
+            this.label1.Location = new System.Drawing.Point(22, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(155, 13);
             this.label1.TabIndex = 0;
@@ -54,7 +54,7 @@
             // LblConsultationsAmount
             // 
             this.LblConsultationsAmount.AutoSize = true;
-            this.LblConsultationsAmount.Location = new System.Drawing.Point(186, 33);
+            this.LblConsultationsAmount.Location = new System.Drawing.Point(174, 20);
             this.LblConsultationsAmount.Name = "LblConsultationsAmount";
             this.LblConsultationsAmount.Size = new System.Drawing.Size(13, 13);
             this.LblConsultationsAmount.TabIndex = 1;
@@ -63,7 +63,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(34, 57);
+            this.label3.Location = new System.Drawing.Point(22, 44);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(208, 13);
             this.label3.TabIndex = 2;
@@ -72,7 +72,7 @@
             // LblFreeTime
             // 
             this.LblFreeTime.AutoSize = true;
-            this.LblFreeTime.Location = new System.Drawing.Point(240, 57);
+            this.LblFreeTime.Location = new System.Drawing.Point(228, 44);
             this.LblFreeTime.Name = "LblFreeTime";
             this.LblFreeTime.Size = new System.Drawing.Size(155, 13);
             this.LblFreeTime.TabIndex = 3;
@@ -81,7 +81,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(166, 96);
+            this.label5.Location = new System.Drawing.Point(85, 83);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(13, 13);
             this.label5.TabIndex = 5;
@@ -90,20 +90,24 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(34, 96);
+            this.label6.Location = new System.Drawing.Point(22, 83);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(135, 13);
+            this.label6.Size = new System.Drawing.Size(66, 13);
             this.label6.TabIndex = 4;
-            this.label6.Text = "Remarcações necessárias:";
+            this.label6.Text = "Pendências:";
             // 
-            // dataGridView1
+            // DgvData
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(992, 340);
-            this.dataGridView1.TabIndex = 6;
+            this.DgvData.AllowUserToAddRows = false;
+            this.DgvData.AllowUserToDeleteRows = false;
+            this.DgvData.AllowUserToOrderColumns = true;
+            this.DgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvData.Location = new System.Drawing.Point(0, 0);
+            this.DgvData.Name = "DgvData";
+            this.DgvData.ReadOnly = true;
+            this.DgvData.Size = new System.Drawing.Size(992, 361);
+            this.DgvData.TabIndex = 6;
             // 
             // panel1
             // 
@@ -116,16 +120,16 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(992, 134);
+            this.panel1.Size = new System.Drawing.Size(992, 113);
             this.panel1.TabIndex = 7;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.dataGridView1);
+            this.panel2.Controls.Add(this.DgvData);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 134);
+            this.panel2.Location = new System.Drawing.Point(0, 113);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(992, 340);
+            this.panel2.Size = new System.Drawing.Size(992, 361);
             this.panel2.TabIndex = 8;
             // 
             // FrmHome
@@ -138,7 +142,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "FrmHome";
             this.Text = "FrmHome";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -154,7 +158,7 @@
         private System.Windows.Forms.Label LblFreeTime;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView DgvData;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
     }

@@ -21,6 +21,8 @@ namespace SysPaciente.Forms
             // 
             settings = new Settings();
 
+            this.LblStartAndEnd.Text = "Horários de inicio e \nfim de expediente:";
+
             // carregar os dados
             LoadData();
 
@@ -596,9 +598,13 @@ namespace SysPaciente.Forms
 
             //settings.PrintDaysWorked();
 
-            string resp = Data.InsertSettings(settings);
+            string resp = Data.InsertSettings(settings);// enviando para o banco de dados
 
             Debug.WriteLine(resp);
+
+            ScheduleManager.update();// mandando atualizar os horarios no gerenciador
+
+            ChangeBtnConfirmToDisabled();// mudando o botão
         }
 
         private void ChangeBtnConfirmToEnabled()
@@ -610,6 +616,17 @@ namespace SysPaciente.Forms
             //texto de aviso
             this.LblWarning.Visible = true;
         }
+
+        private void ChangeBtnConfirmToDisabled()
+        {
+            this.BtnConfirm.BackColor = SystemColors.ControlDarkDark;
+            this.BtnConfirm.ForeColor = SystemColors.AppWorkspace;
+            this.BtnConfirm.Enabled = false;
+
+            //texto de aviso
+            this.LblWarning.Visible = false;
+        }
+
 
         //------------------------- métodos dos eventos -------------------------
 

@@ -14,6 +14,11 @@ namespace SysPaciente.Entities
 
         static ScheduleManager()
         {
+            initialize();
+        }
+
+        private static void initialize()
+        {
             // criar os mebros da lista
             // ler do banco de dados os dias trabalhados e os horarios
             settings = Data.GetSettings();
@@ -27,26 +32,34 @@ namespace SysPaciente.Entities
             // 7 dias a frente do dia de hj
             int i = 0, index = 0;
 
-            while (index < 7)
+            while (index < 7)// criando uma pool com os horarios para os proximos 7 dias trabalhados
             {
                 //Debug.Write("Dia: " + day + " Data " + date);
                 if (settings.WorkingDay(day)) // se o dia é trabalhado
                 {
+                    // criando um objeto
                     schedules.Add(new Schedules(settings.StartOfWorkOnDayOfWeek(day),
                         settings.EndOfWorkOnDayOfWeek(day), settings.StartOfBreakDayOfWeek(day),
                         settings.EndOfBreakDayOfWeek(day), settings.standardConsultationTime, date));
                     index++;
                 }
-                else
-                {
+                //else
+                //{
                     //Debug.WriteLine(" Dia não trabalhado");
-                }
+                //}
 
                 date = date.AddDays(1);
                 day = date.DayOfWeek;
 
                 i++;
             }
+        }
+
+        // método para quando as configurações forem alteradas
+        public static void update()
+        {
+            schedules.Clear();// primeiro limpa a lista
+            initialize();// depois inicializa ela de novo
         }
 
         // retorna o proximo horario disponivel para consultas

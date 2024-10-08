@@ -97,11 +97,15 @@ namespace SysPaciente.Forms
 
         private void ChangePanelChangedateVisibility(bool value)
         {
+            EnableAndDisableUiButtons(!value);// para os botões da interface
+
             this.PanelChangeDate.Visible = value;
         }
 
         private void ChangePanelAlterstatusVicibility(bool value)
         {
+            EnableAndDisableUiButtons(!value);// para os botões da interface
+
             if (DgvData.Rows.Count > 0)
             {
                 this.PanelAlterStatus.Visible = value;
@@ -112,6 +116,14 @@ namespace SysPaciente.Forms
             {
                 MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void EnableAndDisableUiButtons(bool value)
+        {
+            this.BtnDate.Enabled = value;
+            this.BtnChangeStatus.Enabled = value;
+            this.BtnEdit.Enabled = value;
+            this.BtnMark.Enabled = value;
         }
 
         private void Edit()
