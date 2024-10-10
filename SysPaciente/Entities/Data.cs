@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
+using System.Security.Policy;
 
 namespace SysPaciente.Entities
 {
@@ -860,6 +861,48 @@ namespace SysPaciente.Entities
             return dtResult;
         }
 
+        // método que vai verificar se o cliente tem alguma consulta marcada
+        public static bool CheckIfClientHasAnyConsultationsScheduled(int idClient)
+        {
+            bool result = false;
+
+            // Objeto da conexão com o banco de dados
+            using (SqlConnection sqlCon = new SqlConnection(Connection.Cn))
+            {
+                try
+                {
+                    // Abrindo a conexão ao banco de dados
+                    sqlCon.Open();
+
+                    // Comando SQL - que está no banco de dados
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_consult_client", sqlCon))
+                    {
+                        // chamando um procedimento armazenado no banco de dados.
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        // criando o parametro do id do cliente
+                        sqlCmd.Parameters.Add(CreateSqlParameter(idClient, "@idClient"));
+
+                        // criando o parametro output que vai receber a quantidade
+                        sqlCmd.Parameters.Add(CreateSqlParameter("@answer", SqlDbType.Bit));
+
+                        // Executar a stored procedure
+                        sqlCmd.ExecuteNonQuery();
+
+                        // recuperando a quantidade de consultas
+                        result = Convert.ToBoolean(sqlCmd.Parameters["@answer"].Value);
+
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception: " + ex.Message);
+                }
+            }
+            return result;
+        }
+
         //------------------------------------- configurações -------------------------------------
 
         // método que vai ler as configurações no banco de dados
@@ -1452,7 +1495,7 @@ namespace SysPaciente.Entities
                         sqlCmd.CommandType = CommandType.StoredProcedure;
 
                         // criando o parametro da data que vai ser consultado no banco de dados
-                        sqlCmd.Parameters.Add(CreateSqlParameter(date, "date"));
+                        sqlCmd.Parameters.Add(CreateSqlParameter(date, "@date"));
 
                         // criando o parametro output que vai receber a quantidade
                         sqlCmd.Parameters.Add(CreateSqlParameter("@amount", SqlDbType.Int));

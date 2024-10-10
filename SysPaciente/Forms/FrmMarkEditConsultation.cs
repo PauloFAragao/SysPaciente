@@ -4,6 +4,7 @@ using System.Data;
 using System.Windows.Forms;
 using SysPaciente.Entities.Enums;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace SysPaciente.Forms
 {
@@ -322,7 +323,20 @@ namespace SysPaciente.Forms
         {
             if (DgvData.Rows.Count > 0)
             {
-                _idClient = Convert.ToInt32(this.DgvData.CurrentRow.Cells["idClient"].Value);
+                // Guartando o valor temporariamente
+                int idClient = Convert.ToInt32(this.DgvData.CurrentRow.Cells["idClient"].Value);
+
+                //verificar se o cliente tem alguma consulta marcada
+                if (Data.CheckIfClientHasAnyConsultationsScheduled(idClient))
+                {
+                    MessageBox.Show("O cliente selecionado já tem uma consulta marcada", 
+                        "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return;
+                }
+
+                //capturando os dados do cliente selecionado
+                _idClient = idClient;
                 _name = Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value);
                 _telephone = Convert.ToString(this.DgvData.CurrentRow.Cells["telephone"].Value);
 

@@ -37,6 +37,24 @@ BEGIN
 END;
 GO
 
+--procedure que vai verificar se o cliente tem alguma consulta com status marcada
+CREATE PROC sp_consult_client
+	@idClient INT,
+	@answer BIT OUTPUT
+AS
+BEGIN
+	IF EXISTS (Select * From consultations where idClient = @idClient AND status = '0')
+	BEGIN
+		SET @answer = 1;
+	END;
+
+	ELSE
+	BEGIN
+		SET @answer = 0;
+	END;
+END;
+GO
+
 ----------------------- pacientes -----------------------
 
 --procedimento para recuperar o nome a partir de uma id

@@ -25,3 +25,23 @@ possivel status ficar visivel
 
 -o botão visualizar na tela de pacientes foi implementado,
 -na nova tela são exibidos o nome do paciente e todo o seu historico de consultas
+
+-Agora na tela de marcação de consultas ao selecionar um cliente o programa verifica se o paciente 
+já tem alguma consulta marcada e emite erro não premitindo que um paciente tenha 2 consultas 
+marcadas ao mesmo tempo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
