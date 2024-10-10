@@ -71,6 +71,7 @@
             this.BtnView.TabIndex = 9;
             this.BtnView.Text = "Visualizar";
             this.BtnView.UseVisualStyleBackColor = false;
+            this.BtnView.Click += new System.EventHandler(this.BtnView_Click);
             // 
             // BtnEdit
             // 

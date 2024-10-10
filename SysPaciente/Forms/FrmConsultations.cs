@@ -115,6 +115,8 @@ namespace SysPaciente.Forms
             else
             {
                 MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                EnableAndDisableUiButtons(true);
             }
         }
 

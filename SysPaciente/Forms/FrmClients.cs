@@ -171,6 +171,20 @@ namespace SysPaciente.Forms
             }
         }
 
+        private void View()
+        {
+            if (DgvData.Rows.Count > 0)
+            {
+                FormLoader.OpenChildForm(new FrmClientHistorical(
+                Convert.ToInt32(this.DgvData.CurrentRow.Cells["idClient"].Value),
+                Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value) ));
+            }
+            else
+            {
+                MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         //------------------ métodos criados pelo visual studio
         private void BtnSearchMode_Click(object sender, EventArgs e)
         {
@@ -190,6 +204,11 @@ namespace SysPaciente.Forms
         private void BtnEdit_Click(object sender, EventArgs e)
         {
             NewEdit(1);
+        }
+
+        private void BtnView_Click(object sender, EventArgs e)
+        {
+            View();
         }
     }
 }

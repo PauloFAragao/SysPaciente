@@ -22,3 +22,6 @@ possivel status ficar visivel
 -a tela inicial agora tem um botão para editar a consulta diretamente
 -os dados do DataGridView são atualizados a cada 1 minuto
 -a quantidade de pendencias aparece em um contador de pendencias
+
+-o botão visualizar na tela de pacientes foi implementado,
+-na nova tela são exibidos o nome do paciente e todo o seu historico de consultas

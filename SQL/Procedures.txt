@@ -459,7 +459,7 @@ Begin
 	c.telephone,
 	co.consultationDate,
 	co.timeOfConsultation,
-	CASE
+		CASE
 			WHEN co.status = 0 THEN 'Marcada'
 			WHEN co.status = 1 THEN 'Realizada'
 			WHEN co.status = 2 THEN 'Faltou'
@@ -473,6 +473,29 @@ Begin
 	And timeOfConsultation <= @timeOfConsultation 
 	And status = 0;
 End;
+GO
+
+--procedimento que vai pesquisar todas consultas de um paciente
+CREATE PROC sp_consultations_of_client
+	@idClient INT
+AS
+BEGIN
+	Select 
+		consultationDate,
+		timeOfConsultation,
+
+		CASE
+			WHEN status = 0 THEN 'Marcada'
+			WHEN status = 1 THEN 'Realizada'
+			WHEN status = 2 THEN 'Faltou'
+			WHEN status = 3 THEN 'Cancelada'
+			WHEN status = 4 THEN 'Pendente'
+			WHEN status = 5 THEN 'Remarcada'
+		END AS statusDescription
+
+	from consultations 
+	where idClient = @idClient
+END;
 GO
 
 ----------------------- configurações -----------------------
