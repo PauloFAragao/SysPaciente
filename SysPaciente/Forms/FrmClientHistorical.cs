@@ -1,14 +1,11 @@
 ﻿using System.Data;
 using System.Windows.Forms;
 using SysPaciente.Entities;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SysPaciente.Forms
 {
     public partial class FrmClientHistorical : Form
     {
-        private bool _menu;// Indica se o menu está aberto ou não
-
         public FrmClientHistorical(int id, string name)
         {
             InitializeComponent();

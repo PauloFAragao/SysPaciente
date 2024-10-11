@@ -8,7 +8,7 @@ namespace SysPaciente.Forms
 {
     public partial class FrmSettings : Form
     {
-        Settings settings;
+        Settings _settings;
 
         public FrmSettings()
         {
@@ -18,8 +18,8 @@ namespace SysPaciente.Forms
             this.LblWarning.Text = "   Atenção alterar dados dessa pagina pode \ngerar a necessidade de reagendar consultas!";
             this.LblWarning.Visible = false;
 
-            // 
-            settings = new Settings();
+            // objeto que vai guardar todos os dados das configurações
+            _settings = new Settings();
 
             this.LblStartAndEnd.Text = "Horários de inicio e \nfim de expediente:";
 
@@ -270,339 +270,430 @@ namespace SysPaciente.Forms
         private void CaptureDays()
         {
             // dias trabalhados
-            settings.workOnMondays = this.CbMonday.Checked;// segundas
-            settings.workOnTuesdays = this.CbTuesday.Checked;// terça
-            settings.workOnWednesdays = this.CbWednesday.Checked;// quarta
-            settings.workOnThursdays = this.CbThursday.Checked;// quinta 
-            settings.workOnFridays = this.CbFriday.Checked;//sexta
-            settings.workOnSaturdays = this.CbSaturday.Checked;// sabado
-            settings.workOnSundays = this.CbSunday.Checked;// domingo
+            _settings.workOnMondays = this.CbMonday.Checked;// segundas
+            _settings.workOnTuesdays = this.CbTuesday.Checked;// terça
+            _settings.workOnWednesdays = this.CbWednesday.Checked;// quarta
+            _settings.workOnThursdays = this.CbThursday.Checked;// quinta 
+            _settings.workOnFridays = this.CbFriday.Checked;//sexta
+            _settings.workOnSaturdays = this.CbSaturday.Checked;// sabado
+            _settings.workOnSundays = this.CbSunday.Checked;// domingo
         }
 
         // método que vai verificar e capturar os dados dos horarios de trabalho
-        private void CaptureJobSchedules()
+        private bool CaptureJobSchedules()
         {
-            if (settings.workOnMondays)// se trabalha as segundas
+            bool resp = true;
+
+            string errorMsg = "Por favor preencha os seguintes campos:";
+
+            if (_settings.workOnMondays)// se trabalha as segundas
             {
                 // tentando capturar o horario das segundas 
                 if (TimeSpan.TryParse(this.TxtStartOfWorkOnMondays.Text, out TimeSpan swm))// horario inicial
-                    settings.startOfWorkOnMondays = swm;
+                    _settings.startOfWorkOnMondays = swm;
 
                 else
-                    settings.startOfWorkOnMondays = null;
+                {
+                    //settings.startOfWorkOnMondays = null;
+                    resp = false;
+
+                    errorMsg += "\n-Horário do inicio do expediente as Segundas-Feiras";
+                }
 
                 if (TimeSpan.TryParse(this.TxtEndOfWorkOnMondays.Text, out TimeSpan ewm))// horario final
-                    settings.endOfWorkOnMondays = ewm;
+                    _settings.endOfWorkOnMondays = ewm;
 
                 else
-                    settings.endOfWorkOnMondays = null;
+                {
+                    //settings.endOfWorkOnMondays = null;
+                    resp = false;
+
+                    errorMsg += "\n-Horário do final do expediente as Segundas-Feiras";
+                }
             }
             else
             {
-                settings.startOfWorkOnMondays = null;
-                settings.endOfWorkOnMondays = null;
+                _settings.startOfWorkOnMondays = null;
+                _settings.endOfWorkOnMondays = null;
             }
 
-            if (settings.workOnTuesdays)// se trabalha as terças
+            if (_settings.workOnTuesdays)// se trabalha as terças
             {
                 // tentando capturar o horario das terças 
                 if (TimeSpan.TryParse(this.TxtStartOfWorkOnTuesdays.Text, out TimeSpan swtu))// horario inicial
-                    settings.startOfWorkOnTuesdays = swtu;
+                    _settings.startOfWorkOnTuesdays = swtu;
 
-                else
-                    settings.startOfWorkOnTuesdays = null;
+                else  
+                {
+                    //settings.startOfWorkOnTuesdays = null;
+                    resp = false;
+
+                    errorMsg += "\n-Horário do inicio do expediente as Terças-Feiras";
+                }
 
                 if (TimeSpan.TryParse(this.TxtEndOfWorkOnTuesdays.Text, out TimeSpan ewtu))// horario final
-                    settings.endOfWorkOnTuesdays = ewtu;
+                    _settings.endOfWorkOnTuesdays = ewtu;
 
-                else
-                    settings.endOfWorkOnTuesdays = null;
+                else 
+                {
+                    //settings.endOfWorkOnTuesdays = null;
+                    resp = false;
+
+                    errorMsg += "\n-Horário do final do expediente as Terças-Feiras";
+                }
             }
             else
             {
-                settings.startOfWorkOnTuesdays = null;
-                settings.endOfWorkOnTuesdays = null;
+                _settings.startOfWorkOnTuesdays = null;
+                _settings.endOfWorkOnTuesdays = null;
             }
 
-            if (settings.workOnWednesdays)// se trabalha as quartas
+            if (_settings.workOnWednesdays)// se trabalha as quartas
             {
                 // tentando capturar o horario das quartas 
                 if (TimeSpan.TryParse(this.TxtStartOfWorkOnWednesdays.Text, out TimeSpan sww))// horario inicial
-                    settings.startOfWorkOnWednesdays = sww;
+                    _settings.startOfWorkOnWednesdays = sww;
 
                 else
-                    settings.startOfWorkOnWednesdays = null;
+                {
+                    //settings.startOfWorkOnWednesdays = null;
+                    resp = false;
+
+                    errorMsg += "\n-Horário do inicio do expediente as Quartas-Feiras";
+                }
 
                 if (TimeSpan.TryParse(this.TxtEndOfWorkOnWednesdays.Text, out TimeSpan eww))// horario final
-                    settings.endOfWorkOnWednesdays = eww;
+                    _settings.endOfWorkOnWednesdays = eww;
 
                 else
-                    settings.endOfWorkOnWednesdays = null;
+                {
+                    //settings.endOfWorkOnWednesdays = null;
+                    resp = false;
+
+                    errorMsg += "\n-Horário do final do expediente as Quartas-Feiras";
+                }
             }
             else
             {
-                settings.startOfWorkOnWednesdays = null;
-                settings.endOfWorkOnWednesdays = null;
+                _settings.startOfWorkOnWednesdays = null;
+                _settings.endOfWorkOnWednesdays = null;
             }
 
-            if (settings.workOnThursdays)// se trabalha as quintas
+            if (_settings.workOnThursdays)// se trabalha as quintas
             {
                 // tentando capturar o horario das quintas 
                 if (TimeSpan.TryParse(this.TxtStartOfWorkOnThursdays.Text, out TimeSpan swth))// horario inicial
-                    settings.startOfWorkOnThursdays = swth;
+                    _settings.startOfWorkOnThursdays = swth;
 
                 else
-                    settings.startOfWorkOnThursdays = null;
+                {
+                    //settings.startOfWorkOnThursdays = null;
+                    resp = false;
+
+                    errorMsg += "\n-Horário do inicio do expediente as Quintas-Feiras";
+                }
 
                 if (TimeSpan.TryParse(this.TxtEndOfWorkOnThursdays.Text, out TimeSpan ewth))// horario final
-                    settings.endOfWorkOnThursdays = ewth;
+                    _settings.endOfWorkOnThursdays = ewth;
 
                 else
-                    settings.endOfWorkOnThursdays = null;
+                {
+                    //settings.endOfWorkOnThursdays = null;
+                    resp = false;
+
+                    errorMsg += "\n-Horário do final do expediente as Quintas-Feiras";
+                }
             }
             else
             {
-                settings.startOfWorkOnThursdays = null;
-                settings.endOfWorkOnThursdays = null;
-
+                _settings.startOfWorkOnThursdays = null;
+                _settings.endOfWorkOnThursdays = null;
             }
 
-            if (settings.workOnFridays)// se trabalha as sextas
+            if (_settings.workOnFridays)// se trabalha as sextas
             {
                 // tentando capturar o horario das sextas 
                 if (TimeSpan.TryParse(this.TxtStartOfWorkOnFridays.Text, out TimeSpan swf))// horario inicial
-                    settings.startOfWorkOnFridays = swf;
+                    _settings.startOfWorkOnFridays = swf;
 
                 else
-                    settings.startOfWorkOnFridays = null;
+                {
+                    //settings.startOfWorkOnFridays = null;
+                    resp = false;
+
+                    errorMsg += "\n-Horário do inicio do expediente as Sextas-Feiras";
+                }
 
                 if (TimeSpan.TryParse(this.TxtEndOfWorkOnFridays.Text, out TimeSpan ewf))// horario final
-                    settings.endOfWorkOnFridays = ewf;
+                    _settings.endOfWorkOnFridays = ewf;
 
                 else
-                    settings.endOfWorkOnFridays = null;
+                {
+                    //settings.endOfWorkOnFridays = null;
+                    resp = false;
+
+                    errorMsg += "\n-Horário do final do expediente as Sextas-Feiras";
+                }
             }
             else
             {
-                settings.startOfWorkOnFridays = null;
-                settings.endOfWorkOnFridays = null;
+                _settings.startOfWorkOnFridays = null;
+                _settings.endOfWorkOnFridays = null;
             }
 
-            if (settings.workOnSaturdays)// se trabalha aos sabados
+            if (_settings.workOnSaturdays)// se trabalha aos sabados
             {
                 // tentando capturar o horario das sabados 
                 if (TimeSpan.TryParse(this.TxtStartOfWorkOnSaturdays.Text, out TimeSpan swsa))// horario inicial
-                    settings.startOfWorkOnSaturdays = swsa;
+                    _settings.startOfWorkOnSaturdays = swsa;
 
                 else
-                    settings.startOfWorkOnSaturdays = null;
+                {
+                    //settings.startOfWorkOnSaturdays = null;
+                    resp = false;
+
+                    errorMsg += "\n-Horário do inicio do expediente aos Sábados";
+                }
 
                 if (TimeSpan.TryParse(this.TxtEndOfWorkOnSaturdays.Text, out TimeSpan ewsa))// horario final
-                    settings.endOfWorkOnSaturdays = ewsa;
+                    _settings.endOfWorkOnSaturdays = ewsa;
 
                 else
-                    settings.endOfWorkOnSaturdays = null;
+                {
+                    //settings.endOfWorkOnSaturdays = null;
+                    resp = false;
+
+                    errorMsg += "\n-Horário do final do expediente aos Sábados";
+                }
             }
             else
             {
-                settings.startOfWorkOnSaturdays = null;
-                settings.endOfWorkOnSaturdays = null;
+                _settings.startOfWorkOnSaturdays = null;
+                _settings.endOfWorkOnSaturdays = null;
             }
 
-            if (settings.workOnSundays)// se trabalha aos domingos
+            if (_settings.workOnSundays)// se trabalha aos domingos
             {
                 // tentando capturar o horario das domingos 
                 if (TimeSpan.TryParse(this.TxtStartOfWorkOnSundays.Text, out TimeSpan swsu))// horario inicial
-                    settings.startOfWorkOnSundays = swsu;
+                    _settings.startOfWorkOnSundays = swsu;
 
                 else
-                    settings.startOfWorkOnSundays = null;
+                {
+                    //settings.startOfWorkOnSundays = null;
+                    resp = false;
+
+                    errorMsg += "\n-Horário do inicio do expediente aos Domingos";
+                }
 
                 if (TimeSpan.TryParse(this.TxtEndOfWorkOnSundays.Text, out TimeSpan ewsu))// horario final
-                    settings.endOfWorkOnSundays = ewsu;
+                    _settings.endOfWorkOnSundays = ewsu;
 
                 else
-                    settings.endOfWorkOnSundays = null;
+                {
+                    //settings.endOfWorkOnSundays = null;
+                    resp = false;
+
+                    errorMsg += "\n-Horário do final do expediente aos Domingos";
+                }
             }
             else
             {
-                settings.startOfWorkOnSundays = null;
-                settings.endOfWorkOnSundays = null;
+                _settings.startOfWorkOnSundays = null;
+                _settings.endOfWorkOnSundays = null;
 
             }
+
+
+            if (!resp)
+                MessageBox.Show(errorMsg, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            return resp;
         }
 
         // método que vai verificar e capturar os dados dos horarios de almoço
         private void CaptureLunchSchedules()
         {
-            if (settings.workOnMondays)// se trabalha as segundas
+            
+
+            if (_settings.workOnMondays)// se trabalha as segundas
             {
                 // tentando capturar o horario das segundas 
                 if (TimeSpan.TryParse(this.TxtStartOfBreakOnMondays.Text, out TimeSpan swm))// horario inicial
-                    settings.startOfBreakOnMondays = swm;
+                    _settings.startOfBreakOnMondays = swm;
 
                 else
-                    settings.startOfBreakOnMondays = null;
+                    _settings.startOfBreakOnMondays = null;
+                
 
                 if (TimeSpan.TryParse(this.TxtEndOfBreakOnMondays.Text, out TimeSpan ewm))// horario final
-                    settings.endOfBreakOnMondays = ewm;
+                    _settings.endOfBreakOnMondays = ewm;
 
                 else
-                    settings.endOfBreakOnMondays = null;
+                    _settings.endOfBreakOnMondays = null;
+                
             }
             else
             {
-                settings.startOfBreakOnMondays = null;
-                settings.endOfBreakOnMondays = null;
+                _settings.startOfBreakOnMondays = null;
+                _settings.endOfBreakOnMondays = null;
             }
 
-            if (settings.workOnTuesdays)// se trabalha as terças
+            if (_settings.workOnTuesdays)// se trabalha as terças
             {
                 // tentando capturar o horario das terças 
                 if (TimeSpan.TryParse(this.TxtStartOfBreakOnTuesdays.Text, out TimeSpan swm))// horario inicial
-                    settings.startOfBreakOnTuesdays = swm;
+                    _settings.startOfBreakOnTuesdays = swm;
 
                 else
-                    settings.startOfBreakOnTuesdays = null;
+                    _settings.startOfBreakOnTuesdays = null;
 
                 if (TimeSpan.TryParse(this.TxtEndOfBreakOnTuesdays.Text, out TimeSpan ewm))// horario final
-                    settings.endOfBreakOnTuesdays = ewm;
+                    _settings.endOfBreakOnTuesdays = ewm;
 
                 else
-                    settings.endOfBreakOnTuesdays = null;
+                    _settings.endOfBreakOnTuesdays = null;
             }
             else
             {
-                settings.startOfBreakOnTuesdays = null;
-                settings.endOfBreakOnTuesdays = null;
+                _settings.startOfBreakOnTuesdays = null;
+                _settings.endOfBreakOnTuesdays = null;
             }
 
-            if (settings.workOnWednesdays)// se trabalha as quartas
+            if (_settings.workOnWednesdays)// se trabalha as quartas
             {
                 // tentando capturar o horario das quartas 
                 if (TimeSpan.TryParse(this.TxtStartOfBreakOnWednesdays.Text, out TimeSpan swm))// horario inicial
-                    settings.startOfBreakOnWednesdays = swm;
+                    _settings.startOfBreakOnWednesdays = swm;
 
                 else
-                    settings.startOfBreakOnWednesdays = null;
+                    _settings.startOfBreakOnWednesdays = null;
 
                 if (TimeSpan.TryParse(this.TxtEndOfBreakOnWednesdays.Text, out TimeSpan ewm))// horario final
-                    settings.endOfBreakOnWednesdays = ewm;
+                    _settings.endOfBreakOnWednesdays = ewm;
 
                 else
-                    settings.endOfBreakOnWednesdays = null;
+                    _settings.endOfBreakOnWednesdays = null;
             }
             else
             {
-                settings.startOfBreakOnWednesdays = null;
-                settings.endOfBreakOnWednesdays = null;
+                _settings.startOfBreakOnWednesdays = null;
+                _settings.endOfBreakOnWednesdays = null;
             }
 
-            if (settings.workOnThursdays)// se trabalha as quintas
+            if (_settings.workOnThursdays)// se trabalha as quintas
             {
                 // tentando capturar o horario das quintas 
                 if (TimeSpan.TryParse(this.TxtStartOfBreakOnThursdays.Text, out TimeSpan swm))// horario inicial
-                    settings.startOfBreakOnThursdays = swm;
+                    _settings.startOfBreakOnThursdays = swm;
 
                 else
-                    settings.startOfBreakOnThursdays = null;
+                    _settings.startOfBreakOnThursdays = null;
 
                 if (TimeSpan.TryParse(this.TxtEndOfBreakOnThursdays.Text, out TimeSpan ewm))// horario final
-                    settings.endOfBreakOnThursdays = ewm;
+                    _settings.endOfBreakOnThursdays = ewm;
 
                 else
-                    settings.endOfBreakOnThursdays = null;
+                    _settings.endOfBreakOnThursdays = null;
             }
             else
             {
-                settings.startOfBreakOnThursdays = null;
-                settings.endOfBreakOnThursdays = null;
+                _settings.startOfBreakOnThursdays = null;
+                _settings.endOfBreakOnThursdays = null;
             }
 
-            if (settings.workOnFridays)// se trabalha as sextas
+            if (_settings.workOnFridays)// se trabalha as sextas
             {
                 // tentando capturar o horario das sextas 
                 if (TimeSpan.TryParse(this.TxtStartOfBreakOnFridays.Text, out TimeSpan swm))// horario inicial
-                    settings.startOfBreakOnFridays = swm;
+                    _settings.startOfBreakOnFridays = swm;
 
                 else
-                    settings.startOfBreakOnFridays = null;
+                    _settings.startOfBreakOnFridays = null;
 
                 if (TimeSpan.TryParse(this.TxtEndOfBreakOnFridays.Text, out TimeSpan ewm))// horario final
-                    settings.endOfBreakOnFridays = ewm;
+                    _settings.endOfBreakOnFridays = ewm;
 
                 else
-                    settings.endOfBreakOnFridays = null;
+                    _settings.endOfBreakOnFridays = null;
             }
             else
             {
-                settings.startOfBreakOnFridays = null;
-                settings.endOfBreakOnFridays = null;
+                _settings.startOfBreakOnFridays = null;
+                _settings.endOfBreakOnFridays = null;
             }
 
-            if (settings.workOnSaturdays)// se trabalha aos sabados
+            if (_settings.workOnSaturdays)// se trabalha aos sabados
             {
                 // tentando capturar o horario das sabados 
                 if (TimeSpan.TryParse(this.TxtStartOfBreakOnSaturdays.Text, out TimeSpan swm))// horario inicial
-                    settings.startOfBreakOnSaturdays = swm;
+                    _settings.startOfBreakOnSaturdays = swm;
 
                 else
-                    settings.startOfBreakOnSaturdays = null;
+                    _settings.startOfBreakOnSaturdays = null;
 
                 if (TimeSpan.TryParse(this.TxtEndOfBreakOnSaturdays.Text, out TimeSpan ewm))// horario final
-                    settings.endOfBreakOnSaturdays = ewm;
+                    _settings.endOfBreakOnSaturdays = ewm;
 
                 else
-                    settings.endOfBreakOnSaturdays = null;
+                    _settings.endOfBreakOnSaturdays = null;
             }
             else
             {
-                settings.startOfBreakOnSaturdays = null;
-                settings.endOfBreakOnSaturdays = null;
-
+                _settings.startOfBreakOnSaturdays = null;
+                _settings.endOfBreakOnSaturdays = null;
             }
 
-            if (settings.workOnSundays)// se trabalha aos domingos
+            if (_settings.workOnSundays)// se trabalha aos domingos
             {
                 // tentando capturar o horario das domingos 
                 if (TimeSpan.TryParse(this.TxtStartOfBreakOnSundays.Text, out TimeSpan swm))// horario inicial
-                    settings.startOfBreakOnSundays = swm;
+                    _settings.startOfBreakOnSundays = swm;
 
                 else
-                    settings.startOfBreakOnSundays = null;
+                    _settings.startOfBreakOnSundays = null;
 
                 if (TimeSpan.TryParse(this.TxtEndOfBreakOnSundays.Text, out TimeSpan ewm))// horario final
-                    settings.endOfBreakOnSundays = ewm;
+                    _settings.endOfBreakOnSundays = ewm;
 
                 else
-                    settings.endOfBreakOnSundays = null;
+                    _settings.endOfBreakOnSundays = null;
             }
             else
             {
-                settings.startOfBreakOnSundays = null;
-                settings.endOfBreakOnSundays = null;
+                _settings.startOfBreakOnSundays = null;
+                _settings.endOfBreakOnSundays = null;
             }
+
         }
 
         private void Confirm()
         {
-            CaptureDays(); // capturando os dias trabalhados
-            CaptureJobSchedules(); // capturando os horarios de trabalho 
+            CaptureDays();// capturando os dias trabalhados
+
+            if (!CaptureJobSchedules())// capturando os horarios de trabalho 
+                return;// se os campos não foram preenchidos coretamente
+            
             CaptureLunchSchedules();// capturando os horarios de almoço
 
             // capturando o tempo padrão das consultas
             if (int.TryParse(this.TxtStandardConsultationTime.Text, out int value))
             {
-                settings.standardConsultationTime = value;
+                _settings.standardConsultationTime = value;
             }
 
-            //settings.PrintDaysWorked();
-
-            string resp = Data.InsertSettings(settings);// enviando para o banco de dados
+            string resp = Data.InsertSettings(_settings);// enviando para o banco de dados
 
             Debug.WriteLine(resp);
 
             ScheduleManager.update();// mandando atualizar os horarios no gerenciador
+
+            // mandando verificar se alguma consulta vai ficar com status pendente
+            string status = _settings.ProcessFutureConsultations();
+            if (status != "")
+            {
+                MessageBox.Show(status, "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
             ChangeBtnConfirmToDisabled();// mudando o botão
         }

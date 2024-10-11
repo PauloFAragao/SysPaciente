@@ -180,7 +180,7 @@ namespace SysPaciente.Forms
             // preenchendo os campos do form
             this.LblClientName.Text = _name;
             this.LblClientTelephone.Text = _telephone;
-            this.LblClientDateOfBirth.Text = _dateOfBirth.Substring(0, 10); ;
+            this.LblClientDateOfBirth.Text = _dateOfBirth.Substring(0, 10);
             this.TxtTimeOfConsultation.Text = _timeOfConsultation.ToString();
             this.CbxStatus.Text = _status;
             this.DateTimePicker.Text = _consultationDate;
@@ -357,7 +357,7 @@ namespace SysPaciente.Forms
 
         private bool CaptureAndVerifyData()
         {
-
+            
             if (DateTime.Now > Convert.ToDateTime(DateTimePicker.Value))
             {
                 MessageBox.Show("Só é possível marcar consultas em datas e horários futuros",
@@ -390,11 +390,12 @@ namespace SysPaciente.Forms
             }
             else if (CaptureAndVerifyData())
             {
-                DateTime time = Convert.ToDateTime(DateTimePicker.Text);
+                //DateTime time = Convert.ToDateTime(DateTimePicker.Text);
+                DateTime consultationDate = Convert.ToDateTime(DateTimePicker.Text);
 
                 if (_tipe == 0)// para adiconar
                 {
-                    string resp = Data.InsertConsultation(Convert.ToDateTime(DateTimePicker.Text), _timeOfConsultation, _idClient, 0);
+                    string resp = Data.InsertConsultation(consultationDate, _timeOfConsultation, _idClient, 0);
 
                     if (resp == "Registro inserido com sucesso.")
                     {
@@ -402,6 +403,9 @@ namespace SysPaciente.Forms
 
                         //passando o botão que deve ficar selecionado
                         MenuButtonController.SetBtnConsultationsSelected();
+
+                        // mandando atualizar o gerenciador
+                        ScheduleManager.SetScheduleBusy(consultationDate, _timeOfConsultation);
 
                         FormLoader.OpenChildForm(new FrmConsultations());
                     }
@@ -430,8 +434,9 @@ namespace SysPaciente.Forms
 
                         if (remarcar == "Registro editado com sucesso.")//a alteração ocoreu com sucesso
                         {
+
                             // agora criando a nova consulta
-                            string resp = Data.InsertConsultation(Convert.ToDateTime(DateTimePicker.Text), _timeOfConsultation, _idClient, 0);
+                            string resp = Data.InsertConsultation(consultationDate, _timeOfConsultation, _idClient, 0);
 
                             if (resp == "Registro inserido com sucesso.")
                             {
@@ -439,6 +444,9 @@ namespace SysPaciente.Forms
 
                                 //passando o botão que deve ficar selecionado
                                 MenuButtonController.SetBtnConsultationsSelected();
+
+                                // mandando atualizar o gerenciador
+                                ScheduleManager.SetScheduleBusy(consultationDate, _timeOfConsultation);
 
                                 FormLoader.OpenChildForm(new FrmConsultations());
                             }
@@ -451,7 +459,7 @@ namespace SysPaciente.Forms
                     }
                     else// se não for remarcação só edita
                     {
-                        string resp = Data.EditConsultation(_idConsultation, Convert.ToDateTime(DateTimePicker.Text), _timeOfConsultation, _idClient, this.CbxStatus.SelectedIndex);
+                        string resp = Data.EditConsultation(_idConsultation, consultationDate, _timeOfConsultation, _idClient, this.CbxStatus.SelectedIndex);
 
                         if (resp == "Registro editado com sucesso.")
                         {
@@ -459,6 +467,9 @@ namespace SysPaciente.Forms
 
                             //passando o botão que deve ficar selecionado
                             MenuButtonController.SetBtnConsultationsSelected();
+
+                            // mandando atualizar o gerenciador
+                            ScheduleManager.SetScheduleBusy(consultationDate, _timeOfConsultation);
 
                             FormLoader.OpenChildForm(new FrmConsultations());
                         }
@@ -485,7 +496,7 @@ namespace SysPaciente.Forms
             this.Panel.Height = 230;
 
             // limpando o textBox do horario
-            this.TxtTimeOfConsultation.Text = string.Empty;
+            //this.TxtTimeOfConsultation.Text = string.Empty;
 
             // carrega e adiciona os novos botões
             LoadSchedule();
@@ -502,7 +513,7 @@ namespace SysPaciente.Forms
 
             ChangeButtonCollor(btn);
 
-            TxtTimeOfConsultation.Text = btn.Text;
+            this.TxtTimeOfConsultation.Text = btn.Text;
         }
 
         //-------------------------- métodos criados pelo visual studio --------------------------

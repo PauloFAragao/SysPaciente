@@ -89,5 +89,20 @@ namespace SysPaciente.Entities
 
             return null;
         }
+        
+        // método para mudar status de uma consulta
+        public static void SetScheduleBusy(DateTime date, TimeSpan timeSpan )
+        {
+            //Debug.WriteLine("DATE: " + date + " Time: "+timeSpan);
+
+            foreach(Schedules s in schedules)
+            {
+                if(s.Date.Date == date.Date)
+                {
+                    s.SetScheduleBusy(timeSpan);
+                    return;
+                }
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace SysPaciente.Entities
 {
@@ -41,8 +42,6 @@ namespace SysPaciente.Entities
             Times = new List<Tuple<TimeSpan, bool>>();
 
             Fill(); // enchendo a lista com os horaros disponiveis no dia
-
-            // ler do banco de dados os horarios já oculados
 
             // mudar o bool das tuplas
             ChangeSchedulesWithAppointment();
@@ -157,6 +156,34 @@ namespace SysPaciente.Entities
             return null;
         }
     
+        public void SetScheduleBusy(TimeSpan timeSpan)
+        {
+            int index = TakeIndex(timeSpan);// procura a posição na lista
+
+            if (index == -1)// erro inesperado
+            {
+                MessageBox.Show("Ocoreu um erro interno inesperado!", "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //mudando o valor 
+            Times[index] = new Tuple<TimeSpan, bool>(Times[index].Item1, false);
+        }
+
+        private int TakeIndex(TimeSpan timeSpan)
+        {
+            for (int i = 0; i < Times.Count; i++) // for para cada tupla
+            {
+                if (Times[i].Item1 == timeSpan)
+                {
+                    //Debug.WriteLine("INDEX: "+i);
+                    return i;
+                }
+            }
+            
+            return -1;
+        }
+
         public int GetCount()
         {
             return Times.Count;

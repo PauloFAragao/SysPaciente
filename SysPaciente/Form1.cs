@@ -8,65 +8,27 @@ namespace SysPaciente
 {
     public partial class Form1 : Form
     {
-        private bool _menu;// Indica se o menu está aberto ou não
-
         public Form1()
         {
             InitializeComponent();
 
-            //enviando a referencia do panel para a classe
+            // classe FormLoader
             FormLoader.PanelBody = this.PanelBody;
+            FormLoader.PanelMenu = this.PanelMenu;
+            FormLoader.MenuButton = this.BtnMenu;
 
-            //o menu começa recolido
-            _menu = false;
-
-            //
+            // classe que controla os botões
             MenuButtonController.SetButtonsData(this.BtnHome, this.BtnClients, this.BtnConsultations, this.BtnConfigurations);
 
-            //o botão inicio (BtnHome) começa selecionado
+            // o botão inicio (BtnHome) começa selecionado
             MenuButtonController.SetBtnHomeSelected();
             FormLoader.OpenChildForm(new FrmHome());
-        }
-
-        //sobrecarga para desativar o menu
-        private void MenuController()
-        {
-            if (_menu)
-            {
-                Button btn = this.BtnMenu;
-                MenuController(btn);
-            } 
-        }
-
-        //sobrecarga para ser chamada pelo botão no menu
-        private void MenuController(object sender)
-        {
-            Button bt = (Button)sender;
-
-            if (_menu)
-            {
-                _menu = !_menu;
-                this.PanelMenu.Visible = false;
-                bt.BackColor = Color.FromArgb(70, 130, 180);
-                bt.ForeColor = Color.Black;
-            }
-            else
-            {
-                _menu = !_menu;
-                this.PanelMenu.Visible = true;
-                bt.BackColor = Color.FromArgb(63, 72, 204);
-                bt.ForeColor = Color.White;
-                PanelMenu.BringToFront();//trazendo para frente
-            }
         }
 
         private void Clients()
         {
             //passando o botão que deve ficar selecionado
             MenuButtonController.SetBtnClientsSelected();
-
-            //desativar o menu se ele estiver ativado
-            MenuController();
 
             //carregar a form
             FormLoader.OpenChildForm(new FrmClients());
@@ -76,9 +38,6 @@ namespace SysPaciente
         {
             //passando o botão que deve ficar selecionado
             MenuButtonController.SetBtnConsultationsSelected();
-
-            //desativar o menu se ele estiver ativado
-            MenuController();
             
             //carregar a form
             FormLoader.OpenChildForm(new FrmConsultations());
@@ -89,9 +48,6 @@ namespace SysPaciente
             //passando o botão que deve ficar selecionado
             MenuButtonController.SetBtnConfigurationsSelected();
 
-            //desativar o menu se ele estiver ativado
-            MenuController();
-
             //carregar a form
             FormLoader.OpenChildForm(new FrmSettings());
         }
@@ -101,9 +57,6 @@ namespace SysPaciente
             //passando o botão que deve ficar selecionado
             MenuButtonController.SetBtnHomeSelected();
 
-            //desativar o menu se ele estiver ativado
-            MenuController();
-
             //carregar a form
             FormLoader.OpenChildForm(new FrmHome());
         }
@@ -112,9 +65,6 @@ namespace SysPaciente
         {
             //desativando todos os botões
             MenuButtonController.UnselectCurrentButton();
-
-            //desativar o menu se ele estiver ativado
-            MenuController();
 
             //carregar a form
             FormLoader.OpenChildForm(new FrmAdm());
@@ -145,48 +95,33 @@ namespace SysPaciente
 
         private void BtnMenu_Click(object sender, EventArgs e)
         {
-            MenuController(sender);
+            FormLoader.MenuController();
         }
 
         //------------------------- botões do menu
         private void BtnMHome_Click(object sender, EventArgs e)
         {
-            //Button btn = this.BtnHome;
-            //ActivateButton(btn);
             Home();
-            //MenuController();
         }
 
         private void BtnMClients_Click(object sender, EventArgs e)
         {
             Clients();
-            //MenuController();
         }
 
         private void BtnMConsultations_Click(object sender, EventArgs e)
         {
-            //Button btn = this.BtnConsultations;
-            //ActivateButton(btn);
             Consultations();
-            //MenuController();
         }
 
         private void BtnMConfigurations_Click(object sender, EventArgs e)
         {
-            //Button btn = this.BtnConfigurations;
-            //ActivateButton(btn);
             Settings();
-            //MenuController();
         }
 
         private void BtnMAdministration_Click(object sender, EventArgs e)
         {
-
-
             Adm();
-
-            //Debug.WriteLine( Data.InsertClient("Maria das Dores",
-            //"2128861234","Rua A","102","Fazendinha","Rio de Janeiro","Fundos","123456789","12345678901") );
         }
 
     }

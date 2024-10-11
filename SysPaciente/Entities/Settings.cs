@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics;
 
 namespace SysPaciente.Entities
@@ -64,10 +65,10 @@ namespace SysPaciente.Entities
         public bool WorkingDay(DayOfWeek dayOfWeek)
         {
             switch (dayOfWeek)
-            { 
+            {
                 case DayOfWeek.Monday:
                     return workOnMondays;
-                
+
                 case DayOfWeek.Tuesday:
                     return workOnTuesdays;
 
@@ -211,6 +212,218 @@ namespace SysPaciente.Entities
             }
         }
 
+        public string ProcessFutureConsultations()
+        {
+            string resp = "";
+
+            DataTable dataTable = Data.FutureConsultations();
+
+            if (dataTable != null)
+            {
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    //Debug.WriteLine("Row: " + row["idConsultation"].ToString());
+
+                    //verificar se todas as consultas aqui estão dentro dos horarios e dias trabalhados
+                    //os que estiverem fora devem ser marcados com status pendente
+
+                    DayOfWeek dayOfWeek = Convert.ToDateTime(row["consultationDate"]).DayOfWeek;
+                    TimeSpan time = TimeSpan.Parse(row["timeOfConsultation"].ToString());
+
+                    //primeiro descobrir se o dia da semana é trabalhado
+                    if (WorkedDay(dayOfWeek))// se for um dia trabalhado
+                    {
+                        if (!WithinWorkingHours(dayOfWeek, time))// se o horario não está dentro dos horarios trabalhados
+                        {
+                            Debug.WriteLine("Fora do horario: " + row["idConsultation"].ToString());
+
+                            resp = "Atenção, a alteração nas configurações fez com que o status de uma ou mais consultas "
+                                + "fosse mudado para pendente, verfifique a lista de consultas pendentes para resolver as pendencias";
+
+                            string result = Data.EditConsultationStatus(Convert.ToInt32(row["idConsultation"]), 4);
+
+                            Debug.WriteLine(result);
+                        }
+                    }
+                    else// se não for um dia trabalhado
+                    {
+                        Debug.WriteLine("Fora do dia: " + row["idConsultation"].ToString());
+
+                        resp = "Atenção, a alteração nas configurações fez com que o status de uma ou mais consultas "
+                            + "fosse mudado para pendente, verfifique a lista de consultas pendentes para resolver as pendencias";
+
+                        string result = Data.EditConsultationStatus(Convert.ToInt32(row["idConsultation"]), 4);
+
+                        Debug.WriteLine(result);
+                    }
+                }
+            }
+
+            return resp;
+        }
+
+        private bool WorkedDay(DayOfWeek dayOfWeek)
+        {
+            switch (dayOfWeek)
+            {
+                case DayOfWeek.Monday:// segunda
+                    return workOnMondays;
+
+                case DayOfWeek.Tuesday:// terça
+                    return workOnTuesdays;
+
+                case DayOfWeek.Wednesday:// quarta
+                    return workOnWednesdays;
+
+                case DayOfWeek.Thursday:// quinta
+                    return workOnThursdays;
+
+                case DayOfWeek.Friday:// sexta
+                    return workOnFridays;
+
+                case DayOfWeek.Saturday:// sabado
+                    return workOnSaturdays;
+
+                case DayOfWeek.Sunday:// domingo
+                    return workOnSundays;
+            }
+            return false;
+        }
+
+        private bool WithinWorkingHours(DayOfWeek dayOfWeek, TimeSpan time)
+        {
+            switch (dayOfWeek)
+            {
+                case DayOfWeek.Monday:// segunda
+
+                    // se está marcado dentro do horario de trabalho
+                    if (time >= startOfWorkOnMondays && time < endOfWorkOnMondays)
+                    {
+                        if (startOfBreakOnMondays != null &&// caso o horairo de almoço n seja nulo
+                            (time < startOfBreakOnMondays || time >= endOfBreakOnMondays)
+                            )
+                        {
+                            Debug.WriteLine("é na segunda-ferira");
+                            return true;
+                        }
+
+                        else // está marcado dentro do horario de almoço
+                            return false;
+                    }
+                    else// está marcado fora do horario de trabalho
+                        return false;
+
+                case DayOfWeek.Tuesday:// terça
+                    // se está marcado dentro do horario de trabalho
+                    if (time >= startOfWorkOnTuesdays && time < endOfWorkOnTuesdays)
+                    {
+                        if (startOfBreakOnTuesdays != null &&// caso o horairo de almoço n seja nulo
+                            (time < startOfBreakOnTuesdays || time >= endOfBreakOnTuesdays)
+                            )
+                        {
+                            Debug.WriteLine("é na terça-ferira");
+                            return true;
+                        }
+
+                        else // está marcado dentro do horario de almoço
+                            return false;
+                    }
+                    else// está marcado fora do horario de trabalho
+                        return false;
+
+                case DayOfWeek.Wednesday:// quarta
+                    // se está marcado dentro do horario de trabalho
+                    if (time >= startOfWorkOnWednesdays && time < endOfWorkOnWednesdays)
+                    {
+                        if (startOfBreakOnWednesdays != null &&// caso o horairo de almoço n seja nulo
+                            (time < startOfBreakOnWednesdays || time >= endOfBreakOnWednesdays)
+                            )
+                        {
+                            Debug.WriteLine("é na quarta-ferira");
+                            return true;
+                        }
+
+                        else // está marcado dentro do horario de almoço
+                            return false;
+                    }
+                    else// está marcado fora do horario de trabalho
+                        return false;
+
+                case DayOfWeek.Thursday:// quinta
+                    // se está marcado dentro do horario de trabalho
+                    if (time >= startOfWorkOnThursdays && time < endOfWorkOnThursdays)
+                    {
+                        if (startOfBreakOnThursdays != null &&// caso o horairo de almoço n seja nulo
+                            (time < startOfBreakOnThursdays || time >= endOfBreakOnThursdays)
+                            )
+                        {
+                            Debug.WriteLine("é na quinta-ferira");
+                            return true;
+                        }
+
+                        else // está marcado dentro do horario de almoço
+                            return false;
+                    }
+                    else// está marcado fora do horario de trabalho
+                        return false;
+
+                case DayOfWeek.Friday:// sexta
+                    // se está marcado dentro do horario de trabalho
+                    if (time >= startOfWorkOnFridays && time < endOfWorkOnFridays)
+                    {
+                        if (startOfBreakOnFridays != null &&// caso o horairo de almoço n seja nulo
+                            (time < startOfBreakOnFridays || time >= endOfBreakOnFridays)
+                            )
+                        {
+                            Debug.WriteLine("é na sexta-ferira");
+                            return true;
+                        }
+
+                        else // está marcado dentro do horario de almoço
+                            return false;
+                    }
+                    else// está marcado fora do horario de trabalho
+                        return false;
+
+                case DayOfWeek.Saturday:// sabado
+                    // se está marcado dentro do horario de trabalho
+                    if (time >= startOfWorkOnSaturdays && time < endOfWorkOnSaturdays)
+                    {
+                        if (startOfBreakOnSaturdays != null &&// caso o horairo de almoço n seja nulo
+                            (time < startOfBreakOnSaturdays || time >= endOfBreakOnSaturdays)
+                            )
+                        {
+                            Debug.WriteLine("é no sabado");
+                            return true;
+                        }
+
+                        else // está marcado dentro do horario de almoço
+                            return false;
+                    }
+                    else// está marcado fora do horario de trabalho
+                        return false;
+
+                case DayOfWeek.Sunday:// domingo
+                    // se está marcado dentro do horario de trabalho
+                    if (time >= startOfWorkOnSundays && time < endOfWorkOnSundays)
+                    {
+                        if (startOfBreakOnSundays != null &&// caso o horairo de almoço n seja nulo
+                            (time < startOfBreakOnSundays || time >= endOfBreakOnSundays)
+                            )
+                        {
+                            Debug.WriteLine("é no domingo");
+                            return true;
+                        }
+
+                        else // está marcado dentro do horario de almoço
+                            return false;
+                    }
+                    else// está marcado fora do horario de trabalho
+                        return false;
+            }
+            return false;
+        }
+
         public void PrintDaysWorked()
         {
             Debug.WriteLine("workOnMondays: " + workOnMondays);
@@ -274,7 +487,7 @@ namespace SysPaciente.Entities
         {
             Debug.WriteLine("standardConsultationTime: " + standardConsultationTime);
         }
-    
-    
+
+
     }
 }

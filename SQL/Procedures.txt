@@ -55,6 +55,21 @@ BEGIN
 END;
 GO
 
+--procedure que vai retornar todas as consultas a partir da data com status de marcada
+CREATE PROC sp_future_consultations
+	@date DATE
+As
+Begin
+	Select 
+		idConsultation,
+		consultationDate,
+		timeOfConsultation
+	From consultations 
+	Where consultationDate >= @date 
+	And status = '0';
+End;
+GO
+
 ----------------------- pacientes -----------------------
 
 --procedimento para recuperar o nome a partir de uma id
@@ -435,7 +450,7 @@ BEGIN
 	Select timeOfConsultation 
 	From consultations 
 	Where consultationDate = @date 
-	And status = 0 ;
+	And status IN (0, 4);
 END;
 GO
 

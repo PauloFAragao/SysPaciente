@@ -30,8 +30,14 @@ possivel status ficar visivel
 já tem alguma consulta marcada e emite erro não premitindo que um paciente tenha 2 consultas 
 marcadas ao mesmo tempo
 
-
-
+-Resolvido um bug que fazia o menu continuar aberto por baixo da form quando mudava de janela
+-Agora ao marcar que um dia será trabalhado o usuaro deve configurar os horarios do inico e do 
+final do exepdiente
+-Resolvido um erro que fazia o gerenciador de horarios livres não atualizar os horarios com 
+consultas marcadas
+-Agora quando as configurações são alteradas o programa verifica se alguma consulta ficou fora dos
+dias trabalhados ou fora dos horarios trabalhados e marca ela como pendente, além de avisar isso ao
+usuario.
 
 
 
