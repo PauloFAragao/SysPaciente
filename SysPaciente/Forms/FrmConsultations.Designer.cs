@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BtnSearch = new System.Windows.Forms.Button();
             this.BtnDate = new System.Windows.Forms.Button();
             this.LblDate = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -59,6 +60,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Controls.Add(this.BtnSearch);
             this.panel1.Controls.Add(this.BtnDate);
             this.panel1.Controls.Add(this.LblDate);
             this.panel1.Controls.Add(this.label1);
@@ -70,8 +72,24 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(992, 80);
+            this.panel1.Size = new System.Drawing.Size(992, 92);
             this.panel1.TabIndex = 1;
+            // 
+            // BtnSearch
+            // 
+            this.BtnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
+            this.BtnSearch.FlatAppearance.BorderSize = 0;
+            this.BtnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSearch.ForeColor = System.Drawing.Color.White;
+            this.BtnSearch.Location = new System.Drawing.Point(315, 22);
+            this.BtnSearch.Name = "BtnSearch";
+            this.BtnSearch.Size = new System.Drawing.Size(97, 35);
+            this.BtnSearch.TabIndex = 14;
+            this.BtnSearch.Text = "Pesquisar";
+            this.BtnSearch.UseVisualStyleBackColor = false;
+            this.BtnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // BtnDate
             // 
@@ -81,7 +99,7 @@
             this.BtnDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnDate.ForeColor = System.Drawing.Color.White;
-            this.BtnDate.Location = new System.Drawing.Point(503, 22);
+            this.BtnDate.Location = new System.Drawing.Point(523, 22);
             this.BtnDate.Name = "BtnDate";
             this.BtnDate.Size = new System.Drawing.Size(104, 35);
             this.BtnDate.TabIndex = 13;
@@ -92,7 +110,7 @@
             // LblDate
             // 
             this.LblDate.AutoSize = true;
-            this.LblDate.Location = new System.Drawing.Point(347, 33);
+            this.LblDate.Location = new System.Drawing.Point(468, 69);
             this.LblDate.Name = "LblDate";
             this.LblDate.Size = new System.Drawing.Size(65, 13);
             this.LblDate.TabIndex = 12;
@@ -101,7 +119,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(317, 33);
+            this.label1.Location = new System.Drawing.Point(438, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 11;
@@ -131,7 +149,7 @@
             this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnEdit.ForeColor = System.Drawing.Color.White;
-            this.BtnEdit.Location = new System.Drawing.Point(745, 22);
+            this.BtnEdit.Location = new System.Drawing.Point(748, 22);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(97, 35);
             this.BtnEdit.TabIndex = 8;
@@ -147,7 +165,7 @@
             this.BtnChangeStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnChangeStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnChangeStatus.ForeColor = System.Drawing.Color.White;
-            this.BtnChangeStatus.Location = new System.Drawing.Point(622, 22);
+            this.BtnChangeStatus.Location = new System.Drawing.Point(634, 22);
             this.BtnChangeStatus.Name = "BtnChangeStatus";
             this.BtnChangeStatus.Size = new System.Drawing.Size(107, 35);
             this.BtnChangeStatus.TabIndex = 7;
@@ -161,7 +179,6 @@
             this.TxtSearchText.Name = "TxtSearchText";
             this.TxtSearchText.Size = new System.Drawing.Size(209, 20);
             this.TxtSearchText.TabIndex = 1;
-            this.TxtSearchText.TextChanged += new System.EventHandler(this.TxtSearchText_TextChanged);
             // 
             // LblSearch
             // 
@@ -178,9 +195,9 @@
             this.panel2.Controls.Add(this.PanelChangeDate);
             this.panel2.Controls.Add(this.DgvData);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 80);
+            this.panel2.Location = new System.Drawing.Point(0, 92);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(992, 394);
+            this.panel2.Size = new System.Drawing.Size(992, 382);
             this.panel2.TabIndex = 3;
             // 
             // PanelAlterStatus
@@ -322,7 +339,7 @@
             this.DgvData.Location = new System.Drawing.Point(0, 0);
             this.DgvData.Name = "DgvData";
             this.DgvData.ReadOnly = true;
-            this.DgvData.Size = new System.Drawing.Size(992, 394);
+            this.DgvData.Size = new System.Drawing.Size(992, 382);
             this.DgvData.TabIndex = 1;
             // 
             // FrmConsultations
@@ -369,5 +386,6 @@
         private System.Windows.Forms.Button BtnAlterStatus;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox CbxStatus;
+        private System.Windows.Forms.Button BtnSearch;
     }
 }

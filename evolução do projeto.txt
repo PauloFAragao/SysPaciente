@@ -39,10 +39,11 @@ consultas marcadas
 dias trabalhados ou fora dos horarios trabalhados e marca ela como pendente, além de avisar isso ao
 usuario.
 
+-Agora se clicar no botão de uma aba aberta ela não carrega novamente
 -O carregamento dos dados da janela de pacientes agora acontece em thread para evitar travar o
 programa caso o SQL Server demore muito para responder
 
-
+-Agora o carregamento dos dados da janela de consultas e da janela inicial acontecem em thread
 
 
 

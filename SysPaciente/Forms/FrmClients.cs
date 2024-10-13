@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Data;
-using System.Diagnostics;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SysPaciente.Entities;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 
 namespace SysPaciente.Forms
 {
     public partial class FrmClients : Form
     {
         private bool _searchForName;
-
-        Thread _load;
-
+        
         public FrmClients()
         {
             InitializeComponent();
@@ -22,10 +17,8 @@ namespace SysPaciente.Forms
             // inicia buscando por nome
             _searchForName = true;
 
-            // inicializando a thread que vai carregar os dados dos clientes
-            _load = new Thread(new ThreadStart(LoadData));
-            _load.IsBackground = true;
-            _load.Start();
+            //carregando os dados
+            Task.Run(() => Initialize());
 
             // colocando o focus no campo
             this.TxtSearchText.Focus();
@@ -103,7 +96,19 @@ namespace SysPaciente.Forms
         }
 
         //------------------ Thread
-        private void LoadData()
+        private void Initialize()
+        {
+            if (LoadData())
+            {
+                HideColumns();
+                ChangeColumns();
+
+                // para iniciar com a primeira linha selecionada
+                ThreadHelper.SelectFirstRow(this.DgvData);
+            }
+        }
+
+        private bool LoadData()
         {
             DataTable dataTable = Data.ShowClients();
 
@@ -111,58 +116,64 @@ namespace SysPaciente.Forms
             {
                 // carregando os dados no DataGridView
                 ThreadHelper.SetPropertyValue(DgvData, "DataSource", dataTable);
-
-                ThreadHelper.SetColumnVisibility(this.DgvData, 0, false);//mudando a visibilidade da coluna id
-                ThreadHelper.SetColumnVisibility(this.DgvData, 11, false);//mudando a visibilidade da coluna número da identidade
-                ThreadHelper.SetColumnVisibility(this.DgvData, 12, false);//mudando a visibilidade da coluna número do cpf
-
-                // Altera o texto do cabeçalho da coluna 1 para "Nome do paciente"
-                ThreadHelper.SetColumnHeaderText(this.DgvData, 1, "Nome do paciente");
-                ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 1, DataGridViewAutoSizeColumnMode.AllCells);
-
-                // Altera o texto do cabeçalho da coluna 2 para "Contato"
-                ThreadHelper.SetColumnHeaderText(this.DgvData, 2, "Contato");
-                ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 2, DataGridViewAutoSizeColumnMode.AllCells);
-
-                // Altera o texto do cabeçalho da coluna 3 para "Data de nascimento"
-                ThreadHelper.SetColumnHeaderText(this.DgvData, 3, "Data de nascimento");
-                ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 3, DataGridViewAutoSizeColumnMode.AllCells);
-
-                // Altera o texto do cabeçalho da coluna 4 para "Rua"
-                ThreadHelper.SetColumnHeaderText(this.DgvData, 4, "Rua");
-                ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 4, DataGridViewAutoSizeColumnMode.AllCells);
-
-                // Altera o texto do cabeçalho da coluna 5 para "Número da casa"
-                ThreadHelper.SetColumnHeaderText(this.DgvData, 5, "Número da casa");
-                ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 5, DataGridViewAutoSizeColumnMode.AllCells);
-
-                // Altera o texto do cabeçalho da coluna 6 para "Bairro"
-                ThreadHelper.SetColumnHeaderText(this.DgvData, 6, "Bairro");
-                ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 6, DataGridViewAutoSizeColumnMode.AllCells);
-
-                // Altera o texto do cabeçalho da coluna 7 para "Cidade"
-                ThreadHelper.SetColumnHeaderText(this.DgvData, 7, "Cidade");
-                ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 7, DataGridViewAutoSizeColumnMode.AllCells);
-
-                // Altera o texto do cabeçalho da coluna 8 para "Cep"
-                ThreadHelper.SetColumnHeaderText(this.DgvData, 8, "Cep");
-                ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 8, DataGridViewAutoSizeColumnMode.AllCells);
-
-                // Altera o texto do cabeçalho da coluna 9 para "Estado"
-                ThreadHelper.SetColumnHeaderText(this.DgvData, 9, "Estado");
-                ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 9, DataGridViewAutoSizeColumnMode.AllCells);
-
-                // Altera o texto do cabeçalho da coluna 10 para "Complemento"
-                ThreadHelper.SetColumnHeaderText(this.DgvData, 10, "Complemento");
-                ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 10, DataGridViewAutoSizeColumnMode.AllCells);
-
-                // Altera o texto do cabeçalho da coluna 13 para "Histórico de consultas"
-                ThreadHelper.SetColumnHeaderText(this.DgvData, 13, "Histórico de consultas");
-                ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 13, DataGridViewAutoSizeColumnMode.AllCells);
-
-                // para iniciar com a primeira linha selecionada
-                ThreadHelper.SelectFirstRow(this.DgvData);
+                return true;
             }
+            else
+                return false;
+        }
+
+        private void HideColumns()
+        {
+            ThreadHelper.SetColumnVisibility(this.DgvData, 0, false);//mudando a visibilidade da coluna id
+            ThreadHelper.SetColumnVisibility(this.DgvData, 11, false);//mudando a visibilidade da coluna número da identidade
+            ThreadHelper.SetColumnVisibility(this.DgvData, 12, false);//mudando a visibilidade da coluna número do cpf
+        }
+
+        private void ChangeColumns()
+        {
+            // Altera o texto do cabeçalho da coluna 1 para "Nome do paciente"
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 1, "Nome do paciente");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 1, DataGridViewAutoSizeColumnMode.AllCells);
+
+            // Altera o texto do cabeçalho da coluna 2 para "Contato"
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 2, "Contato");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 2, DataGridViewAutoSizeColumnMode.AllCells);
+
+            // Altera o texto do cabeçalho da coluna 3 para "Data de nascimento"
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 3, "Data de nascimento");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 3, DataGridViewAutoSizeColumnMode.AllCells);
+
+            // Altera o texto do cabeçalho da coluna 4 para "Rua"
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 4, "Rua");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 4, DataGridViewAutoSizeColumnMode.AllCells);
+
+            // Altera o texto do cabeçalho da coluna 5 para "Número da casa"
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 5, "Número da casa");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 5, DataGridViewAutoSizeColumnMode.AllCells);
+
+            // Altera o texto do cabeçalho da coluna 6 para "Bairro"
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 6, "Bairro");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 6, DataGridViewAutoSizeColumnMode.AllCells);
+
+            // Altera o texto do cabeçalho da coluna 7 para "Cidade"
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 7, "Cidade");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 7, DataGridViewAutoSizeColumnMode.AllCells);
+
+            // Altera o texto do cabeçalho da coluna 8 para "Cep"
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 8, "Cep");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 8, DataGridViewAutoSizeColumnMode.AllCells);
+
+            // Altera o texto do cabeçalho da coluna 9 para "Estado"
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 9, "Estado");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 9, DataGridViewAutoSizeColumnMode.AllCells);
+
+            // Altera o texto do cabeçalho da coluna 10 para "Complemento"
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 10, "Complemento");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 10, DataGridViewAutoSizeColumnMode.AllCells);
+
+            // Altera o texto do cabeçalho da coluna 13 para "Histórico de consultas"
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 13, "Histórico de consultas");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 13, DataGridViewAutoSizeColumnMode.AllCells);
         }
 
         private void SearchName()

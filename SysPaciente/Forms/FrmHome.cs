@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using SysPaciente.Entities;
 
@@ -26,7 +27,6 @@ namespace SysPaciente.Forms
             // quantidade de consultas marcadas para hoje
             LblConsultationsAmount.Text = Data.GetConsultationsAmount(DateTime.Now).ToString();
 
-
             // proximo horario disponivel
             string FreeTimeText;
             if (DateTime.TryParse(ScheduleManager.GetFreeSchedule().ToString(), out DateTime nextFreeTime))
@@ -42,76 +42,17 @@ namespace SysPaciente.Forms
             }
             LblFreeTime.Text = FreeTimeText;
 
+            // carregando os dados
+            Task.Run(() => Initialize());
 
-            // capturando pendencias
-            if(LoadPendingTable())
-            {
-                HideColumns();
-                ChangeColumns();
-            }
-
+            // quantidade de pendencias
+            this.LblPending.Text = DgvData.Rows.Count.ToString();
         }
 
         private void Atualize()
         {
             Debug.WriteLine("Atualizou");
             LoadPendingTable();
-        }
-
-        private bool LoadPendingTable()
-        {
-            // capturando dados para a tabela
-            DataTable dataTable = Data.SearchPendingIssues();
-
-            // pegano as consultas marcadas que estão com status atrasado
-            DataTable dt = Data.SearchEntriesThatNeedToBeUpdated();
-
-            // para controle se tem dados
-            bool isNotNull = false;
-
-            if (dataTable != null)// verificando se tem dados
-            {
-                isNotNull = true;
-            }
-            if (dt != null)// verificando se tem dados
-            {
-                isNotNull = true;
-
-                dataTable.Merge(dt);
-            }
-
-            if (isNotNull)
-            {
-                this.DgvData.DataSource = dataTable;
-
-                this.LblPending.Text = dataTable.Rows.Count.ToString();
-            }
-
-            return isNotNull;
-        }
-
-        private void HideColumns()
-        {
-            this.DgvData.Columns[0].Visible = false;
-            this.DgvData.Columns[1].Visible = false;
-        }
-
-        private void ChangeColumns()
-        {
-            this.DgvData.Columns[2].HeaderText = "Nome do paciente";
-            this.DgvData.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-            this.DgvData.Columns[3].HeaderText = "Telefone";
-            this.DgvData.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-            this.DgvData.Columns[4].HeaderText = "Data da consulta";
-            this.DgvData.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-            this.DgvData.Columns[5].HeaderText = "Horário da consulta";
-            this.DgvData.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-            this.DgvData.Columns[6].HeaderText = "Status da consulta";
-            this.DgvData.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
 
         private void ChangePanelAlterstatusVicibility(bool value)
@@ -167,6 +108,75 @@ namespace SysPaciente.Forms
             {
                 MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        //---------------------------- Thread
+
+        private void Initialize()
+        {
+            // capturando pendencias
+            if (LoadPendingTable())
+            {
+                HideColumns();
+                ChangeColumns();
+
+                // para iniciar com a primeira linha selecionada
+                ThreadHelper.SelectFirstRow(this.DgvData);
+            }
+        }
+
+        private bool LoadPendingTable()
+        {
+            // capturando dados para a tabela
+            DataTable dataTable = Data.SearchPendingIssues();
+
+            // pegano as consultas marcadas que estão com status atrasado
+            DataTable dt = Data.SearchEntriesThatNeedToBeUpdated();
+
+            // para controle se tem dados
+            bool isNotNull = false;
+
+            if (dataTable != null)// verificando se tem dados
+            {
+                isNotNull = true;
+            }
+            if (dt != null)// verificando se tem dados
+            {
+                isNotNull = true;
+
+                dataTable.Merge(dt);
+            }
+
+            if (isNotNull)
+            {
+                //this.DgvData.DataSource = dataTable;
+                ThreadHelper.SetPropertyValue(DgvData, "DataSource", dataTable);
+            }
+
+            return isNotNull;
+        }
+
+        private void HideColumns()
+        { 
+            ThreadHelper.SetColumnVisibility(this.DgvData, 0, false);
+            ThreadHelper.SetColumnVisibility(this.DgvData, 1, false);
+        }
+
+        private void ChangeColumns()
+        {
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 2, "Nome do paciente");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 2, DataGridViewAutoSizeColumnMode.AllCells);
+
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 3, "Telefone");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 3, DataGridViewAutoSizeColumnMode.AllCells);
+
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 4, "Data da consulta");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 4, DataGridViewAutoSizeColumnMode.AllCells);
+
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 5, "Horário da consulta");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 5, DataGridViewAutoSizeColumnMode.AllCells);
+
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 6, "Status da consulta");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 6, DataGridViewAutoSizeColumnMode.AllCells);
         }
 
         //---------------------------- Eventos
