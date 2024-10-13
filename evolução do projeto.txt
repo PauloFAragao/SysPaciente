@@ -39,7 +39,8 @@ consultas marcadas
 dias trabalhados ou fora dos horarios trabalhados e marca ela como pendente, além de avisar isso ao
 usuario.
 
-
+-O carregamento dos dados da janela de pacientes agora acontece em thread para evitar travar o
+programa caso o SQL Server demore muito para responder
 
 
 

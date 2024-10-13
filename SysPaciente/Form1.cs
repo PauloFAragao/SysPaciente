@@ -8,6 +8,8 @@ namespace SysPaciente
 {
     public partial class Form1 : Form
     {
+        private int _selected = 0;//0-inicio | 1-pacientes | 2-consultas | 3-configurações
+
         public Form1()
         {
             InitializeComponent();
@@ -27,46 +29,66 @@ namespace SysPaciente
 
         private void Clients()
         {
-            //passando o botão que deve ficar selecionado
+            // passando o botão que deve ficar selecionado
             MenuButtonController.SetBtnClientsSelected();
 
-            //carregar a form
-            FormLoader.OpenChildForm(new FrmClients());
+            if (_selected != 1)
+            {
+                _selected = 1;// indicando a tela selecionada
+
+                // carregar a form
+                FormLoader.OpenChildForm(new FrmClients());
+            }
         }
 
         private void Consultations()
         {
-            //passando o botão que deve ficar selecionado
+            // passando o botão que deve ficar selecionado
             MenuButtonController.SetBtnConsultationsSelected();
-            
-            //carregar a form
-            FormLoader.OpenChildForm(new FrmConsultations());
+
+            if (_selected != 2)
+            {
+                _selected = 2;// indicando a tela selecionada
+
+                // carregar a form
+                FormLoader.OpenChildForm(new FrmConsultations());
+            }
         }
 
         private void Settings()
         {
-            //passando o botão que deve ficar selecionado
+            // passando o botão que deve ficar selecionado
             MenuButtonController.SetBtnConfigurationsSelected();
 
-            //carregar a form
-            FormLoader.OpenChildForm(new FrmSettings());
+            if (_selected != 3)
+            {
+                _selected = 3;// indicando a tela selecionada
+
+                // carregar a form
+                FormLoader.OpenChildForm(new FrmSettings());
+            }
         }
 
         private void Home()
         {
-            //passando o botão que deve ficar selecionado
+            // passando o botão que deve ficar selecionado
             MenuButtonController.SetBtnHomeSelected();
 
-            //carregar a form
-            FormLoader.OpenChildForm(new FrmHome());
+            if (_selected != 0)
+            {
+                _selected = 0;// indicando a tela selecionada
+
+                // carregar a form
+                FormLoader.OpenChildForm(new FrmHome());
+            }
         }
 
         private void Adm()
         {
-            //desativando todos os botões
+            // desativando todos os botões
             MenuButtonController.UnselectCurrentButton();
 
-            //carregar a form
+            // carregar a form
             FormLoader.OpenChildForm(new FrmAdm());
         }
 

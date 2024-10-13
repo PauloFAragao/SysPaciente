@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
-using System.Security.Policy;
+using System.Threading;
 
 namespace SysPaciente.Entities
 {
@@ -45,6 +45,8 @@ namespace SysPaciente.Entities
                 }
             }
 
+            //Thread.Sleep(5000);
+
             return dtResult;
         }
 
@@ -85,6 +87,9 @@ namespace SysPaciente.Entities
                     Debug.WriteLine("Exception: " + ex.Message);
                 }
             }
+
+            //Thread.Sleep(5000);
+
             return dtResult;
         }
 
