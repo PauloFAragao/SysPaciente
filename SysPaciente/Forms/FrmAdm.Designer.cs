@@ -342,6 +342,7 @@
             this.Controls.Add(this.BtnEditClient);
             this.Name = "FrmAdm";
             this.Text = "FrmAdm";
+            this.Load += new System.EventHandler(this.FrmAdm_Load);
             this.PainelChangePassword.ResumeLayout(false);
             this.PainelChangePassword.PerformLayout();
             this.PanelLogin.ResumeLayout(false);

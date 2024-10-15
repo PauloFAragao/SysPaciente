@@ -16,9 +16,6 @@ namespace SysPaciente.Forms
 
             //_password = "123";
             LoadPassword();
-
-            //focus no campo não funciona
-            this.TxtPassord.Focus();
         }
 
         private void LoadPassword()
@@ -204,6 +201,11 @@ namespace SysPaciente.Forms
         private void BtnDelConsultations_Click(object sender, EventArgs e)
         {
             FormLoader.OpenChildForm(new FrmAdmConsultations());
+        }
+
+        private void FrmAdm_Load(object sender, EventArgs e)
+        {
+            this.TxtPassord.Focus();
         }
     }
 }

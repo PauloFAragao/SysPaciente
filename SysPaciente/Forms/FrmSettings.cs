@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace SysPaciente.Forms
 {
@@ -679,6 +680,12 @@ namespace SysPaciente.Forms
             // capturando o tempo padrão das consultas
             if (int.TryParse(this.TxtStandardConsultationTime.Text, out int value))
             {
+                if(value < 10)
+                {
+                    MessageBox.Show("O tempo padrão das consultas não pode ser menor do que 10 minutos!", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 _settings.standardConsultationTime = value;
             }
 

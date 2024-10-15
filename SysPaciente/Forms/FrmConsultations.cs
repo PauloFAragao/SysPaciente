@@ -56,8 +56,7 @@ namespace SysPaciente.Forms
         private void ChangePanelAlterstatusVicibility(bool value)
         {
             EnableAndDisableUiButtons(!value);// para os botões da interface
-
-            if (DgvData.Rows.Count > 0)
+            if(CheckDgvData())
             {
                 this.PanelAlterStatus.Visible = value;
 
@@ -65,8 +64,6 @@ namespace SysPaciente.Forms
             }
             else
             {
-                MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                 EnableAndDisableUiButtons(true);
             }
         }
@@ -81,7 +78,7 @@ namespace SysPaciente.Forms
 
         private void Edit()
         {
-            if (DgvData.Rows.Count > 0)
+            if (CheckDgvData())
             {
                 FormLoader.OpenChildForm(new FrmMarkEditConsultation(
                     Convert.ToInt32(this.DgvData.CurrentRow.Cells["idConsultation"].Value),
@@ -89,10 +86,6 @@ namespace SysPaciente.Forms
                     Convert.ToString(this.DgvData.CurrentRow.Cells["consultationDate"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["timeOfConsultation"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["statusDescription"].Value)));
-            }
-            else
-            {
-                MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -112,6 +105,41 @@ namespace SysPaciente.Forms
             else
                 MessageBox.Show(resp, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        // verifica se tem dados na DataGridView e se tem alguma linha selecionada
+        private bool CheckDgvData()
+        {
+            if (DgvData.Rows.Count > 0)
+            {
+                if (this.DgvData.SelectedRows.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Nenhuma linha selecionada!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
+            }
+        }
+
+        private void NewConsultation()
+        {
+            if(Data.VerifyIfHaveClients())
+            {
+                FormLoader.OpenChildForm(new FrmMarkEditConsultation());
+            }
+            else
+                MessageBox.Show("Não tem clientes registrados no banco de dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         //--------------------------------- Thread
         private void Initialize()
         {
@@ -121,7 +149,7 @@ namespace SysPaciente.Forms
                 ChangeColumns();
 
                 // para iniciar com a primeira linha selecionada
-                ThreadHelper.SelectFirstRow(this.DgvData);
+                //ThreadHelper.SelectFirstRow(this.DgvData);
             }
         }
 
@@ -207,7 +235,7 @@ namespace SysPaciente.Forms
 
         private void BtnMark_Click(object sender, EventArgs e)
         {
-            FormLoader.OpenChildForm(new FrmMarkEditConsultation());
+            NewConsultation();
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
@@ -218,6 +246,11 @@ namespace SysPaciente.Forms
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             Search();
+        }
+
+        private void FrmConsultations_Load(object sender, EventArgs e)
+        {
+            this.TxtSearchText.Focus();
         }
     }
 }

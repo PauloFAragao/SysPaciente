@@ -268,6 +268,26 @@ BEGIN
 END;
 GO
 
+--prodecure que verifica se tem algum cliente cadastrado no banco de dados
+Create Proc sp_check_if_have_clients_registered
+	@respost Bit Output
+As
+Begin
+	DECLARE @RowCount INT;
+
+	SELECT @RowCount = COUNT(*) FROM clients;
+	
+	IF @RowCount > 0
+    BEGIN
+        Set @respost = 1;
+    END
+    ELSE
+    BEGIN
+        Set @respost = 0;
+    END
+End;
+Go
+
 ----------------------- consultas -----------------------
 
 --procedimento para pesquisar por data

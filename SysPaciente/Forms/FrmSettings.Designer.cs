@@ -204,6 +204,7 @@
             this.TxtStandardConsultationTime.Name = "TxtStandardConsultationTime";
             this.TxtStandardConsultationTime.Size = new System.Drawing.Size(57, 20);
             this.TxtStandardConsultationTime.TabIndex = 10;
+            this.TxtStandardConsultationTime.Text = "10";
             // 
             // label3
             // 

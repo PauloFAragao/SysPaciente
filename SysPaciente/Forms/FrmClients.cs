@@ -19,9 +19,6 @@ namespace SysPaciente.Forms
 
             //carregando os dados
             Task.Run(() => Initialize());
-
-            // colocando o focus no campo
-            this.TxtSearchText.Focus();
         }
 
         private void ChangeText()
@@ -33,8 +30,6 @@ namespace SysPaciente.Forms
 
             else
                 this.LblSearch.Text = "Buscar por cpf:";
-
-            this.TxtSearchText.Focus();// colocar o focus na caixa de busca
         }
 
         private void Search()
@@ -58,7 +53,7 @@ namespace SysPaciente.Forms
             }
 
             //verifica se tem alguma linha no DataGridView
-            if (DgvData.Rows.Count > 0)
+            if (CheckDgvData())
             {
                 FormLoader.OpenChildForm(new FrmAddEditClient(1,
                     Convert.ToInt32(this.DgvData.CurrentRow.Cells["idClient"].Value),
@@ -74,10 +69,6 @@ namespace SysPaciente.Forms
                     Convert.ToString(this.DgvData.CurrentRow.Cells["complement"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["idNumber"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["cpf"].Value)));
-            }
-            else
-            {
-                MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -95,6 +86,30 @@ namespace SysPaciente.Forms
             }
         }
 
+        // verifica se tem dados na DataGridView e se tem alguma linha selecionada
+        private bool CheckDgvData()
+        {
+            if (DgvData.Rows.Count > 0)
+            {
+                if (this.DgvData.SelectedRows.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Nenhuma linha selecionada!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
+            }
+        }
+
         //------------------ Thread
         private void Initialize()
         {
@@ -104,7 +119,7 @@ namespace SysPaciente.Forms
                 ChangeColumns();
 
                 // para iniciar com a primeira linha selecionada
-                ThreadHelper.SelectFirstRow(this.DgvData);
+                //ThreadHelper.SelectFirstRow(this.DgvData);
             }
         }
 
@@ -225,6 +240,11 @@ namespace SysPaciente.Forms
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             Search();
+        }
+
+        private void FrmClients_Load(object sender, EventArgs e)
+        {
+            this.TxtSearchText.Focus();
         }
     }
 }

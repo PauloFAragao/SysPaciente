@@ -35,6 +35,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.MskCpf = new System.Windows.Forms.MaskedTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.MskTel = new System.Windows.Forms.MaskedTextBox();
             this.MskDateOfBirth = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.TxtName = new System.Windows.Forms.TextBox();
@@ -59,7 +60,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LblAdm = new System.Windows.Forms.Label();
-            this.MskTel = new System.Windows.Forms.MaskedTextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -76,7 +76,7 @@
             this.BtnCancel.Location = new System.Drawing.Point(751, 413);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(97, 35);
-            this.BtnCancel.TabIndex = 14;
+            this.BtnCancel.TabIndex = 16;
             this.BtnCancel.Text = "Cancelar";
             this.BtnCancel.UseVisualStyleBackColor = false;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
@@ -86,7 +86,7 @@
             this.TxtIdNumber.Location = new System.Drawing.Point(79, 36);
             this.TxtIdNumber.Name = "TxtIdNumber";
             this.TxtIdNumber.Size = new System.Drawing.Size(171, 20);
-            this.TxtIdNumber.TabIndex = 11;
+            this.TxtIdNumber.TabIndex = 13;
             // 
             // LblIdentidade
             // 
@@ -115,7 +115,7 @@
             this.groupBox3.Location = new System.Drawing.Point(26, 258);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(751, 123);
-            this.groupBox3.TabIndex = 85;
+            this.groupBox3.TabIndex = 12;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Documentos";
             // 
@@ -125,7 +125,7 @@
             this.MskCpf.Mask = "000.000.000-00";
             this.MskCpf.Name = "MskCpf";
             this.MskCpf.Size = new System.Drawing.Size(171, 20);
-            this.MskCpf.TabIndex = 12;
+            this.MskCpf.TabIndex = 14;
             // 
             // groupBox2
             // 
@@ -138,9 +138,19 @@
             this.groupBox2.Location = new System.Drawing.Point(26, 45);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(751, 78);
-            this.groupBox2.TabIndex = 96;
+            this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Identificação";
+            // 
+            // MskTel
+            // 
+            this.MskTel.Location = new System.Drawing.Point(309, 35);
+            this.MskTel.Mask = "(00)0000-0000";
+            this.MskTel.Name = "MskTel";
+            this.MskTel.Size = new System.Drawing.Size(97, 20);
+            this.MskTel.TabIndex = 2;
+            this.MskTel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MskTel_KeyPress);
+            this.MskTel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MskTel_KeyUp);
             // 
             // MskDateOfBirth
             // 
@@ -198,7 +208,7 @@
             this.TxtComplement.Location = new System.Drawing.Point(420, 36);
             this.TxtComplement.Name = "TxtComplement";
             this.TxtComplement.Size = new System.Drawing.Size(190, 20);
-            this.TxtComplement.TabIndex = 6;
+            this.TxtComplement.TabIndex = 7;
             // 
             // BtnConfirm
             // 
@@ -210,7 +220,7 @@
             this.BtnConfirm.Location = new System.Drawing.Point(630, 413);
             this.BtnConfirm.Name = "BtnConfirm";
             this.BtnConfirm.Size = new System.Drawing.Size(97, 35);
-            this.BtnConfirm.TabIndex = 13;
+            this.BtnConfirm.TabIndex = 15;
             this.BtnConfirm.Text = "Adicionar";
             this.BtnConfirm.UseVisualStyleBackColor = false;
             this.BtnConfirm.Click += new System.EventHandler(this.BtnConfirm_Click);
@@ -229,7 +239,7 @@
             this.TxtHouseNumber.Location = new System.Drawing.Point(292, 36);
             this.TxtHouseNumber.Name = "TxtHouseNumber";
             this.TxtHouseNumber.Size = new System.Drawing.Size(48, 20);
-            this.TxtHouseNumber.TabIndex = 5;
+            this.TxtHouseNumber.TabIndex = 6;
             // 
             // label5
             // 
@@ -259,7 +269,7 @@
             this.groupBox1.Location = new System.Drawing.Point(26, 129);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(751, 123);
-            this.groupBox1.TabIndex = 88;
+            this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Endereço";
             // 
@@ -299,7 +309,7 @@
             this.CbxState.Location = new System.Drawing.Point(537, 75);
             this.CbxState.Name = "CbxState";
             this.CbxState.Size = new System.Drawing.Size(160, 21);
-            this.CbxState.TabIndex = 10;
+            this.CbxState.TabIndex = 11;
             // 
             // label10
             // 
@@ -316,7 +326,7 @@
             this.MskCep.Mask = "00000-000";
             this.MskCep.Name = "MskCep";
             this.MskCep.Size = new System.Drawing.Size(70, 20);
-            this.MskCep.TabIndex = 7;
+            this.MskCep.TabIndex = 8;
             // 
             // label9
             // 
@@ -332,14 +342,14 @@
             this.TxtCity.Location = new System.Drawing.Point(292, 75);
             this.TxtCity.Name = "TxtCity";
             this.TxtCity.Size = new System.Drawing.Size(190, 20);
-            this.TxtCity.TabIndex = 9;
+            this.TxtCity.TabIndex = 10;
             // 
             // TxtStreet
             // 
             this.TxtStreet.Location = new System.Drawing.Point(49, 36);
             this.TxtStreet.Name = "TxtStreet";
             this.TxtStreet.Size = new System.Drawing.Size(190, 20);
-            this.TxtStreet.TabIndex = 4;
+            this.TxtStreet.TabIndex = 5;
             // 
             // label4
             // 
@@ -364,7 +374,7 @@
             this.TxtNeighborhood.Location = new System.Drawing.Point(53, 75);
             this.TxtNeighborhood.Name = "TxtNeighborhood";
             this.TxtNeighborhood.Size = new System.Drawing.Size(190, 20);
-            this.TxtNeighborhood.TabIndex = 8;
+            this.TxtNeighborhood.TabIndex = 9;
             // 
             // label8
             // 
@@ -388,7 +398,7 @@
             this.panel1.Location = new System.Drawing.Point(63, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(872, 472);
-            this.panel1.TabIndex = 82;
+            this.panel1.TabIndex = 100;
             // 
             // LblAdm
             // 
@@ -397,19 +407,9 @@
             this.LblAdm.Location = new System.Drawing.Point(368, 11);
             this.LblAdm.Name = "LblAdm";
             this.LblAdm.Size = new System.Drawing.Size(210, 16);
-            this.LblAdm.TabIndex = 22;
+            this.LblAdm.TabIndex = 101;
             this.LblAdm.Text = "Modo de edição de administrador";
             this.LblAdm.Visible = false;
-            // 
-            // MskTel
-            // 
-            this.MskTel.Location = new System.Drawing.Point(309, 35);
-            this.MskTel.Mask = "(00)0000-0000";
-            this.MskTel.Name = "MskTel";
-            this.MskTel.Size = new System.Drawing.Size(97, 20);
-            this.MskTel.TabIndex = 100;
-            this.MskTel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MskTel_KeyPress);
-            this.MskTel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MskTel_KeyUp);
             // 
             // FrmAddEditClient
             // 
@@ -420,6 +420,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "FrmAddEditClient";
             this.Text = "FrmAddEditClient";
+            this.Load += new System.EventHandler(this.FrmAddEditClient_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);

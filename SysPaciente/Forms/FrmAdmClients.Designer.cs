@@ -163,6 +163,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "FrmAdmClients";
             this.Text = "FrmAdmClients";
+            this.Load += new System.EventHandler(this.FrmAdmClients_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

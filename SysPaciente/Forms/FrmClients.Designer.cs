@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BtnSearch = new System.Windows.Forms.Button();
+            this.CbSearchMode = new System.Windows.Forms.CheckBox();
             this.BtnView = new System.Windows.Forms.Button();
             this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnNew = new System.Windows.Forms.Button();
@@ -36,8 +38,6 @@
             this.LblSearch = new System.Windows.Forms.Label();
             this.DgvData = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.CbSearchMode = new System.Windows.Forms.CheckBox();
-            this.BtnSearch = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.panel2.SuspendLayout();
@@ -58,6 +58,33 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(992, 91);
             this.panel1.TabIndex = 0;
+            // 
+            // BtnSearch
+            // 
+            this.BtnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
+            this.BtnSearch.FlatAppearance.BorderSize = 0;
+            this.BtnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSearch.ForeColor = System.Drawing.Color.White;
+            this.BtnSearch.Location = new System.Drawing.Point(320, 26);
+            this.BtnSearch.Name = "BtnSearch";
+            this.BtnSearch.Size = new System.Drawing.Size(97, 35);
+            this.BtnSearch.TabIndex = 11;
+            this.BtnSearch.Text = "Pesquisar";
+            this.BtnSearch.UseVisualStyleBackColor = false;
+            this.BtnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
+            // 
+            // CbSearchMode
+            // 
+            this.CbSearchMode.AutoSize = true;
+            this.CbSearchMode.Location = new System.Drawing.Point(15, 65);
+            this.CbSearchMode.Name = "CbSearchMode";
+            this.CbSearchMode.Size = new System.Drawing.Size(109, 17);
+            this.CbSearchMode.TabIndex = 10;
+            this.CbSearchMode.Text = "Pesquisar por Cpf";
+            this.CbSearchMode.UseVisualStyleBackColor = true;
+            this.CbSearchMode.CheckedChanged += new System.EventHandler(this.CbSearchMode_CheckedChanged);
             // 
             // BtnView
             // 
@@ -145,33 +172,6 @@
             this.panel2.Size = new System.Drawing.Size(992, 383);
             this.panel2.TabIndex = 2;
             // 
-            // CbSearchMode
-            // 
-            this.CbSearchMode.AutoSize = true;
-            this.CbSearchMode.Location = new System.Drawing.Point(15, 65);
-            this.CbSearchMode.Name = "CbSearchMode";
-            this.CbSearchMode.Size = new System.Drawing.Size(109, 17);
-            this.CbSearchMode.TabIndex = 10;
-            this.CbSearchMode.Text = "Pesquisar por Cpf";
-            this.CbSearchMode.UseVisualStyleBackColor = true;
-            this.CbSearchMode.CheckedChanged += new System.EventHandler(this.CbSearchMode_CheckedChanged);
-            // 
-            // BtnSearch
-            // 
-            this.BtnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
-            this.BtnSearch.FlatAppearance.BorderSize = 0;
-            this.BtnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSearch.ForeColor = System.Drawing.Color.White;
-            this.BtnSearch.Location = new System.Drawing.Point(320, 26);
-            this.BtnSearch.Name = "BtnSearch";
-            this.BtnSearch.Size = new System.Drawing.Size(97, 35);
-            this.BtnSearch.TabIndex = 11;
-            this.BtnSearch.Text = "Pesquisar";
-            this.BtnSearch.UseVisualStyleBackColor = false;
-            this.BtnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
-            // 
             // FrmClients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -181,6 +181,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "FrmClients";
             this.Text = "FrmClients";
+            this.Load += new System.EventHandler(this.FrmClients_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();

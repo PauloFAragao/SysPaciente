@@ -45,11 +45,15 @@ programa caso o SQL Server demore muito para responder
 
 -Agora o carregamento dos dados da janela de consultas e da janela inicial acontecem em thread
 
-
-
-
-
-
+-Bug resolvido: agora se nas telas que tem DataGridView se uma row não estiver selecionada não dá
+mais exceção.
+-Bug resolvido: resolvido um bug no botão alterar status na tela inicial, agora os botões voltam
+a ter enable true
+-Agora o tempo padrão das consultas não pode ser configurado para menos do que 10 minutosz
+-Agora não é possivel ir para a tela de marcar consulta se não houverem clientes registrados no 
+banco de dados
+-Bug resolvido: agora resolvidos os tab incorretos na tela de adiconar clientes
+-Consegui fazer os campos corretos terem focus
 
 
 

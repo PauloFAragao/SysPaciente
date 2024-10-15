@@ -37,6 +37,8 @@ namespace SysPaciente.Forms
 
             //carregando os dados
             LoadData(name, telephone, dateOfBirth, street, houseNumber, neighborhood, city, cep, state, complement, idNumber, cpf);
+
+            
         }
 
         public FrmAddEditClient(int tipe)
@@ -336,6 +338,11 @@ namespace SysPaciente.Forms
         {
             if (e.KeyCode == Keys.Back)//verifica se a tecla pressionada foi o backspace
                 MskTelCntroller(true);
+        }
+
+        private void FrmAddEditClient_Load(object sender, EventArgs e)
+        {
+            this.TxtName.Focus();
         }
     }
 }

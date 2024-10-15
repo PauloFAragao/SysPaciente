@@ -22,9 +22,6 @@ namespace SysPaciente.Forms
                 HideColumns();
                 ChangeColumns();
             }
-
-            //colocando o focus no campo
-            this.TxtSearchText.Focus();
         }
 
         private bool LoadData()
@@ -117,8 +114,6 @@ namespace SysPaciente.Forms
                 //para quando clicar no botão já fazer a pesquisa
                 Search();
             }
-
-            this.TxtSearchText.Focus();
         }
 
         private void Search()
@@ -212,6 +207,11 @@ namespace SysPaciente.Forms
         private void TxtSearchText_TextChanged(object sender, EventArgs e)
         {
             Search();
+        }
+
+        private void FrmAdmClients_Load(object sender, EventArgs e)
+        {
+            this.TxtSearchText.Focus();
         }
     }
 }

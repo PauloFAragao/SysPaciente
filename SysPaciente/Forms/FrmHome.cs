@@ -59,7 +59,7 @@ namespace SysPaciente.Forms
         {
             EnableAndDisableUiButtons(!value);// para os botões da interface
 
-            if (DgvData.Rows.Count > 0)
+            if (CheckDgvData())
             {
                 this.PanelAlterStatus.Visible = value;
 
@@ -67,8 +67,11 @@ namespace SysPaciente.Forms
             }
             else
             {
-                MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                EnableAndDisableUiButtons(true);// para os botões da interface
             }
+
         }
 
         private void EnableAndDisableUiButtons(bool value)
@@ -95,7 +98,7 @@ namespace SysPaciente.Forms
 
         private void Edit()
         {
-            if (DgvData.Rows.Count > 0)
+            if (CheckDgvData())
             {
                 FormLoader.OpenChildForm(new FrmMarkEditConsultation(
                     Convert.ToInt32(this.DgvData.CurrentRow.Cells["idConsultation"].Value),
@@ -104,11 +107,31 @@ namespace SysPaciente.Forms
                     Convert.ToString(this.DgvData.CurrentRow.Cells["timeOfConsultation"].Value),
                     Convert.ToString(this.DgvData.CurrentRow.Cells["statusDescription"].Value)));
             }
+        }
+
+        private bool CheckDgvData()
+        {
+            if (DgvData.Rows.Count > 0)
+            {
+                if (this.DgvData.SelectedRows.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Nenhuma linha selecionada!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return false;
+                }
+            }
             else
             {
                 MessageBox.Show("A tabela não tem dados", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
             }
         }
+
         //---------------------------- Thread
 
         private void Initialize()
@@ -120,7 +143,7 @@ namespace SysPaciente.Forms
                 ChangeColumns();
 
                 // para iniciar com a primeira linha selecionada
-                ThreadHelper.SelectFirstRow(this.DgvData);
+                //ThreadHelper.SelectFirstRow(this.DgvData);
             }
         }
 

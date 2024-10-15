@@ -434,6 +434,45 @@ namespace SysPaciente.Entities
             return resp;
         }
 
+        public static bool VerifyIfHaveClients()
+        {
+            bool result = false;
+
+            // Objeto da conexão com o banco de dados
+            using (SqlConnection sqlCon = new SqlConnection(Connection.Cn))
+            {
+                try
+                {
+                    // Abrindo a conexão ao banco de dados
+                    sqlCon.Open();
+
+                    // Comando SQL - que está no banco de dados
+                    using (SqlCommand sqlCmd = new SqlCommand("sp_check_if_have_clients_registered", sqlCon))
+                    {
+                        // chamando um procedimento armazenado no banco de dados.
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+
+                        // criando o parametro output que vai receber a quantidade
+                        sqlCmd.Parameters.Add(CreateSqlParameter("@respost", SqlDbType.Bit));
+
+                        // Executar a stored procedure
+                        sqlCmd.ExecuteNonQuery();
+
+                        // recuperando a quantidade de consultas
+                        result = Convert.ToBoolean(sqlCmd.Parameters["@respost"].Value);
+
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception: " + ex.Message);
+                }
+            }
+
+            return result;
+        }
+
         //------------------------------------- consultas -------------------------------------
 
         // método que vai pegar as consultas da data no banco de dados

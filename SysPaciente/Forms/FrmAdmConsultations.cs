@@ -153,5 +153,10 @@ namespace SysPaciente.Forms
         {
             Delete();
         }
+
+        private void FrmAdmConsultations_Load(object sender, EventArgs e)
+        {
+            this.TxtSearchText.Focus();
+        }
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.PanelBar = new System.Windows.Forms.Panel();
+            this.BtnMenu = new System.Windows.Forms.Button();
             this.BtnHome = new System.Windows.Forms.Button();
             this.BtnClients = new System.Windows.Forms.Button();
             this.BtnConsultations = new System.Windows.Forms.Button();
@@ -45,7 +46,6 @@
             this.BtnMClients = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.BtnMHome = new System.Windows.Forms.Button();
-            this.BtnMenu = new System.Windows.Forms.Button();
             this.PanelBar.SuspendLayout();
             this.PanelBody.SuspendLayout();
             this.PanelMenu.SuspendLayout();
@@ -71,6 +71,23 @@
             this.PanelBar.Size = new System.Drawing.Size(1008, 48);
             this.PanelBar.TabIndex = 0;
             // 
+            // BtnMenu
+            // 
+            this.BtnMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.BtnMenu.FlatAppearance.BorderSize = 0;
+            this.BtnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnMenu.Image = global::SysPaciente.Properties.Resources.Menu;
+            this.BtnMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnMenu.Location = new System.Drawing.Point(10, 0);
+            this.BtnMenu.Name = "BtnMenu";
+            this.BtnMenu.Size = new System.Drawing.Size(89, 48);
+            this.BtnMenu.TabIndex = 5;
+            this.BtnMenu.Text = "Menu";
+            this.BtnMenu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnMenu.UseVisualStyleBackColor = true;
+            this.BtnMenu.Click += new System.EventHandler(this.BtnMenu_Click);
+            // 
             // BtnHome
             // 
             this.BtnHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(72)))), ((int)(((byte)(204)))));
@@ -82,7 +99,7 @@
             this.BtnHome.Location = new System.Drawing.Point(399, 0);
             this.BtnHome.Name = "BtnHome";
             this.BtnHome.Size = new System.Drawing.Size(146, 48);
-            this.BtnHome.TabIndex = 3;
+            this.BtnHome.TabIndex = 1;
             this.BtnHome.Text = "Inicio";
             this.BtnHome.UseVisualStyleBackColor = false;
             this.BtnHome.Click += new System.EventHandler(this.BtnHome_Click);
@@ -110,7 +127,7 @@
             this.BtnConsultations.Location = new System.Drawing.Point(691, 0);
             this.BtnConsultations.Name = "BtnConsultations";
             this.BtnConsultations.Size = new System.Drawing.Size(146, 48);
-            this.BtnConsultations.TabIndex = 1;
+            this.BtnConsultations.TabIndex = 3;
             this.BtnConsultations.Text = "Consultas";
             this.BtnConsultations.UseVisualStyleBackColor = true;
             this.BtnConsultations.Click += new System.EventHandler(this.BtnConsultations_Click);
@@ -124,7 +141,7 @@
             this.BtnConfigurations.Location = new System.Drawing.Point(837, 0);
             this.BtnConfigurations.Name = "BtnConfigurations";
             this.BtnConfigurations.Size = new System.Drawing.Size(146, 48);
-            this.BtnConfigurations.TabIndex = 0;
+            this.BtnConfigurations.TabIndex = 4;
             this.BtnConfigurations.Text = "Configurações";
             this.BtnConfigurations.UseVisualStyleBackColor = true;
             this.BtnConfigurations.Click += new System.EventHandler(this.BtnConfigurations_Click);
@@ -137,7 +154,7 @@
             this.PanelBody.Location = new System.Drawing.Point(0, 48);
             this.PanelBody.Name = "PanelBody";
             this.PanelBody.Size = new System.Drawing.Size(1008, 513);
-            this.PanelBody.TabIndex = 1;
+            this.PanelBody.TabIndex = 6;
             // 
             // PanelMenu
             // 
@@ -150,7 +167,7 @@
             this.PanelMenu.Location = new System.Drawing.Point(0, 0);
             this.PanelMenu.Name = "PanelMenu";
             this.PanelMenu.Size = new System.Drawing.Size(298, 428);
-            this.PanelMenu.TabIndex = 0;
+            this.PanelMenu.TabIndex = 10;
             this.PanelMenu.Visible = false;
             // 
             // panel7
@@ -169,7 +186,7 @@
             this.BtnMAdministration.Location = new System.Drawing.Point(-11, 2);
             this.BtnMAdministration.Name = "BtnMAdministration";
             this.BtnMAdministration.Size = new System.Drawing.Size(320, 64);
-            this.BtnMAdministration.TabIndex = 3;
+            this.BtnMAdministration.TabIndex = 9;
             this.BtnMAdministration.Text = "Administração";
             this.BtnMAdministration.UseVisualStyleBackColor = true;
             this.BtnMAdministration.Click += new System.EventHandler(this.BtnMAdministration_Click);
@@ -211,7 +228,7 @@
             this.BtnMConsultations.Location = new System.Drawing.Point(-11, 2);
             this.BtnMConsultations.Name = "BtnMConsultations";
             this.BtnMConsultations.Size = new System.Drawing.Size(320, 64);
-            this.BtnMConsultations.TabIndex = 3;
+            this.BtnMConsultations.TabIndex = 9;
             this.BtnMConsultations.Text = "Consultas";
             this.BtnMConsultations.UseVisualStyleBackColor = true;
             this.BtnMConsultations.Click += new System.EventHandler(this.BtnMConsultations_Click);
@@ -232,7 +249,7 @@
             this.BtnMClients.Location = new System.Drawing.Point(-11, 2);
             this.BtnMClients.Name = "BtnMClients";
             this.BtnMClients.Size = new System.Drawing.Size(320, 64);
-            this.BtnMClients.TabIndex = 3;
+            this.BtnMClients.TabIndex = 8;
             this.BtnMClients.Text = "Pacientes";
             this.BtnMClients.UseVisualStyleBackColor = true;
             this.BtnMClients.Click += new System.EventHandler(this.BtnMClients_Click);
@@ -253,27 +270,10 @@
             this.BtnMHome.Location = new System.Drawing.Point(-11, 2);
             this.BtnMHome.Name = "BtnMHome";
             this.BtnMHome.Size = new System.Drawing.Size(320, 64);
-            this.BtnMHome.TabIndex = 3;
+            this.BtnMHome.TabIndex = 7;
             this.BtnMHome.Text = "Inicio";
             this.BtnMHome.UseVisualStyleBackColor = true;
             this.BtnMHome.Click += new System.EventHandler(this.BtnMHome_Click);
-            // 
-            // BtnMenu
-            // 
-            this.BtnMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.BtnMenu.FlatAppearance.BorderSize = 0;
-            this.BtnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnMenu.Image = global::SysPaciente.Properties.Resources.Menu;
-            this.BtnMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnMenu.Location = new System.Drawing.Point(10, 0);
-            this.BtnMenu.Name = "BtnMenu";
-            this.BtnMenu.Size = new System.Drawing.Size(89, 48);
-            this.BtnMenu.TabIndex = 4;
-            this.BtnMenu.Text = "Menu";
-            this.BtnMenu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnMenu.UseVisualStyleBackColor = true;
-            this.BtnMenu.Click += new System.EventHandler(this.BtnMenu_Click);
             // 
             // Form1
             // 
